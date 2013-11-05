@@ -1,2 +1,2 @@
 // namespace m
-var m = { };
+var m = m || { };

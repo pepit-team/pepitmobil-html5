@@ -1,2 +1,2 @@
 // namespace m.math
-var m.math = { };
+m.math = { };

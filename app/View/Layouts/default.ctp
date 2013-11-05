@@ -21,19 +21,22 @@
  * @license       http://www.gnu.org/licenses/ GPLv3 License
  */
 ?>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <?php echo $this->Html->charset(); ?>
-    <title>
-        <?php __('PepitMobil'); ?>
-        <?php echo $title_for_layout; ?>
-    </title>
     <?php
+    echo '<meta charset="utf-8">';
+    echo '<meta http-equiv="X-UA-Compatible" content="IE=edge">';
     echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
     echo $this->Html->meta('icon');
+    ?>
+
+    <title>
+        <?php __('PepitMobil'); ?>
+    <?php echo $title_for_layout; ?>
+    </title>
+
+    <?php
     echo $this->Html->css('pepitmobil');
     echo $this->Html->css('bootstrap.min');
     echo $this->Html->css('bootstrap-theme.min');
