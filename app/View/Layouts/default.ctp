@@ -31,48 +31,57 @@
         <?php __('PepitMobil'); ?>
         <?php echo $title_for_layout; ?>
     </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php
+    echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
     echo $this->Html->meta('icon');
-
     echo $this->Html->css('pepitmobil');
-    echo $this->Html->css('jquery.mobile.min');
-    echo $this->Html->css('jquery.mobile.theme.min');
+    echo $this->Html->css('bootstrap.min');
+    echo $this->Html->css('bootstrap-theme.min');
 
     echo $this->Html->script('jquery.min');
-    echo $this->Html->script('jquery.mobile.min');
+    echo $this->Html->script('bootstrap.min');
 
     echo $scripts_for_layout;
     ?>
 </head>
 <body>
-<div data-role="page" style="background-image: url(/app/webroot/css/images/pattern-white.png);">
-    <div data-role="header">
-        <div data-role="navbar" data-iconpos="right" data-grid="d">
-            <ul>
-                <li>
-                    <?php
-                    echo $this->Html->link(__('Home'), array('controller' => 'pages', 'action' => 'display', 'home'), array("data-icon" => "home"));
-                    ?>
-                </li>
-                <li>
-                    <?php
-                    echo $this->Html->link(__('Exercises'), array('controller' => 'pages', 'action' => 'display', 'exercises'), array("data-icon" => "bars"));
-                    ?>
-                </li>
-                <li>
-                    <?php
-                    if (AuthComponent::user('id') != 0) {
-                        echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout'), array("data-icon" => "check",  "class" => "ui-btn-active")).' '.AuthComponent::user('username');
-                    } else {
-                        echo $this->Html->link('Sign in', array('controller' => 'users', 'action' => 'login'), array("data-icon" => "check",  "class" => "ui-btn-active"));
-                    }
-                    ?>
-                </li>
-            </ul>
+
+<div style="height: 60px;">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <?php
+                echo $this->Html->link(__('PepitMobil'), array('controller' => 'pages', 'action' => 'display', 'home'),
+                    array("class" => "navbar-brand"));
+                ?>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                    </li>
+                    <li>
+                        <?php
+                        echo $this->Html->link(__('Exercises'), array('controller' => 'pages', 'action' => 'display', 'exercises/exercises'));
+                        ?>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <?php
+                        if (AuthComponent::user('id') != 0) {
+                            echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout'), array("data-icon" => "check", "class" => "ui-btn-active")) . ' ' . AuthComponent::user('username');
+                        } else {
+                            echo $this->Html->link('Sign in', array('controller' => 'users', 'action' => 'login'), array("data-icon" => "check", "class" => "ui-btn-active"));
+                        }
+                        ?>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-    <?php echo $content_for_layout; ?>
 </div>
+
+<?php echo $content_for_layout; ?>
+
 </body>
 </html>
