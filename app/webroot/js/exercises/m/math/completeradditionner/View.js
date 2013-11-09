@@ -1,9 +1,60 @@
 m.math.completeradditionner.View = function (div, number, max) {
 
 // public methods
+    this.init = function (view, number, max) {
+        height = window.innerHeight;
+        width = window.innerWidth;
+
+        model = new m.math.completeradditionner.Model(number, max);
+        init_div(view);
+        controller = new m.math.completeradditionner.Controller(model, this);
+    };
+
+    this.update = function () {
+        for (var i = 1; i <= 12; ++i) {
+            var button = $('#button_' + i);
+
+            if (model.getSelectedNumber() == i) {
+                button.attr('class', 'btn btn-warning btn-ms active');
+            } else {
+                button.attr('class', 'btn btn-primary btn-ms active');
+            }
+        }
+        if (model.isOkFirstOperand()) {
+            $('#number_1').html(model.getFirstOperand());
+        }
+        if (model.isOkSecondOperand()) {
+            $('#number_2').html(model.getSecondOperand());
+        }
+        if (model.isOkResult()) {
+            $('#result').html(model.getResult());
+            $('#img_result').attr('src', '/app/webroot/img/exercises/m/math/completeradditionner/card_' +
+                model.getResult() + '.png');
+            bootstrap_alert.info('Bravo !!!');
+        }
+    };
 
 // private methods
-    var build_button_with_number = function (i) {
+    var build_button_for_response = function (name) {
+        var button = document.createElement('div');
+        var link = document.createElement('a');
+
+        button.className = 'col-md-2';
+        button.appendChild(link);
+
+        setAttributes(link, {
+            href: '#',
+            class: 'btn btn-ms active',
+            id: 'button_' + name,
+            role: 'button'
+        });
+        link.innerHTML = '<div style="font-size: 80px; color: #006600; text-align: center; font-weight: bold;" id="' +
+            name + '">?</div>';
+
+        return button;
+    };
+
+    var build_button_with_number = function (i, top) {
         var button = document.createElement('div');
         var table = document.createElement('table');
         var first_row = document.createElement('tr');
@@ -12,14 +63,17 @@ m.math.completeradditionner.View = function (div, number, max) {
 
         button.className = 'col-md-2';
         button.appendChild(table);
-        table.appendChild(first_row);
         table.style = 'text-align: center';
         first_row.appendChild(first_cell);
-        link.href = '#';
-        link.className = 'btn btn-primary btn-ms active';
-        link.id = 'button_' + i;
-        link.setAttribute('role', 'button');
+
+        setAttributes(link, {
+            href: '#',
+            class: 'btn btn-primary btn-ms active',
+            id: 'button_' + i,
+            role: 'button'
+        });
         link.innerHTML = '<h1>' + i + '</h1>';
+
         first_cell.appendChild(link);
 
         var second_row = document.createElement('tr');
@@ -27,30 +81,37 @@ m.math.completeradditionner.View = function (div, number, max) {
         var text_div = document.createElement('div');
         var text = document.createTextNode(numbers[i]);
 
-        table.appendChild(second_row);
         second_row.appendChild(second_cell);
         text_div.appendChild(text);
         text_div.style = 'font-size: 20px; color: #ffffff;';
         second_cell.appendChild(text_div);
+        if (top) {
+            table.appendChild(second_row);
+            table.appendChild(first_row);
+        } else {
+            table.appendChild(first_row);
+            table.appendChild(second_row);
+        }
         return button;
     };
 
-    var build_image = function (i) {
+    var build_image = function (i, name) {
         var img = document.createElement('img');
 
         img.src = '/app/webroot/img/exercises/m/math/completeradditionner/card_' + i + '.png';
         img.height = height - 550 > 200 ? height - 550 : 200;
+        img.id = 'img_' + name;
         return img;
     };
 
-    var build_line_with_numbers = function (view, min, max) {
+    var build_line_with_numbers = function (view, min, max, top) {
         var line_div = document.createElement('div');
         var row = document.createElement('div');
 
         line_div.style = 'background-color: #252538; padding: 10px; border-radius: 6px 6px 6px 6px';
         row.className = 'row';
         for (var i = min; i <= max; i++) {
-            row.appendChild(build_button_with_number(i));
+            row.appendChild(build_button_with_number(i, top));
         }
         line_div.appendChild(row);
         view.appendChild(line_div);
@@ -89,11 +150,11 @@ m.math.completeradditionner.View = function (div, number, max) {
         row_1.appendChild(cell_1_3);
         row_1.appendChild(cell_1_4);
         row_1.appendChild(cell_1_5);
-        cell_1_1.appendChild(build_image(x));
+        cell_1_1.appendChild(build_image(x, 'operand_1'));
         cell_1_2.appendChild(build_operator('+'));
-        cell_1_3.appendChild(build_image(y));
+        cell_1_3.appendChild(build_image(y, 'operand_2'));
         cell_1_4.appendChild(build_operator('='));
-        cell_1_5.appendChild(build_operator(''));
+        cell_1_5.appendChild(build_image(0, 'result'));
 
         table.appendChild(row_2);
         row_2.appendChild(cell_2_1);
@@ -101,11 +162,11 @@ m.math.completeradditionner.View = function (div, number, max) {
         row_2.appendChild(cell_2_3);
         row_2.appendChild(cell_2_4);
         row_2.appendChild(cell_2_5);
-        cell_2_1.appendChild(build_operator('?'));
+        cell_2_1.appendChild(build_button_for_response('number_1'));
         cell_2_2.appendChild(build_operator(''));
-        cell_2_3.appendChild(build_operator('?'));
+        cell_2_3.appendChild(build_button_for_response('number_2'));
         cell_2_4.appendChild(build_operator(''));
-        cell_2_5.appendChild(build_operator('?'));
+        cell_2_5.appendChild(build_button_for_response('result'));
 
         view.appendChild(global_div);
     };
@@ -117,23 +178,19 @@ m.math.completeradditionner.View = function (div, number, max) {
         view.appendChild(spacing_div);
     };
 
-    var init_div = function(view) {
+    var init_div = function (view) {
         view.style = 'background-color: #404060; padding: 10px;';
-        build_line_with_numbers(view, 1, 6);
+        build_line_with_numbers(view, 1, 6, false);
         build_spacing(view);
-        build_operation(view, model.firstOperand(), model.secondOperand());
+        build_operation(view, model.getFirstOperand(), model.getSecondOperand());
         build_spacing(view);
-        build_line_with_numbers(view, 7, 12);
+        build_line_with_numbers(view, 7, 12, true);
     };
 
-    var init = function (view, number, max) {
-        height = window.innerHeight;
-        width = window.innerWidth;
-
-        model = new m.math.completeradditionner.Model(number, max);
-        controller = new m.math.completeradditionner.Controller(model);
-
-        init_div(view);
+    var setAttributes = function (el, attrs) {
+        for (var key in attrs) {
+            el.setAttribute(key, attrs[key]);
+        }
     };
 
 // private attributes
@@ -144,5 +201,5 @@ m.math.completeradditionner.View = function (div, number, max) {
     var model;
     var controller;
 
-    init(div, number, max);
+    this.init(div, number, max);
 };

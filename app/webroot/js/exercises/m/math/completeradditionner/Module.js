@@ -48,7 +48,7 @@ m.math.completeradditionner.Module = function () {
     };
 
     this.getNextQuestionButtonText = function () {
-        return 'Valider';
+        return 'Suivante';
     };
 
     this.currentAnswerIsRight = function () {

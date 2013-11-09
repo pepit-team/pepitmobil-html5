@@ -1,16 +1,63 @@
 m.math.completeradditionner.Model = function (number, max) {
 
 // public attributes
-    this.firstOperand = function () {
+    this.checkFirstOperand = function() {
+        okFirstOperand = firstOperands[index] == selectedNumber;
+        return okFirstOperand;
+    };
+
+    this.checkResult = function() {
+        okResult = firstOperands[index] + secondOperands[index] == selectedNumber;
+        return okResult;
+    };
+
+    this.checkSecondOperand = function() {
+        okSecondOperand = secondOperands[index] == selectedNumber;
+        return okSecondOperand;
+    };
+
+    this.getFirstOperand = function () {
         return firstOperands[index];
+    };
+
+    this.getResult = function () {
+        return firstOperands[index] + secondOperands[index];
+    };
+
+    this.getSecondOperand = function () {
+        return secondOperands[index];
+    };
+
+    this.getSelectedNumber = function() {
+        return selectedNumber;
+    };
+
+    this.isOkFirstOperand = function() {
+        return okFirstOperand;
+    };
+
+    this.isOkResult = function() {
+        return okResult;
+    };
+
+    this.isOkSecondOperand = function() {
+        return okSecondOperand;
     };
 
     this.next = function () {
         ++index;
+        okFirstOperand = false;
+        okSecondOperand = false;
+        okResult = false;
+        selectedNumber = 0;
     };
 
-    this.secondOperand = function () {
-        return secondOperands[index];
+    this.setSelectedNumber = function(n) {
+        selectedNumber = n;
+    };
+
+    this.unsetSelectedNumber = function() {
+        selectedNumber = 0;
     };
 
 // private methods
@@ -28,12 +75,20 @@ m.math.completeradditionner.Model = function (number, max) {
             }
         } while (i < number);
         index = 0;
+        okFirstOperand = false;
+        okSecondOperand = false;
+        okResult = false;
+        selectedNumber = 0;
     };
 
 // private attributes
     var firstOperands = [];
     var secondOperands = [];
     var index;
+    var selectedNumber;
+    var okFirstOperand;
+    var okSecondOperand;
+    var okResult;
 
     init(number, max);
 };
