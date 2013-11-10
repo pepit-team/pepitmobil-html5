@@ -8,8 +8,6 @@ bootstrap_alert = function () {
 };
 
 bootstrap_alert.info = function (message) {
-    $('#alert_placeholder').append('<div class="alert alert-success fade in" ' +
-        'style="position:absolute; top:50%; left:50%;"><h1>' + message + '</h1></div>');
+    $('#alert_placeholder').append('<div class="alert alert-success fade in"><h1>' + message + '</h1></div>');
     alertTimeout(5000);
 };
-

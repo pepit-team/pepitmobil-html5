@@ -1,42 +1,49 @@
-m.math.completeradditionner.Module = function () {
+m.math.completeradditionner.Module = function (e) {
 
 // public methods
     this.buildExercisePresentation = function (div) {
-
+        div.css({
+            'text-align': 'center',
+            'font-size': '20px',
+            'color': '#ffffff'
+        });
+        div.html('<h1>Aligner<br>Compter</h1>');
     };
 
-    this.buildExplanationPresentation = function (div, selectedExercise) {
+    this.buildExplanation = function (div, selectedExercise) {
     };
 
-    this.buildQuestion = function (div, selectedExercise, selectedModule, numQuestion) {
-        if (numQuestion == 1) {
-            if (selectedExercise == 1) {
-                view = new m.math.completeradditionner.View(div, 5, 5);
-            } else if (selectedExercise == 2) {
-                view = new m.math.completeradditionner.View(div, 5, 6);
-            } else if (selectedExercise == 3) {
-                view = new m.math.completeradditionner.View(div, 5, 8);
-            } else if (selectedExercise == 4) {
-                view = new m.math.completeradditionner.View(div, 5, 10);
-            } else if (selectedExercise == 5) {
-                view = new m.math.completeradditionner.View(div, 5, 12);
-            }
-        } else {
-            view.next();
+    this.buildQuestion = function (div, selectedExercise, selectedModule) {
+        if (selectedExercise == 1) {
+            view = new m.math.completeradditionner.View(this, div, 5, 5);
+        } else if (selectedExercise == 2) {
+            view = new m.math.completeradditionner.View(this, div, 5, 6);
+        } else if (selectedExercise == 3) {
+            view = new m.math.completeradditionner.View(this, div, 5, 8);
+        } else if (selectedExercise == 4) {
+            view = new m.math.completeradditionner.View(this, div, 5, 10);
+        } else if (selectedExercise == 5) {
+            view = new m.math.completeradditionner.View(this, div, 5, 12);
         }
+        questionIndex = 1;
     };
 
     this.getExerciseList = function () {
-        return ["Addition - niveau 1", "Addition - niveau 2", "Addition - niveau 3", "Addition - niveau 4",
-            "Addition - niveau 5"];
+        return {
+            title: ["Niveau 1" , "Niveau 2", "Niveau 3", "Niveau 4", "Niveau 5"],
+            subTitle: ["jusqu'à 5", "jusqu'à 6", "jusqu'à 8", "jusqu'à 10", "jusqu'à 12"]
+        };
     };
 
     this.getModuleList = function (selectedExercise) {
-        return [ "Module 1", "Module 2", "Module 3", "Module 4", "Module 5"];
+        return {
+            title: ["Module 1" , "Module 2", "Module 3", "Module 4", "Module 5"],
+            subTitle: ["5 questions", "5 questions", "5 questions", "5 questions", "5 questions"]
+        };
     };
 
-    this.getQuestionCount = function (selectedExercise, selectedModule) {
-        return 5;
+    this.finishModule = function (selectedExercise, selectedModule) {
+        return questionIndex > 5;
     };
 
     this.startQuestionSequence = function () {
@@ -67,6 +74,26 @@ m.math.completeradditionner.Module = function () {
 
     };
 
+    this.next = function() {
+        engine.next();
+    };
+
+    this.nextQuestion = function() {
+        questionIndex++;
+        if (questionIndex <= 5) {
+            view.next();
+        }
+    };
+
+// private methods
+    var init = function(e) {
+        engine = e;
+    };
+
 // private attributes
     var view;
+    var questionIndex;
+    var engine;
+
+    init(e);
 };

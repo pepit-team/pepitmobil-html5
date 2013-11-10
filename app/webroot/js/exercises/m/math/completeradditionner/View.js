@@ -1,13 +1,25 @@
-m.math.completeradditionner.View = function (div, number, max) {
+m.math.completeradditionner.View = function (mdl, div, number, max) {
 
 // public methods
-    this.init = function (view, number, max) {
+    this.init = function (mdl, view, number, max) {
         height = window.innerHeight;
         width = window.innerWidth;
 
+        module = mdl;
         model = new m.math.completeradditionner.Model(number, max);
         init_div(view);
         controller = new m.math.completeradditionner.Controller(model, this);
+    };
+
+    this.next = function() {
+        model.next();
+        $('#img_operand_1').attr('src',
+            '/app/webroot/img/exercises/m/math/completeradditionner/card_' + model.getFirstOperand() + '.png');
+        $('#img_operand_2').attr('src',
+            '/app/webroot/img/exercises/m/math/completeradditionner/card_' + model.getSecondOperand() + '.png');
+        $('#img_result').attr('src',
+            '/app/webroot/img/exercises/m/math/completeradditionner/card_0.png');
+        this.update();
     };
 
     this.update = function () {
@@ -22,15 +34,22 @@ m.math.completeradditionner.View = function (div, number, max) {
         }
         if (model.isOkFirstOperand()) {
             $('#number_1').html(model.getFirstOperand());
+        } else {
+            $('#number_1').html('?');
         }
         if (model.isOkSecondOperand()) {
             $('#number_2').html(model.getSecondOperand());
+        } else {
+            $('#number_2').html('?');
         }
         if (model.isOkResult()) {
             $('#result').html(model.getResult());
             $('#img_result').attr('src', '/app/webroot/img/exercises/m/math/completeradditionner/card_' +
                 model.getResult() + '.png');
             bootstrap_alert.info('Bravo !!!');
+            module.next();
+        } else {
+            $('#result').html('?');
         }
     };
 
@@ -198,8 +217,9 @@ m.math.completeradditionner.View = function (div, number, max) {
         'six', 'sept', 'huit', 'neuf', 'dix', 'onze', 'douze' ];
     var height;
     var width;
+    var module;
     var model;
     var controller;
 
-    this.init(div, number, max);
+    this.init(mdl, div[0], number, max);
 };
