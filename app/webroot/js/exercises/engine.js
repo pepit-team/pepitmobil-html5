@@ -53,13 +53,15 @@ var engine = function () {
         for (var index in module.getExerciseList().title) {
             var row = $('<tr />', { });
             var cell = $('<td />', { });
+            var text = '<h2>' + module.getExerciseList().title[index] + '</h2>' +
+                '<h5>' + module.getExerciseList().subTitle[index] +
+                '</h5>' + buildBadgeWithScore(index, -1);
             var link = $('<a />', {
                 href: '#',
                 class: 'btn btn-primary btn-ms active',
                 id: 'exercise_' + index,
                 role: 'button',
-                html: '<h2>' + module.getExerciseList().title[index] + '</h2>' +
-                    '<h5>' + module.getExerciseList().subTitle[index] + '</h5>',
+                html: text,
                 click: function (e) {
                     var e = e || window.event;
                     var target = e.target || e.srcElement;
@@ -166,6 +168,7 @@ var engine = function () {
 
     var buildBadgeWithScore = function(exerciseIndex, moduleIndex) {
         var badge = '<span class="badge pull-right">';
+        var max;
 
         if (moduleIndex != -1) {
             var s = score.get(exerciseIndex, moduleIndex);
@@ -173,13 +176,32 @@ var engine = function () {
             if (s == -1) {
                 badge += 'à faire';
             } else {
-                var max = module.getQuestionScore(exerciseIndex, moduleIndex) *
+                max = module.getQuestionScore(exerciseIndex, moduleIndex) *
                     module.getQuestionNumber(exerciseIndex, moduleIndex);
-
                 badge += s + '/' + max;
             }
         } else {
+            var sum = -1;
 
+            max = 0;
+            for (var moduleIndex in module.getModuleList(exerciseIndex).title) {
+                var s = score.get(exerciseIndex, moduleIndex);
+
+                max += module.getQuestionScore(exerciseIndex, moduleIndex) *
+                    module.getQuestionNumber(exerciseIndex, moduleIndex);
+                if (s > 0) {
+                    if (sum == -1) {
+                        sum = s;
+                    } else {
+                        sum += s;
+                    }
+                }
+            }
+            if (sum == -1) {
+                badge += 'à faire';
+            } else {
+                badge += s + '/' + max;
+            }
         }
         badge += '</span>';
         return badge;
