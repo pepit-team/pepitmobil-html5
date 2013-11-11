@@ -13,7 +13,7 @@ echo $this->Html->script('exercises/m/math/completeradditionner/View');
 
 <script language="javascript">
     $(document).ready(function () {
-        var e = new engine();
+        var e = new engine('exercises/m/exercise-m');
         var module = new m.math.completeradditionner.Module(e);
 
         e.init(module);

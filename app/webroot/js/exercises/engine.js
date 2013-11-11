@@ -20,7 +20,7 @@
  * @license       http://www.gnu.org/licenses/ GPLv3 License
  */
 
-var engine = function () {
+var engine = function (u) {
 
 // public methods
     this.init = function (m) {
@@ -45,125 +45,16 @@ var engine = function () {
     };
 
 // private methods
-    var buildExerciseList = function (div) {
-        var table = $('<table />', {
-            style: 'text-align: center'
-        });
-
-        for (var index in module.getExerciseList().title) {
-            var row = $('<tr />', { });
-            var cell = $('<td />', { });
-            var text = '<h2>' + module.getExerciseList().title[index] + '</h2>' +
-                '<h5>' + module.getExerciseList().subTitle[index] +
-                '</h5>' + buildBadgeWithScore(index, -1);
-            var link = $('<a />', {
-                href: '#',
-                class: 'btn btn-primary btn-ms active',
-                id: 'exercise_' + index,
-                role: 'button',
-                html: text,
-                click: function (e) {
-                    var e = e || window.event;
-                    var target = e.target || e.srcElement;
-
-                    if (target.nodeName != 'A') {
-                        target = target.parentNode;
-                    }
-                    currentExercise = parseInt(target.id.substring(target.id.indexOf('_') + 1, target.id.length)) + 1;
-                    buildModulePage();
-                }
-            });
-            link.appendTo(cell);
-            cell.appendTo(row);
-            row.appendTo(table);
+    var back = function() {
+        if (currentExercise == -1) {
+            window.location.replace(url);
+        } else {
+            if (currentModule == -1 ) {
+                buildExercisePage();
+            } else {
+                buildModulePage();
+            }
         }
-        table.appendTo(div);
-    };
-
-    var buildExercisePage = function () {
-        var page_div = buildPage();
-        var presentation_div = $('<div/>', {
-            class: 'col-md-6'
-        });
-        var exercise_div = $('<div/>', {
-            class: 'col-md-6'
-        });
-
-        module.buildExercisePresentation(presentation_div);
-        buildExerciseList(exercise_div);
-
-        presentation_div.appendTo(page_div);
-        exercise_div.appendTo(page_div);
-    };
-
-    var buildPage = function () {
-        var global_div = $('<div/>', {
-            style: 'background-color: #252538; padding: 10px; border-radius: 6px 6px 6px 6px'
-        });
-        var row_div = $('<div/>', {
-            class: 'row'
-        });
-
-        global_div.appendTo(view);
-        row_div.appendTo(global_div);
-        return row_div;
-    };
-
-    var buildModuleList = function (div) {
-        var table = $('<table />', {
-            style: 'text-align: center'
-        });
-
-        for (var index in module.getModuleList(currentExercise).title) {
-            var row = $('<tr />', { });
-            var cell = $('<td />', { });
-            var text = '<h2>' + module.getModuleList(currentExercise).title[index] + '</h2>' +
-                '<h5>' + module.getModuleList(currentExercise).subTitle[index] +
-                '</h5>' + buildBadgeWithScore(currentExercise - 1, index);
-            var link = $('<a />', {
-                href: '#',
-                class: 'btn btn-primary btn-ms active',
-                id: 'module_' + index,
-                role: 'button',
-                html: text,
-                click: function (e) {
-                    var e = e || window.event;
-                    var target = e.target || e.srcElement;
-
-                    if (target.nodeName != 'A') {
-                        target = target.parentNode;
-                    }
-
-                    currentModule = parseInt(target.id.substring(target.id.indexOf('_') + 1,
-                        target.id.length)) + 1;
-
-                    clearView();
-                    module.buildQuestion(view, currentExercise, currentModule);
-                }
-            });
-            link.appendTo(cell);
-            cell.appendTo(row);
-            row.appendTo(table);
-        }
-        table.appendTo(div);
-    };
-
-    var buildModulePage = function () {
-        clearView();
-
-        var page_div = buildPage();
-        var explanation_div = $('<div/>', {
-            class: 'col-md-6'
-        });
-        var module_div = $('<div/>', {
-            class: 'col-md-6'
-        });
-
-        module.buildExplanation(explanation_div, currentExercise);
-        buildModuleList(module_div);
-
-        explanation_div.appendTo(page_div);
-        module_div.appendTo(page_div);
     };
 
     var buildBadgeWithScore = function(exerciseIndex, moduleIndex) {
@@ -207,6 +98,168 @@ var engine = function () {
         return badge;
     };
 
+    var buildExerciseList = function (div) {
+        var table = $('<table />', {
+            style: 'text-align: center'
+        });
+
+        for (var index in module.getExerciseList().title) {
+            var row = $('<tr />', { });
+            var cell = $('<td />', { });
+            var text = '<h2>' + module.getExerciseList().title[index] + '</h2>' +
+                '<h5>' + module.getExerciseList().subTitle[index] +
+                '</h5>' + buildBadgeWithScore(index, -1);
+            var link = $('<a />', {
+                href: '#',
+                class: 'btn btn-primary btn-ms active',
+                id: 'exercise_' + index,
+                role: 'button',
+                html: text,
+                click: function (e) {
+                    var e = e || window.event;
+                    var target = e.target || e.srcElement;
+
+                    if (target.nodeName != 'A') {
+                        target = target.parentNode;
+                    }
+                    currentExercise = parseInt(target.id.substring(target.id.indexOf('_') + 1, target.id.length)) + 1;
+                    buildModulePage();
+                }
+            });
+            link.appendTo(cell);
+            cell.appendTo(row);
+            row.appendTo(table);
+        }
+        table.appendTo(div);
+    };
+
+    var buildExercisePage = function () {
+        clearView();
+
+        var page_div = buildPage();
+        var presentation_div = $('<div/>', {
+            class: 'col-md-6'
+        });
+        var exercise_div = $('<div/>', {
+            class: 'col-md-6'
+        });
+
+        module.buildExercisePresentation(presentation_div);
+        buildExerciseList(exercise_div);
+
+        presentation_div.appendTo(page_div);
+        exercise_div.appendTo(page_div);
+        currentExercise = -1;
+        currentModule = -1;
+    };
+
+    var buildModuleList = function (div) {
+        var table = $('<table />', {
+            style: 'text-align: center'
+        });
+
+        for (var index in module.getModuleList(currentExercise).title) {
+            var row = $('<tr />', { });
+            var cell = $('<td />', { });
+            var text = '<h2>' + module.getModuleList(currentExercise).title[index] + '</h2>' +
+                '<h5>' + module.getModuleList(currentExercise).subTitle[index] +
+                '</h5>' + buildBadgeWithScore(currentExercise - 1, index);
+            var link = $('<a />', {
+                href: '#',
+                class: 'btn btn-primary btn-ms active',
+                id: 'module_' + index,
+                role: 'button',
+                html: text,
+                click: function (e) {
+                    var e = e || window.event;
+                    var target = e.target || e.srcElement;
+
+                    if (target.nodeName != 'A') {
+                        target = target.parentNode;
+                    }
+
+                    currentModule = parseInt(target.id.substring(target.id.indexOf('_') + 1,
+                        target.id.length)) + 1;
+
+
+                    buildQuestionPage();
+                }
+            });
+            link.appendTo(cell);
+            cell.appendTo(row);
+            row.appendTo(table);
+        }
+        table.appendTo(div);
+    };
+
+    var buildModulePage = function () {
+        clearView();
+
+        var page_div = buildPage();
+        var explanation_div = $('<div/>', {
+            class: 'col-md-6'
+        });
+        var module_div = $('<div/>', {
+            class: 'col-md-6'
+        });
+
+        module.buildExplanation(explanation_div, currentExercise);
+        buildModuleList(module_div);
+
+        explanation_div.appendTo(page_div);
+        module_div.appendTo(page_div);
+        currentModule = -1;
+    };
+
+    var buildPage = function () {
+        var global_div = $('<div/>', {
+            style: 'background-color: #252538; padding: 10px; border-radius: 6px 6px 6px 6px'
+        });
+        var title_div = $('<div/>', {
+            style: 'background-color: #252538; padding: 10px; border-radius: 6px 6px 6px 6px; ' +
+                'color: #ffffff; font-size: 20px; text-align: center',
+            class: 'row'
+        });
+        var title =  $('<div/>', {
+            class: 'col-md-10',
+            html: module.getName()
+        });
+        var nav =  $('<a/>', {
+            href: '#',
+            class: 'col-md_2 btn btn-primary btn-ms active',
+            role: 'button',
+            html: 'Retour',
+            click: function (e) {
+                var e = e || window.event;
+                var target = e.target || e.srcElement;
+
+                back();
+            }
+        });
+        var spacing_div = $('<div/>', {
+            style: 'padding: 5px;'
+        });
+        var row_div = $('<div/>', {
+            class: 'row'
+        });
+
+        nav.appendTo(title_div);
+        title.appendTo(title_div);
+        title_div.appendTo(view);
+        spacing_div.appendTo(view);
+        row_div.appendTo(global_div);
+        global_div.appendTo(view);
+        return row_div;
+    };
+
+    var buildQuestionPage = function() {
+        clearView();
+
+        var page_div = buildPage();
+
+        module.buildQuestion(page_div, currentExercise, currentModule);
+    };
+
     var clearView = function () {
         while (view[0].firstChild) {
             view[0].removeChild(view[0].firstChild);
@@ -214,6 +267,7 @@ var engine = function () {
     };
 
 // private attributes
+    var url = u;
     var module;
     var view;
 

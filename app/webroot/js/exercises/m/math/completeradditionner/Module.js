@@ -7,7 +7,7 @@ m.math.completeradditionner.Module = function (e) {
             'font-size': '20px',
             'color': '#ffffff'
         });
-        div.html('<h1>Aligner<br>Compter</h1>');
+        div.html('<h1>Compléter<br>Additionner</h1>');
     };
 
     this.buildExplanation = function (div, currentExercise) {
@@ -16,7 +16,7 @@ m.math.completeradditionner.Module = function (e) {
             'font-size': '20px',
             'color': '#ffffff'
         });
-        div.html('<h1>Aligner et compter</h1>');
+        div.html('<h1>Compléter et additionner</h1>');
     };
 
     this.buildQuestion = function (div, currentExercise, currentModule) {
@@ -60,6 +60,10 @@ m.math.completeradditionner.Module = function (e) {
             title: ["Module 1" , "Module 2", "Module 3", "Module 4", "Module 5"],
             subTitle: ["5 questions", "5 questions", "5 questions", "5 questions", "5 questions"]
         };
+    };
+
+    this.getName = function() {
+        return 'Complèter et additionner';
     };
 
     this.getNextQuestionButtonText = function () {
