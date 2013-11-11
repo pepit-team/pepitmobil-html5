@@ -3,6 +3,7 @@ m.francais.lelales.View = function (mdl, div, number, min, max, sh) {
 // public methods
     this.error = function () {
         module.error();
+        bootstrap_alert.info('Erreur !', '');
     };
 
     this.init = function (mdl, view, number, min, max, sh) {

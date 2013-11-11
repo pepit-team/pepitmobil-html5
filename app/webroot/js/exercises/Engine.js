@@ -32,7 +32,7 @@ var engine = function (u) {
     };
 
     this.next = function () {
-        bootstrap_alert.info(this, 'Bonne réponse !', module.getNextQuestionButtonText());
+        bootstrap_alert.info('Bonne réponse !', module.getNextQuestionButtonText(), this);
     };
 
     this.next2 = function () {

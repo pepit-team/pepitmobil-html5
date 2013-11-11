@@ -1,14 +1,16 @@
-function alertTimeout(engine, wait) {
+function alertTimeout(wait, engine) {
     setTimeout(function () {
         $('#alert_placeholder').children('.alert:first-child').remove();
-        engine.next2();
+        if (engine) {
+            engine.next2();
+        }
     }, wait);
 }
 
 bootstrap_alert = function () {
 };
 
-bootstrap_alert.info = function (engine, message, button) {
+bootstrap_alert.info = function (message, button, engine) {
     if (button.length > 0) {
         $('#alert_placeholder').append('<div class="alert alert-success fade in"><h1>' +
             message + '</h1><a class="btn btn-primary btn-xs active" data-dismiss="alert" id="alert_button">' +
@@ -19,6 +21,6 @@ bootstrap_alert.info = function (engine, message, button) {
     } else {
         $('#alert_placeholder').append('<div class="alert alert-success fade in"><h1>' +
             message + '</h1></div>');
-        alertTimeout(engine, 3000);
+        alertTimeout(3000, engine);
     }
 };
