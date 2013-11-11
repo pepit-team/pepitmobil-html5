@@ -105,7 +105,10 @@ m.francais.lelales.View = function (mdl, div, number, min, max, sh) {
     };
 
     var init_div = function (view) {
-        view.style = 'background-color: #99CC66; padding: 10px; border-radius: 6px 6px 6px 6px';
+        view.css({'background-color': '#99CC66',
+            'padding': '10px',
+            'border-radius': '6px 6px 6px 6px'
+        });
         build_buttons().appendTo(view);
         build_image(model.getImageIndex()).appendTo(view);
     };
@@ -118,5 +121,5 @@ m.francais.lelales.View = function (mdl, div, number, min, max, sh) {
     var model;
     var controller;
 
-    this.init(mdl, div[0], number, min, max, sh);
+    this.init(mdl, div, number, min, max, sh);
 };
