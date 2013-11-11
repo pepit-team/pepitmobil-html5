@@ -1,10 +1,10 @@
 <?php
 echo $this->Html->script('bootstrap_alert');
-echo $this->Html->script('exercises/engine');
+echo $this->Html->script('exercises/Engine');
 echo $this->Html->script('exercises/Score');
-echo $this->Html->script('exercises/m/level');
-echo $this->Html->script('exercises/m/math/subject');
-echo $this->Html->script('exercises/m/math/completeradditionner/topic');
+echo $this->Html->script('exercises/m/Level');
+echo $this->Html->script('exercises/m/math/Subject');
+echo $this->Html->script('exercises/m/math/completeradditionner/Topic');
 echo $this->Html->script('exercises/m/math/completeradditionner/Controller');
 echo $this->Html->script('exercises/m/math/completeradditionner/Model');
 echo $this->Html->script('exercises/m/math/completeradditionner/Module');
