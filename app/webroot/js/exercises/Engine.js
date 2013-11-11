@@ -241,11 +241,16 @@ var engine = function (u) {
         });
         var title_div = $('<div/>', {
             style: 'background-color: #252538; padding: 10px; border-radius: 6px 6px 6px 6px; ' +
-                'color: #ffffff; font-size: 20px; text-align: center',
+                'color: #ffffff',
             class: 'row'
         });
+        var copyright = $('<img/>', {
+            class: 'col-md-2',
+            src: '/app/webroot/img/by-nc-nd.eu.png',
+        });
         var title = $('<div/>', {
-            class: 'col-md-10',
+            style: 'font-size: 40px; text-align: center',
+            class: 'col-md-8',
             html: module.getName()
         });
         var nav = $('<a/>', {
@@ -267,8 +272,9 @@ var engine = function (u) {
             class: 'row'
         });
 
-        nav.appendTo(title_div);
+        copyright.appendTo(title_div);
         title.appendTo(title_div);
+        nav.appendTo(title_div);
         title_div.appendTo(view);
         spacing_div.appendTo(view);
         row_div.appendTo(global_div);
