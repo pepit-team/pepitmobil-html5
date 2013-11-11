@@ -257,6 +257,7 @@ var engine = function (u) {
 
         var page_div = buildPage();
 
+        score.clear(currentExercise - 1, currentModule -1);
         module.buildQuestion(page_div, currentExercise, currentModule);
     };
 

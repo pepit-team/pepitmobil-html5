@@ -31,6 +31,10 @@ var Score = function (v) {
         }
     };
 
+    this.clear = function(currentExercise, currentModule) {
+        values[currentExercise][currentModule] = -1;
+    };
+
     this.get = function(currentExercise, currentModule) {
         return values[currentExercise][currentModule];
     };
