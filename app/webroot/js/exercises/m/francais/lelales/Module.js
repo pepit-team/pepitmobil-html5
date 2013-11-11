@@ -95,7 +95,7 @@ m.francais.lelales.Module = function (e) {
     };
 
     this.getNextQuestionButtonText = function () {
-        return 'Suivante';
+        return '';
     };
 
     this.getQuestionNumber = function(currentExercise, currentModule) {
