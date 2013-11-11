@@ -1,6 +1,7 @@
 <?php
 echo $this->Html->script('bootstrap_alert');
 echo $this->Html->script('exercises/engine');
+echo $this->Html->script('exercises/Score');
 echo $this->Html->script('exercises/m/level');
 echo $this->Html->script('exercises/m/math/subject');
 echo $this->Html->script('exercises/m/math/completeradditionner/topic');

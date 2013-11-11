@@ -1,6 +1,10 @@
 m.math.completeradditionner.View = function (mdl, div, number, max) {
 
 // public methods
+    this.error = function() {
+        module.error();
+    };
+
     this.init = function (mdl, view, number, max) {
         height = window.innerHeight;
         width = window.innerWidth;
@@ -46,7 +50,6 @@ m.math.completeradditionner.View = function (mdl, div, number, max) {
             $('#result').html(model.getResult());
             $('#img_result').attr('src', '/app/webroot/img/exercises/m/math/completeradditionner/card_' +
                 model.getResult() + '.png');
-            bootstrap_alert.info('Bravo !!!');
             module.next();
         } else {
             $('#result').html('?');

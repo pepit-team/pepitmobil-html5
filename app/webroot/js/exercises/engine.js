@@ -25,16 +25,22 @@ var engine = function () {
 // public methods
     this.init = function (m) {
         module = m;
+        score = new module.initScore();
         view = $('#exercise-view');
 
         buildExercisePage();
     };
 
     this.next = function() {
+        bootstrap_alert.info(this, 'Bravo !!!', module.getNextQuestionButtonText());
+    };
+
+    this.next2 = function() {
+        score.add(currentExercise - 1, currentModule - 1, module.getScore());
         if (module.finishModule(currentExercise, currentModule)) {
             buildModulePage();
         } else {
-            module.nextQuestion();
+            module.nextQuestion(currentExercise, currentModule);
         }
     };
 
@@ -109,13 +115,15 @@ var engine = function () {
         for (var index in module.getModuleList(currentExercise).title) {
             var row = $('<tr />', { });
             var cell = $('<td />', { });
+            var text = '<h2>' + module.getModuleList(currentExercise).title[index] + '</h2>' +
+                '<h5>' + module.getModuleList(currentExercise).subTitle[index] +
+                '</h5>' + buildBadgeWithScore(currentExercise - 1, index);
             var link = $('<a />', {
                 href: '#',
                 class: 'btn btn-primary btn-ms active',
                 id: 'module_' + index,
                 role: 'button',
-                html: '<h2>' + module.getModuleList(currentExercise).title[index] + '</h2>' +
-                    '<h5>' + module.getModuleList(currentExercise).subTitle[index] + '</h5>',
+                html: text,
                 click: function (e) {
                     var e = e || window.event;
                     var target = e.target || e.srcElement;
@@ -156,6 +164,27 @@ var engine = function () {
         module_div.appendTo(page_div);
     };
 
+    var buildBadgeWithScore = function(exerciseIndex, moduleIndex) {
+        var badge = '<span class="badge pull-right">';
+
+        if (moduleIndex != -1) {
+            var s = score.get(exerciseIndex, moduleIndex);
+
+            if (s == -1) {
+                badge += 'à faire';
+            } else {
+                var max = module.getQuestionScore(exerciseIndex, moduleIndex) *
+                    module.getQuestionNumber(exerciseIndex, moduleIndex);
+
+                badge += s + '/' + max;
+            }
+        } else {
+
+        }
+        badge += '</span>';
+        return badge;
+    };
+
     var clearView = function () {
         while (view[0].firstChild) {
             view[0].removeChild(view[0].firstChild);
@@ -165,6 +194,9 @@ var engine = function () {
 // private attributes
     var module;
     var view;
+
+    var score;
+
     var currentExercise;
     var currentModule;
 };

@@ -10,22 +10,42 @@ m.math.completeradditionner.Module = function (e) {
         div.html('<h1>Aligner<br>Compter</h1>');
     };
 
-    this.buildExplanation = function (div, selectedExercise) {
+    this.buildExplanation = function (div, currentExercise) {
+        div.css({
+            'text-align': 'center',
+            'font-size': '20px',
+            'color': '#ffffff'
+        });
+        div.html('<h1>Aligner et compter</h1>');
     };
 
-    this.buildQuestion = function (div, selectedExercise, selectedModule) {
-        if (selectedExercise == 1) {
+    this.buildQuestion = function (div, currentExercise, currentModule) {
+        if (currentExercise == 1) {
             view = new m.math.completeradditionner.View(this, div, 5, 5);
-        } else if (selectedExercise == 2) {
+        } else if (currentExercise == 2) {
             view = new m.math.completeradditionner.View(this, div, 5, 6);
-        } else if (selectedExercise == 3) {
+        } else if (currentExercise == 3) {
             view = new m.math.completeradditionner.View(this, div, 5, 8);
-        } else if (selectedExercise == 4) {
+        } else if (currentExercise == 4) {
             view = new m.math.completeradditionner.View(this, div, 5, 10);
-        } else if (selectedExercise == 5) {
+        } else if (currentExercise == 5) {
             view = new m.math.completeradditionner.View(this, div, 5, 12);
         }
         questionIndex = 1;
+        currentScore = this.getQuestionScore(currentExercise, currentModule);
+    };
+
+    this.error = function() {
+        if (currentScore > 0) {
+            --currentScore;
+        }
+    };
+
+    this.finishModule = function (currentExercise, currentModule) {
+        return questionIndex == this.getQuestionNumber(currentExercise, currentModule);
+    };
+
+    this.finishQuestionSequence = function () {
     };
 
     this.getExerciseList = function () {
@@ -35,31 +55,47 @@ m.math.completeradditionner.Module = function (e) {
         };
     };
 
-    this.getModuleList = function (selectedExercise) {
+    this.getModuleList = function (currentExercise) {
         return {
             title: ["Module 1" , "Module 2", "Module 3", "Module 4", "Module 5"],
             subTitle: ["5 questions", "5 questions", "5 questions", "5 questions", "5 questions"]
         };
     };
 
-    this.finishModule = function (selectedExercise, selectedModule) {
-        return questionIndex > 5;
-    };
-
-    this.startQuestionSequence = function () {
-
-    };
-
-    this.finishQuestionSequence = function () {
-
-    };
-
     this.getNextQuestionButtonText = function () {
         return 'Suivante';
     };
 
-    this.currentAnswerIsRight = function () {
+    this.getQuestionNumber = function(currentExercise, currentModule) {
+        return 5;
+    };
 
+    this.getQuestionScore = function(currentExercise, currentModule) {
+        return 8;  // total = 8 * 5 exercises * 5 modules * 5 questions = 1000 pts
+    };
+
+    this.getScore = function() {
+        return currentScore;
+    };
+
+    this.initScore = function() {
+        return new Score([[-1, -1, -1, -1, -1],
+            [-1, -1, -1, -1, -1],
+            [-1, -1, -1, -1, -1],
+            [-1, -1, -1, -1, -1],
+            [-1, -1, -1, -1, -1]]);
+    };
+
+    this.next = function() {
+        engine.next();
+    };
+
+    this.nextQuestion = function(currentExercise, currentModule) {
+        questionIndex++;
+        if (questionIndex <= this.getQuestionNumber(currentExercise, currentModule)) {
+            currentScore = this.getQuestionScore(currentExercise, currentModule);
+            view.next();
+        }
     };
 
     this.showAnswerIsRight = function () {
@@ -70,19 +106,12 @@ m.math.completeradditionner.Module = function (e) {
 
     };
 
-    this.getPointsRightAnswer = function (selectedExercise) {
+    this.startQuestionSequence = function () {
 
     };
 
-    this.next = function() {
-        engine.next();
-    };
+    this.currentAnswerIsRight = function () {
 
-    this.nextQuestion = function() {
-        questionIndex++;
-        if (questionIndex <= 5) {
-            view.next();
-        }
     };
 
 // private methods
@@ -92,8 +121,10 @@ m.math.completeradditionner.Module = function (e) {
 
 // private attributes
     var view;
-    var questionIndex;
     var engine;
+
+    var questionIndex;
+    var currentScore;
 
     init(e);
 };

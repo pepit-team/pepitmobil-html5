@@ -24,6 +24,10 @@ m.math.completeradditionner.Controller = function (model, view) {
             if (model.checkFirstOperand()) {
                 model.unsetSelectedNumber();
                 view.update();
+            } else {
+                model.unsetSelectedNumber();
+                view.error();
+                view.update();
             }
         });
         $('#button_number_2').on('click', function (e) {
@@ -33,6 +37,10 @@ m.math.completeradditionner.Controller = function (model, view) {
             if (model.checkSecondOperand()) {
                 model.unsetSelectedNumber();
                 view.update();
+            } else {
+                model.unsetSelectedNumber();
+                view.error();
+                view.update();
             }
         });
         $('#button_result').on('click', function (e) {
@@ -41,6 +49,10 @@ m.math.completeradditionner.Controller = function (model, view) {
 
             if (model.checkResult()) {
                 model.unsetSelectedNumber();
+                view.update();
+            } else {
+                model.unsetSelectedNumber();
+                view.error();
                 view.update();
             }
         });
