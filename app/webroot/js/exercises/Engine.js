@@ -102,32 +102,44 @@ var engine = function (u) {
         var table = $('<table />', {
             style: 'text-align: center'
         });
+        var n = Math.ceil(module.getExerciseList().title.length / 3);
+        var index = 0;
 
-        for (var index in module.getExerciseList().title) {
+        while (index < module.getExerciseList().title.length) {
             var row = $('<tr />', { });
-            var cell = $('<td />', { });
-            var text = '<h2>' + module.getExerciseList().title[index] + '</h2>' +
-                '<h5>' + module.getExerciseList().subTitle[index] +
-                '</h5>' + buildBadgeWithScore(index, -1);
-            var link = $('<a />', {
-                href: '#',
-                class: 'btn btn-primary btn-ms active',
-                id: 'exercise_' + index,
-                role: 'button',
-                html: text,
-                click: function (e) {
-                    var e = e || window.event;
-                    var target = e.target || e.srcElement;
+            var i = 0;
 
-                    if (target.nodeName != 'A') {
-                        target = target.parentNode;
-                    }
-                    currentExercise = parseInt(target.id.substring(target.id.indexOf('_') + 1, target.id.length)) + 1;
-                    buildModulePage();
+            while (i < n && index < module.getExerciseList().title.length) {
+                var cell = $('<td />', { });
+                var text = '<h2>' + module.getExerciseList().title[index] + '</h2>';
+
+                if (module.getExerciseList().subTitle.length > 0) {
+                    text += '<h5>' + module.getExerciseList().subTitle[index] + '</h5>';
                 }
-            });
-            link.appendTo(cell);
-            cell.appendTo(row);
+                text += buildBadgeWithScore(index, -1);
+
+                var link = $('<a />', {
+                    href: '#',
+                    class: 'btn btn-primary btn-ms active',
+                    id: 'exercise_' + index,
+                    role: 'button',
+                    html: text,
+                    click: function (e) {
+                        var e = e || window.event;
+                        var target = e.target || e.srcElement;
+
+                        if (target.nodeName != 'A') {
+                            target = target.parentNode;
+                        }
+                        currentExercise = parseInt(target.id.substring(target.id.indexOf('_') + 1, target.id.length)) + 1;
+                        buildModulePage();
+                    }
+                });
+                link.appendTo(cell);
+                cell.appendTo(row);
+                ++index;
+                ++i;
+            }
             row.appendTo(table);
         }
         table.appendTo(div);
@@ -157,36 +169,48 @@ var engine = function (u) {
         var table = $('<table />', {
             style: 'text-align: center'
         });
+        var n = Math.ceil(module.getModuleList(currentExercise).title.length / 3);
+        var index = 0;
 
-        for (var index in module.getModuleList(currentExercise).title) {
+        while (index < module.getModuleList(currentExercise).title.length) {
             var row = $('<tr />', { });
-            var cell = $('<td />', { });
-            var text = '<h2>' + module.getModuleList(currentExercise).title[index] + '</h2>' +
-                '<h5>' + module.getModuleList(currentExercise).subTitle[index] +
-                '</h5>' + buildBadgeWithScore(currentExercise - 1, index);
-            var link = $('<a />', {
-                href: '#',
-                class: 'btn btn-primary btn-ms active',
-                id: 'module_' + index,
-                role: 'button',
-                html: text,
-                click: function (e) {
-                    var e = e || window.event;
-                    var target = e.target || e.srcElement;
+            var i = 0;
 
-                    if (target.nodeName != 'A') {
-                        target = target.parentNode;
-                    }
+            while (i < n && index < module.getModuleList(currentExercise).title.length) {
+                var cell = $('<td />', { });
+                var text = '<h2>' + module.getModuleList(currentExercise).title[index] + '</h2>';
 
-                    currentModule = parseInt(target.id.substring(target.id.indexOf('_') + 1,
-                        target.id.length)) + 1;
-
-
-                    buildQuestionPage();
+                if (module.getModuleList(currentExercise).subTitle.length > 0) {
+                    text += '<h5>' + module.getModuleList(currentExercise).subTitle[index] + '</h5>';
                 }
-            });
-            link.appendTo(cell);
-            cell.appendTo(row);
+                text += buildBadgeWithScore(currentExercise - 1, index);
+
+                var link = $('<a />', {
+                    href: '#',
+                    class: 'btn btn-primary btn-ms active',
+                    id: 'module_' + index,
+                    role: 'button',
+                    html: text,
+                    click: function (e) {
+                        var e = e || window.event;
+                        var target = e.target || e.srcElement;
+
+                        if (target.nodeName != 'A') {
+                            target = target.parentNode;
+                        }
+
+                        currentModule = parseInt(target.id.substring(target.id.indexOf('_') + 1,
+                            target.id.length)) + 1;
+
+
+                        buildQuestionPage();
+                    }
+                });
+                link.appendTo(cell);
+                cell.appendTo(row);
+                ++index;
+                ++i;
+            }
             row.appendTo(table);
         }
         table.appendTo(div);
@@ -257,7 +281,7 @@ var engine = function (u) {
 
         var page_div = buildPage();
 
-        score.clear(currentExercise - 1, currentModule -1);
+        score.clear(currentExercise - 1, currentModule - 1);
         module.buildQuestion(page_div, currentExercise, currentModule);
     };
 

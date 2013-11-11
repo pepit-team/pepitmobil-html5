@@ -11,7 +11,14 @@
             <div id="collapseOne" class="panel-collapse collapse in">
                 <div class="panel-body">
                     <ul class="list-group">
-                        <li class="list-group-item"><a href="#">Déterminants "le - la - les"</a><span class="glyphicon glyphicon-import" style="float: right">></span></li>
+                        <li class="list-group-item">
+                            <?php
+                            echo $this->Html->link('Déterminants "le - la - les',
+                                array('controller' => 'pages', 'action' => 'display', 'exercises/m/francais/lelales'),
+                                array('escape' => false));
+                            ?>
+                            <span class="glyphicon glyphicon-check" style="float: right"></span>
+                        </li>
                         <li class="list-group-item"><a href="#">Déterminants "un - une - des"</a><span class="glyphicon glyphicon-import" style="float: right">></span></li>
                         <li class="list-group-item"><a href="#">L'autre moitié de l'illustration</a><span class="glyphicon glyphicon-import" style="float: right">></span></li>
                         <li class="list-group-item"><a href="#">Le scrabble (mots de 3 à 5 lettres)</a><span class="glyphicon glyphicon-import" style="float: right">></span></li>

@@ -50,6 +50,7 @@ m.math.completeradditionner.View = function (mdl, div, number, max) {
             $('#result').html(model.getResult());
             $('#img_result').attr('src', '/app/webroot/img/exercises/m/math/completeradditionner/card_' +
                 model.getResult() + '.png');
+            bootstrap_alert.info('Bravo !!!');
             module.next();
         } else {
             $('#result').html('?');
