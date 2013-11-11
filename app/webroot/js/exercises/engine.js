@@ -31,11 +31,11 @@ var engine = function (u) {
         buildExercisePage();
     };
 
-    this.next = function() {
-        bootstrap_alert.info(this, 'Bravo !!!', module.getNextQuestionButtonText());
+    this.next = function () {
+        bootstrap_alert.info(this, 'Bonne réponse !', module.getNextQuestionButtonText());
     };
 
-    this.next2 = function() {
+    this.next2 = function () {
         score.add(currentExercise - 1, currentModule - 1, module.getScore());
         if (module.finishModule(currentExercise, currentModule)) {
             buildModulePage();
@@ -45,11 +45,11 @@ var engine = function (u) {
     };
 
 // private methods
-    var back = function() {
+    var back = function () {
         if (currentExercise == -1) {
             window.location.replace(url);
         } else {
-            if (currentModule == -1 ) {
+            if (currentModule == -1) {
                 buildExercisePage();
             } else {
                 buildModulePage();
@@ -57,7 +57,7 @@ var engine = function (u) {
         }
     };
 
-    var buildBadgeWithScore = function(exerciseIndex, moduleIndex) {
+    var buildBadgeWithScore = function (exerciseIndex, moduleIndex) {
         var badge = '<span class="badge pull-right">';
         var max;
 
@@ -75,11 +75,11 @@ var engine = function (u) {
             var sum = -1;
 
             max = 0;
-            for (var moduleIndex in module.getModuleList(exerciseIndex).title) {
-                var s = score.get(exerciseIndex, moduleIndex);
+            for (var index in module.getModuleList(exerciseIndex).title) {
+                var s = score.get(exerciseIndex, index);
 
-                max += module.getQuestionScore(exerciseIndex, moduleIndex) *
-                    module.getQuestionNumber(exerciseIndex, moduleIndex);
+                max += module.getQuestionScore(exerciseIndex, index) *
+                    module.getQuestionNumber(exerciseIndex, index);
                 if (s > 0) {
                     if (sum == -1) {
                         sum = s;
@@ -91,7 +91,7 @@ var engine = function (u) {
             if (sum == -1) {
                 badge += 'à faire';
             } else {
-                badge += s + '/' + max;
+                badge += sum + '/' + max;
             }
         }
         badge += '</span>';
@@ -220,11 +220,11 @@ var engine = function (u) {
                 'color: #ffffff; font-size: 20px; text-align: center',
             class: 'row'
         });
-        var title =  $('<div/>', {
+        var title = $('<div/>', {
             class: 'col-md-10',
             html: module.getName()
         });
-        var nav =  $('<a/>', {
+        var nav = $('<a/>', {
             href: '#',
             class: 'col-md_2 btn btn-primary btn-ms active',
             role: 'button',
@@ -252,7 +252,7 @@ var engine = function (u) {
         return row_div;
     };
 
-    var buildQuestionPage = function() {
+    var buildQuestionPage = function () {
         clearView();
 
         var page_div = buildPage();
