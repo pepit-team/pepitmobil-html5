@@ -1,4 +1,4 @@
-m.francais.lelales.View = function (mdl, div, number, min, max, sh) {
+m.francais.lelales.View = function (mdl, u, div, number, min, max, sh) {
 
 // public methods
     this.error = function () {
@@ -6,11 +6,12 @@ m.francais.lelales.View = function (mdl, div, number, min, max, sh) {
         bootstrap_alert.info('Erreur !', '');
     };
 
-    this.init = function (mdl, view, number, min, max, sh) {
+    this.init = function (mdl, u, view, number, min, max, sh) {
         height = window.innerHeight;
         width = window.innerWidth;
 
         module = mdl;
+        url = u;
         model = new m.francais.lelales.Model(number, min, max, sh);
         init_div(view);
         controller = new m.francais.lelales.Controller(model, this);
@@ -19,7 +20,7 @@ m.francais.lelales.View = function (mdl, div, number, min, max, sh) {
     this.next = function () {
         model.next();
         $('#image').attr('src',
-            '/app/webroot/img/exercises/m/francais/lelales/card_' + model.getImageIndex() + '.png');
+            url + 'img/exercises/m/francais/lelales/card_' + model.getImageIndex() + '.png');
         this.update();
     };
 
@@ -79,7 +80,7 @@ m.francais.lelales.View = function (mdl, div, number, min, max, sh) {
         });
         var img = $('<img/>', {
             style: 'background-color: #FFFFFF; padding: 10px; border-radius: 6px 6px 6px 6px; display: block; margin-left: auto; margin-right: auto; border: 1px solid #000000',
-            src: '/app/webroot/img/exercises/m/francais/lelales/card_' + i + '.png',
+            src: url + 'img/exercises/m/francais/lelales/card_' + i + '.png',
             height: height / 2,
             id: 'image'
         });
@@ -116,10 +117,11 @@ m.francais.lelales.View = function (mdl, div, number, min, max, sh) {
 // private attributes
     var height;
     var width;
+    var url;
 
     var module;
     var model;
     var controller;
 
-    this.init(mdl, div, number, min, max, sh);
+    this.init(mdl, u, div, number, min, max, sh);
 };

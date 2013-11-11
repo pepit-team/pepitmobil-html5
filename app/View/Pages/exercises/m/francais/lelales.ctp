@@ -13,8 +13,8 @@ echo $this->Html->script('exercises/m/francais/lelales/View');
 
 <script language="javascript">
     $(document).ready(function () {
-        var e = new engine('exercises/m/exercise-m');
-        var module = new m.francais.lelales.Module(e);
+        var e = new engine('exercises/m/exercise-m', '<?php echo $this->webroot; ?>');
+        var module = new m.francais.lelales.Module(e, '<?php echo $this->webroot; ?>');
 
         e.init(module);
     });

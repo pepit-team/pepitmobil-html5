@@ -1,4 +1,4 @@
-m.math.completeradditionner.Module = function (e) {
+m.math.completeradditionner.Module = function (e, u) {
 
 // public methods
     this.buildExercisePresentation = function (div) {
@@ -21,15 +21,15 @@ m.math.completeradditionner.Module = function (e) {
 
     this.buildQuestion = function (div, currentExercise, currentModule) {
         if (currentExercise == 1) {
-            view = new m.math.completeradditionner.View(this, div, 5, 5);
+            view = new m.math.completeradditionner.View(this, url, div, 5, 5);
         } else if (currentExercise == 2) {
-            view = new m.math.completeradditionner.View(this, div, 5, 6);
+            view = new m.math.completeradditionner.View(this, url, div, 5, 6);
         } else if (currentExercise == 3) {
-            view = new m.math.completeradditionner.View(this, div, 5, 8);
+            view = new m.math.completeradditionner.View(this, url, div, 5, 8);
         } else if (currentExercise == 4) {
-            view = new m.math.completeradditionner.View(this, div, 5, 10);
+            view = new m.math.completeradditionner.View(this, url, div, 5, 10);
         } else if (currentExercise == 5) {
-            view = new m.math.completeradditionner.View(this, div, 5, 12);
+            view = new m.math.completeradditionner.View(this, url, div, 5, 12);
         }
         questionIndex = 1;
         currentScore = this.getQuestionScore(currentExercise, currentModule);
@@ -119,16 +119,18 @@ m.math.completeradditionner.Module = function (e) {
     };
 
 // private methods
-    var init = function(e) {
+    var init = function(e, u) {
         engine = e;
+        url = u;
     };
 
 // private attributes
     var view;
     var engine;
+    var url;
 
     var questionIndex;
     var currentScore;
 
-    init(e);
+    init(e, u);
 };

@@ -1,15 +1,16 @@
-m.math.completeradditionner.View = function (mdl, div, number, max) {
+m.math.completeradditionner.View = function (mdl, u, div, number, max) {
 
 // public methods
     this.error = function() {
         module.error();
     };
 
-    this.init = function (mdl, view, number, max) {
+    this.init = function (mdl, u, view, number, max) {
         height = window.innerHeight;
         width = window.innerWidth;
 
         module = mdl;
+        url = u;
         model = new m.math.completeradditionner.Model(number, max);
         init_div(view);
         controller = new m.math.completeradditionner.Controller(model, this);
@@ -18,11 +19,11 @@ m.math.completeradditionner.View = function (mdl, div, number, max) {
     this.next = function() {
         model.next();
         $('#img_operand_1').attr('src',
-            '/app/webroot/img/exercises/m/math/completeradditionner/card_' + model.getFirstOperand() + '.png');
+            url + 'img/exercises/m/math/completeradditionner/card_' + model.getFirstOperand() + '.png');
         $('#img_operand_2').attr('src',
-            '/app/webroot/img/exercises/m/math/completeradditionner/card_' + model.getSecondOperand() + '.png');
+            url + 'img/exercises/m/math/completeradditionner/card_' + model.getSecondOperand() + '.png');
         $('#img_result').attr('src',
-            '/app/webroot/img/exercises/m/math/completeradditionner/card_0.png');
+            url + 'img/exercises/m/math/completeradditionner/card_0.png');
         this.update();
     };
 
@@ -48,7 +49,7 @@ m.math.completeradditionner.View = function (mdl, div, number, max) {
         }
         if (model.isOkResult()) {
             $('#result').html(model.getResult());
-            $('#img_result').attr('src', '/app/webroot/img/exercises/m/math/completeradditionner/card_' +
+            $('#img_result').attr('src', url + 'img/exercises/m/math/completeradditionner/card_' +
                 model.getResult() + '.png');
             module.next();
         } else {
@@ -120,7 +121,7 @@ m.math.completeradditionner.View = function (mdl, div, number, max) {
     var build_image = function (i, name) {
         var img = document.createElement('img');
 
-        img.src = '/app/webroot/img/exercises/m/math/completeradditionner/card_' + i + '.png';
+        img.src = url + 'img/exercises/m/math/completeradditionner/card_' + i + '.png';
         img.height = height - 550 > 200 ? height - 550 : 200;
         img.id = 'img_' + name;
         return img;
@@ -220,9 +221,11 @@ m.math.completeradditionner.View = function (mdl, div, number, max) {
         'six', 'sept', 'huit', 'neuf', 'dix', 'onze', 'douze' ];
     var height;
     var width;
+    var url;
+
     var module;
     var model;
     var controller;
 
-    this.init(mdl, div[0], number, max);
+    this.init(mdl, u, div[0], number, max);
 };

@@ -20,7 +20,7 @@
  * @license       http://www.gnu.org/licenses/ GPLv3 License
  */
 
-var engine = function (u) {
+var engine = function (u1, u2) {
 
 // public methods
     this.init = function (m) {
@@ -246,7 +246,7 @@ var engine = function (u) {
         });
         var copyright = $('<img/>', {
             class: 'col-md-2',
-            src: '/app/webroot/img/by-nc-nd.eu.png',
+            src: root + 'img/by-nc-nd.eu.png'
         });
         var title = $('<div/>', {
             style: 'font-size: 40px; text-align: center',
@@ -298,7 +298,8 @@ var engine = function (u) {
     };
 
 // private attributes
-    var url = u;
+    var url = u1;
+    var root = u2;
     var module;
     var view;
 
