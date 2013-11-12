@@ -59,161 +59,155 @@ m.math.completeradditionner.View = function (mdl, u, div, number, max) {
 
 // private methods
     var build_button_for_response = function (name) {
-        var button = document.createElement('div');
-        var link = document.createElement('a');
-
-        button.className = 'col-md-2';
-        button.appendChild(link);
-
-        setAttributes(link, {
+        var button = $('<div/>', {
+           class: 'col-md-2'
+        });
+        var link = $('<a/>', {
             href: '#',
             class: 'btn btn-ms active',
             id: 'button_' + name,
-            role: 'button'
+            role: 'button',
+            html: '<div style="font-size: 80px; color: #006600; text-align: center; font-weight: bold;" id="' +
+                name + '">?</div>'
         });
-        link.innerHTML = '<div style="font-size: 80px; color: #006600; text-align: center; font-weight: bold;" id="' +
-            name + '">?</div>';
 
+        link.appendTo(button);
         return button;
     };
 
     var build_button_with_number = function (i, top) {
-        var button = document.createElement('div');
-        var table = document.createElement('table');
-        var first_row = document.createElement('tr');
-        var first_cell = document.createElement('td');
-        var link = document.createElement('a');
-
-        button.className = 'col-md-2';
-        button.appendChild(table);
-        table.style = 'text-align: center';
-        first_row.appendChild(first_cell);
-
-        setAttributes(link, {
+        var button = $('<div/>', {
+            class: 'col-md-2'
+        });
+        var table = $('<table/>', {
+            style: 'text-align: center'
+        });
+        var first_row = $('<tr/>', { });
+        var first_cell = $('<td/>', { });
+        var link = $('<a/>', {
             href: '#',
             class: 'btn btn-primary btn-ms active',
             id: 'button_' + i,
-            role: 'button'
+            role: 'button',
+            html: '<h1>' + i + '</h1>'
         });
-        link.innerHTML = '<h1>' + i + '</h1>';
 
-        first_cell.appendChild(link);
+        table.appendTo(button);
+        first_cell.appendTo(first_row);
+        link.appendTo(first_cell);
 
-        var second_row = document.createElement('tr');
-        var second_cell = document.createElement('td');
-        var text_div = document.createElement('div');
-        var text = document.createTextNode(numbers[i]);
+        var second_row = $('<tr/>', { });
+        var second_cell = $('<td/>', { });
+        var text_div = $('<div/>', {
+            style: 'font-size: 20px; color: #ffffff;',
+            html: numbers[i]
+        });
 
-        second_row.appendChild(second_cell);
-        text_div.appendChild(text);
-        text_div.style = 'font-size: 20px; color: #ffffff;';
-        second_cell.appendChild(text_div);
+        second_cell.appendTo(second_row);
+        text_div.appendTo(second_cell);
         if (top) {
-            table.appendChild(second_row);
-            table.appendChild(first_row);
+            second_row.appendTo(table);
+            first_row.appendTo(table);
         } else {
-            table.appendChild(first_row);
-            table.appendChild(second_row);
+            first_row.appendTo(table);
+            second_row.appendTo(table);
         }
         return button;
     };
 
     var build_image = function (i, name) {
-        var img = document.createElement('img');
-
-        img.src = url + 'img/exercises/m/math/completeradditionner/card_' + i + '.png';
-        img.height = height - 550 > 200 ? height - 550 : 200;
-        img.id = 'img_' + name;
-        return img;
+        return $('<img/>', {
+            src: url + 'img/exercises/m/math/completeradditionner/card_' + i + '.png',
+            height: height - 550 > 200 ? height - 550 : 200,
+            id: 'img_' + name
+        });
     };
 
-    var build_line_with_numbers = function (view, min, max, top) {
-        var line_div = document.createElement('div');
-        var row = document.createElement('div');
+    var build_line_with_numbers = function (min, max, top) {
+        var line_div = $('<div/>', {
+            style: 'background-color: #252538; padding: 10px; border-radius: 6px 6px 6px 6px'
+        });
+        var row = $('<div/>', {
+            class: 'row'
+        });
 
-        line_div.style = 'background-color: #252538; padding: 10px; border-radius: 6px 6px 6px 6px';
-        row.className = 'row';
         for (var i = min; i <= max; i++) {
-            row.appendChild(build_button_with_number(i, top));
+            build_button_with_number(i, top).appendTo(row);
         }
-        line_div.appendChild(row);
-        view.appendChild(line_div);
+        row.appendTo(line_div);
+        return line_div;
     };
 
     var build_operator = function (op) {
-        var text_div = document.createElement('div');
-        var text = document.createTextNode(op);
-
-        text_div.appendChild(text);
-        text_div.style = 'font-size: 80px; color: #006600; text-align: center; font-weight: bold;';
-        return text_div;
+        return $('<div/>', {
+            style: 'font-size: 80px; color: #006600; text-align: center; font-weight: bold;',
+            html: op
+        });
     };
 
-    var build_operation = function (view, x, y) {
-        var global_div = document.createElement('div');
-        var table = document.createElement('table');
-        var row_1 = document.createElement('tr');
-        var row_2 = document.createElement('tr');
-        var cell_1_1 = document.createElement('td');
-        var cell_1_2 = document.createElement('td');
-        var cell_1_3 = document.createElement('td');
-        var cell_1_4 = document.createElement('td');
-        var cell_1_5 = document.createElement('td');
-        var cell_2_1 = document.createElement('td');
-        var cell_2_2 = document.createElement('td');
-        var cell_2_3 = document.createElement('td');
-        var cell_2_4 = document.createElement('td');
-        var cell_2_5 = document.createElement('td');
+    var build_operation = function (x, y) {
+        var global_div = $('<div/>', {
+            style: 'background-color: #ffffff; padding: 10px; border-radius: 6px 6px 6px 6px'
+        });
+        var table = $('<table/>');
+        var row_1 = $('<tr/>');
+        var row_2 = $('<tr/>');
+        var cell_1_1 = $('<td/>');
+        var cell_1_2 = $('<td/>');
+        var cell_1_3 = $('<td/>');
+        var cell_1_4 = $('<td/>');
+        var cell_1_5 = $('<td/>');
+        var cell_2_1 = $('<td/>');
+        var cell_2_2 = $('<td/>');
+        var cell_2_3 = $('<td/>');
+        var cell_2_4 = $('<td/>');
+        var cell_2_5 = $('<td/>');
 
-        global_div.style = 'background-color: #ffffff; padding: 10px; border-radius: 6px 6px 6px 6px';
-        global_div.appendChild(table);
-        table.appendChild(row_1);
-        row_1.appendChild(cell_1_1);
-        row_1.appendChild(cell_1_2);
-        row_1.appendChild(cell_1_3);
-        row_1.appendChild(cell_1_4);
-        row_1.appendChild(cell_1_5);
-        cell_1_1.appendChild(build_image(x, 'operand_1'));
-        cell_1_2.appendChild(build_operator('+'));
-        cell_1_3.appendChild(build_image(y, 'operand_2'));
-        cell_1_4.appendChild(build_operator('='));
-        cell_1_5.appendChild(build_image(0, 'result'));
+        table.appendTo(global_div);
+        row_1.appendTo(table);
+        cell_1_1.appendTo(row_1);
+        cell_1_2.appendTo(row_1);
+        cell_1_3.appendTo(row_1);
+        cell_1_4.appendTo(row_1);
+        cell_1_5.appendTo(row_1);
+        build_image(x, 'operand_1').appendTo(cell_1_1);
+        build_operator('+').appendTo(cell_1_2);
+        build_image(y, 'operand_2').appendTo(cell_1_3);
+        build_operator('=').appendTo(cell_1_4);
+        build_image(0, 'result').appendTo(cell_1_5);
 
-        table.appendChild(row_2);
-        row_2.appendChild(cell_2_1);
-        row_2.appendChild(cell_2_2);
-        row_2.appendChild(cell_2_3);
-        row_2.appendChild(cell_2_4);
-        row_2.appendChild(cell_2_5);
-        cell_2_1.appendChild(build_button_for_response('number_1'));
-        cell_2_2.appendChild(build_operator(''));
-        cell_2_3.appendChild(build_button_for_response('number_2'));
-        cell_2_4.appendChild(build_operator(''));
-        cell_2_5.appendChild(build_button_for_response('result'));
+        row_2.appendTo(table);
+        cell_2_1.appendTo(row_2);
+        cell_2_2.appendTo(row_2);
+        cell_2_3.appendTo(row_2);
+        cell_2_4.appendTo(row_2);
+        cell_2_5.appendTo(row_2);
 
-        view.appendChild(global_div);
+        build_button_for_response('number_1').appendTo(cell_2_1);
+        build_operator('').appendTo(cell_2_2);
+        build_button_for_response('number_2').appendTo(cell_2_3);
+        build_operator('').appendTo(cell_2_4);
+        build_button_for_response('result').appendTo(cell_2_5);
+
+        return global_div;
     };
 
-    var build_spacing = function (view) {
-        var spacing_div = document.createElement('div');
-
-        spacing_div.style = 'padding: 10px;';
-        view.appendChild(spacing_div);
+    var build_spacing = function () {
+        return $('<div/>', {
+            style: 'padding: 10px;'
+        });
     };
 
     var init_div = function (view) {
-        view.style = 'background-color: #404060; padding: 10px;';
-        build_line_with_numbers(view, 1, 6, false);
-        build_spacing(view);
-        build_operation(view, model.getFirstOperand(), model.getSecondOperand());
-        build_spacing(view);
-        build_line_with_numbers(view, 7, 12, true);
-    };
-
-    var setAttributes = function (el, attrs) {
-        for (var key in attrs) {
-            el.setAttribute(key, attrs[key]);
-        }
+        view.css({
+            'background-color': '#404060',
+            'padding': '10px'
+        });
+        build_line_with_numbers(1, 6, false).appendTo(view);
+        build_spacing().appendTo(view);
+        build_operation(model.getFirstOperand(), model.getSecondOperand()).appendTo(view);
+        build_spacing().appendTo(view);
+        build_line_with_numbers(7, 12, true).appendTo(view);
     };
 
 // private attributes
@@ -227,5 +221,5 @@ m.math.completeradditionner.View = function (mdl, u, div, number, max) {
     var model;
     var controller;
 
-    this.init(mdl, u, div[0], number, max);
+    this.init(mdl, u, div, number, max);
 };
