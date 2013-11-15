@@ -7,17 +7,17 @@ echo $this->Html->script('exercises/m/francais/Subject');
 echo $this->Html->script('exercises/m/francais/determinants/Topic');
 echo $this->Html->script('exercises/m/francais/determinants/Model');
 echo $this->Html->script('exercises/m/francais/determinants/View');
-echo $this->Html->script('exercises/m/francais/lelales/Topic');
-echo $this->Html->script('exercises/m/francais/lelales/Controller');
-echo $this->Html->script('exercises/m/francais/lelales/Model');
-echo $this->Html->script('exercises/m/francais/lelales/Module');
-echo $this->Html->script('exercises/m/francais/lelales/View');
+echo $this->Html->script('exercises/m/francais/ununedes/Topic');
+echo $this->Html->script('exercises/m/francais/ununedes/Controller');
+echo $this->Html->script('exercises/m/francais/ununedes/Model');
+echo $this->Html->script('exercises/m/francais/ununedes/Module');
+echo $this->Html->script('exercises/m/francais/ununedes/View');
 ?>
 
 <script language="javascript">
     $(document).ready(function () {
         var e = new engine('exercises/m/exercise-m', '<?php echo $this->webroot; ?>');
-        var module = new m.francais.lelales.Module(e, '<?php echo $this->webroot; ?>');
+        var module = new m.francais.ununedes.Module(e, '<?php echo $this->webroot; ?>');
 
         e.init(module);
     });
