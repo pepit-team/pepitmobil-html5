@@ -33,7 +33,7 @@
 
     <title>
         <?php __('PepitMobil'); ?>
-    <?php echo $title_for_layout; ?>
+        <?php echo $title_for_layout; ?>
     </title>
 
     <?php
@@ -49,22 +49,29 @@
 </head>
 <body>
 
-<div style="height: 60px;">
-    <div class="navbar navbar-inverse navbar-fixed-top">
+<div style="height: 60px">
+    <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
         <div class="container">
             <div class="navbar-header">
+                <button class="navbar-toggle" type="button" data-toggle="collapse"
+                        data-target=".bs-navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
                 <?php
-                echo $this->Html->link(__('PepitMobil'), array('controller' => 'pages', 'action' => 'display', 'home'),
+                echo $this->Html->link(__('PepitMobil'),
+                    array('controller' => 'pages', 'action' => 'display', 'home'),
                     array("class" => "navbar-brand"));
                 ?>
             </div>
-            <div class="navbar-collapse collapse">
+            <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                 <ul class="nav navbar-nav">
                     <li>
-                    </li>
-                    <li>
                         <?php
-                        echo $this->Html->link(__('Exercises'), array('controller' => 'pages', 'action' => 'display', 'exercises/exercises'));
+                        echo $this->Html->link(__('Exercises'),
+                            array('controller' => 'pages', 'action' => 'display', 'exercises/exercises'));
                         ?>
                     </li>
                 </ul>
@@ -79,9 +86,9 @@
                         ?>
                     </li>
                 </ul>
-            </div>
+            </nav>
         </div>
-    </div>
+    </header>
 </div>
 
 <?php echo $content_for_layout; ?>
