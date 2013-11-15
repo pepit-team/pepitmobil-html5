@@ -1,94 +1,66 @@
 <div class="container">
-    <div class="row" style="padding: 10px">
-        <div class="col-md-4">
-            <?php
-            echo $this->Html->link('M - Maternelles<br><i style="font-size: 12px">A partir de 4 ans</i>',
-                array('controller' => 'pages', 'action' => 'display', 'exercises/m/exercise-m'),
-                array('class' => 'btn btn-success btn-lg active', 'role' => 'button', 'escape' => false));
-            ?>
-        </div>
-        <div class="col-md-4">
-            <?php
-            echo $this->Html->link('P4 - Niveau 4<br><i style="font-size: 12px">A partir de 10 ans</i>',
-                array('controller' => 'pages', 'action' => 'display', 'exercise-p4'),
-                array('class' => 'btn btn-success btn-lg active', 'role' => 'button', 'escape' => false));
-            ?>
-        </div>
-        <div class="col-md-4">
-            <?php
-            echo $this->Html->link('T - Tables de multiplication<br><i style="font-size: 12px">A partir de 8 ans',
-                array('controller' => 'pages', 'action' => 'display', 'exercise-t'),
-                array('class' => 'btn btn-success btn-lg active', 'role' => 'button', 'escape' => false));
-            ?>
-        </div>
-    </div>
-    <div class="row" style="padding: 10px">
-        <div class="col-md-4">
-            <?php
-            echo $this->Html->link('P1 - Niveau 1<br><i style="font-size: 12px">A partir de 7 ans',
-                array('controller' => 'pages', 'action' => 'display', 'exercise-p1'),
-                array('class' => 'btn btn-success btn-lg active', 'role' => 'button', 'escape' => false));
-            ?>
-        </div>
-        <div class="col-md-4">
-            <?php
-            echo $this->Html->link('P5 - Niveau 5<br><i style="font-size: 12px">A partir de 11 ans',
-                array('controller' => 'pages', 'action' => 'display', 'exercise-p5'),
-                array('class' => 'btn btn-success btn-lg active', 'role' => 'button', 'escape' => false));
-            ?>
-        </div>
-        <div class="col-md-4">
-            <?php
-            echo $this->Html->link('ES - Ens. spécial<br><i style="font-size: 12px">Pour tous',
-                array('controller' => 'pages', 'action' => 'display', 'exercise-es'),
-                array('class' => 'btn btn-success btn-lg active', 'role' => 'button', 'escape' => false));
-            ?>
-        </div>
-    </div>
-    <div class="row" style="padding: 10px">
-        <div class="col-md-4">
-            <?php
-            echo $this->Html->link('P2 - Niveau 2<br><i style="font-size: 12px">A partir de 8 ans',
-                array('controller' => 'pages', 'action' => 'display', 'exercise-p2'),
-                array('class' => 'btn btn-success btn-lg active', 'role' => 'button', 'escape' => false));
-            ?>
-        </div>
-        <div class="col-md-4">
-            <?php
-            echo $this->Html->link('P6 - Niveau 6<br><i style="font-size: 12px">A partir de 12 ans',
-                array('controller' => 'pages', 'action' => 'display', 'exercise-p6'),
-                array('class' => 'btn btn-success btn-lg active', 'role' => 'button', 'escape' => false));
-            ?>
-        </div>
-        <div class="col-md-4">
-            <?php
-            echo $this->Html->link('PT - Pour tous !<br><i style="font-size: 12px">De 5 à 75 ans et plus !',
-                array('controller' => 'pages', 'action' => 'display', 'exercise-pt'),
-                array('class' => 'btn btn-success btn-lg active', 'role' => 'button', 'escape' => false));
-            ?>
-        </div>
-    </div>
-    <div class="row" style="padding: 10px">
-        <div class="col-md-4">
-            <?php
-            echo $this->Html->link('P3 - Niveau 3<br><i style="font-size: 12px">A partir de 9 ans',
-                array('controller' => 'pages', 'action' => 'display', 'exercise-p3'),
-                array('class' => 'btn btn-success btn-lg active', 'role' => 'button', 'escape' => false));
-            ?>
-        </div>
-        <div class="col-md-4">
-            <?php
-            echo $this->Html->link('C - Conjugaison<br><i style="font-size: 12px">A partir de 8 ans',
-                array('controller' => 'pages', 'action' => 'display', 'exercise-c'),
-                array('class' => 'btn btn-success btn-lg active', 'role' => 'button', 'escape' => false));
-            ?>
-        </div>
-        <div class="col-md-4">
-            <?php
-            echo $this->Html->link('S - Secondaire<br><i style="font-size: 12px">A partir de 12 ans',
-                array('controller' => 'pages', 'action' => 'display', 'exercise-s'),
-                array('class' => 'btn btn-success btn-lg active', 'role' => 'button', 'escape' => false));
-            ?>
-        </div>
-    </div>
+
+    <?php
+
+    $titles = array('M - Maternelles', 'P1 - Niveau 1', 'P2 - Niveau 2', 'P3 - Niveau 3',
+        'P4 - Niveau 4', 'P5 - Niveau 5', 'P6 - Niveau 6', 'C - Conjugaison', 'T - Tables de multiplication',
+        'ES. Ens. spécial', 'PT - Pour tous !', 'S - Secondaire');
+    $subTitles = array('A partir de 4 ans', 'A partir de 7 ans', 'A partir de 8 ans', 'A partir de 9 ans',
+        'A partir de 10 ans', 'A partir de 11 ans', 'A partir de 12 ans', 'A partir de 8 ans',
+        'A partir de 8 ans', 'Pour tous', 'De 5 à 75 ans et plus !', 'A partir de 12 ans');
+    $paths = array('exercises/m/exercise-m', 'exercises/p1/exercise-p1', 'exercises/p2/exercise-p2',
+        'exercises/p3/exercise-p3', 'exercises/p4/exercise-p4', 'exercises/p5/exercise-p5',
+        'exercises/p6/exercise-p6', 'exercises/c/exercise-c', 'exercises/t/exercise-t',
+        'exercises/es/exercise-es', 'exercises/pt/exercise-pt', 'exercises/s/exercise-s');
+    $colors = array('primary', 'success', 'warning', 'info');
+
+    // md and lg device
+    $k = 0;
+    for ($i = 1; $i <= 3; $i++) {
+        echo '<div class="row visible-md visible-lg" style="padding: 10px">';
+        for ($j = 1; $j <= 4; $j++) {
+            echo '<div class="col-md-3 visible-md visible-lg">';
+            echo $this->Html->link($titles[$k].'<br><i style="font-size: 12px">'.$subTitles[$k].'</i>',
+                array('controller' => 'pages', 'action' => 'display', $paths[$k]),
+                array('class' => 'btn btn-'.$colors[$k % 4].' btn-md active visible-md visible-lg', 'role' => 'button',
+                    'escape' => false));
+            echo '</div>';
+            $k++;
+        }
+        echo '</div>';
+    }
+
+    // sm device
+    $k = 0;
+    for ($i = 1; $i <= 4; $i++) {
+        echo '<div class="row visible-sm" style="padding: 10px">';
+        for ($j = 1; $j <= 3; $j++) {
+            echo '<div class="col-sm-4 visible-sm">';
+            echo $this->Html->link($titles[$k].'<br><i style="font-size: 12px">'.$subTitles[$k].'</i>',
+                array('controller' => 'pages', 'action' => 'display', $paths[$k]),
+                array('class' => 'btn btn-'.$colors[$k % 4].' btn-sm active visible-sm', 'role' => 'button',
+                    'escape' => false));
+            echo '</div>';
+            $k++;
+        }
+        echo '</div>';
+    }
+
+    // xs device
+    $k = 0;
+    for ($i = 1; $i <= 6; $i++) {
+        echo '<div class="row visible-xs" style="padding: 10px">';
+        for ($j = 1; $j <= 2; $j++) {
+            echo '<div class="col-xs-6 visible-xs">';
+            echo $this->Html->link($titles[$k].'<br><i style="font-size: 12px">'.$subTitles[$k].'</i>',
+                array('controller' => 'pages', 'action' => 'display', $paths[$k]),
+                array('class' => 'btn btn-'.$colors[$k % 4].' btn-xs active visible-xs', 'role' => 'button',
+                    'escape' => false));
+            echo '</div>';
+            $k++;
+        }
+        echo '</div>';
+    }
+
+    ?>
 </div>
