@@ -22,6 +22,7 @@
  */
 
 App::uses('AppController', 'Controller');
+App::uses('File', 'Utility');
 
 class PagesController extends AppController {
 
