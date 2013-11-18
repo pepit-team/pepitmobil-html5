@@ -55,6 +55,10 @@ m.math.completeradditionner.Module = function (e, u) {
         };
     };
 
+    this.getLevel = function () {
+        return 'm';
+    };
+
     this.getModuleList = function (currentExercise) {
         return {
             title: ["Module 1" , "Module 2", "Module 3", "Module 4", "Module 5"],
@@ -80,6 +84,14 @@ m.math.completeradditionner.Module = function (e, u) {
 
     this.getScore = function() {
         return currentScore;
+    };
+
+    this.getSubject = function () {
+        return 'math';
+    };
+
+    this.getTopic = function () {
+        return 'completeradditionner';
     };
 
     this.initScore = function() {

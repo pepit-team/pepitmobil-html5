@@ -43,6 +43,17 @@ var Score = function (v) {
         return values[currentExercise][currentModule] != -1;
     };
 
+    this.load = function(level, subject, topic) {
+        var key = 'pepit:'+level+':'+subject+':'+topic;
+
+        if (localStorage[key]) {
+            values = JSON.parse(localStorage[key]);
+        }
+    };
+    this.save = function(level, subject, topic) {
+        localStorage['pepit:'+level+':'+subject+':'+topic] = JSON.stringify(values);
+    };
+
 // private methods
     var init = function (v) {
         values = v;

@@ -26,6 +26,7 @@ var engine = function (u1, u2) {
     this.init = function (m) {
         module = m;
         score = new module.initScore();
+        score.load(module.getLevel(), module.getSubject(), module.getTopic());
         view = $('#exercise-view');
 
         buildExercisePage();
@@ -37,6 +38,7 @@ var engine = function (u1, u2) {
 
     this.next2 = function () {
         score.add(currentExercise - 1, currentModule - 1, module.getScore());
+        score.save(module.getLevel(), module.getSubject(), module.getTopic());
         if (module.finishModule(currentExercise, currentModule)) {
             buildModulePage();
         } else {
