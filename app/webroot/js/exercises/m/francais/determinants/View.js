@@ -19,7 +19,7 @@ m.francais.determinants.View = function (mdl, u, div, number, min, max, sh) {
 
     this.error = function () {
         module.error();
-        bootstrap_alert.info('Erreur !', '');
+        bootstrap_alert.info(module.getWrongResponseMessage(), '');
     };
 
     this.init = function (mdl, u, view, number, min, max, sh) {

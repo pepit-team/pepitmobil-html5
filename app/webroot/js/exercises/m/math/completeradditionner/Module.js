@@ -45,14 +45,15 @@ m.math.completeradditionner.Module = function (e, u) {
         return questionIndex == this.getQuestionNumber(currentExercise, currentModule);
     };
 
-    this.finishQuestionSequence = function () {
-    };
-
     this.getExerciseList = function () {
         return {
             title: ["Niveau 1" , "Niveau 2", "Niveau 3", "Niveau 4", "Niveau 5"],
             subTitle: ["jusqu'à 5", "jusqu'à 6", "jusqu'à 8", "jusqu'à 10", "jusqu'à 12"]
         };
+    };
+
+    this.getGoodResponseMessage = function() {
+        return 'Bonne réponse !';
     };
 
     this.getLevel = function () {
@@ -94,6 +95,10 @@ m.math.completeradditionner.Module = function (e, u) {
         return 'completeradditionner';
     };
 
+    this.getWrongResponseMessage = function() {
+        return 'Mauvaise réponse';
+    };
+
     this.initScore = function() {
         return new Score([[-1, -1, -1, -1, -1],
             [-1, -1, -1, -1, -1],
@@ -112,22 +117,6 @@ m.math.completeradditionner.Module = function (e, u) {
             currentScore = this.getQuestionScore(currentExercise, currentModule);
             view.next();
         }
-    };
-
-    this.showAnswerIsRight = function () {
-
-    };
-
-    this.showAnswerIsWrong = function () {
-
-    };
-
-    this.startQuestionSequence = function () {
-
-    };
-
-    this.currentAnswerIsRight = function () {
-
     };
 
 // private methods

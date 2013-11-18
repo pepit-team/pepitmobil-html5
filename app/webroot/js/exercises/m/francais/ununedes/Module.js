@@ -72,15 +72,16 @@ m.francais.ununedes.Module = function (e, u) {
         return questionIndex == this.getQuestionNumber(currentExercise, currentModule);
     };
 
-    this.finishQuestionSequence = function () {
-    };
-
     this.getExerciseList = function () {
         return {
             title: ["Exercice 1", "Exercice 2", "Exercice 3", "Exercice 4", "Exercice 5",
                 "Exercice 6", "Exercice 7", "Exercice 8", "Exercice 9"],
             subTitle: [ "Les animaux", "-", "-", "-", "-", "-", "-", "-", "-" ]
         };
+    };
+
+    this.getGoodResponseMessage = function() {
+        return 'Bonne réponse !';
     };
 
     this.getLevel = function () {
@@ -122,6 +123,10 @@ m.francais.ununedes.Module = function (e, u) {
         return 'ununedes';
     };
 
+    this.getWrongResponseMessage = function() {
+        return 'Mauvaise réponse';
+    };
+
     this.initScore = function() {
         return new Score([[-1, -1, -1, -1, -1],
             [-1, -1, -1, -1, -1],
@@ -144,22 +149,6 @@ m.francais.ununedes.Module = function (e, u) {
             currentScore = this.getQuestionScore(currentExercise, currentModule);
             view.next();
         }
-    };
-
-    this.showAnswerIsRight = function () {
-
-    };
-
-    this.showAnswerIsWrong = function () {
-
-    };
-
-    this.startQuestionSequence = function () {
-
-    };
-
-    this.currentAnswerIsRight = function () {
-
     };
 
 // private methods

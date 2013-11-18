@@ -33,7 +33,7 @@ var engine = function (u1, u2) {
     };
 
     this.next = function () {
-        bootstrap_alert.info('Bonne réponse !', module.getNextQuestionButtonText(), this);
+        bootstrap_alert.info(module.getGoodResponseMessage(), module.getNextQuestionButtonText(), this);
     };
 
     this.next2 = function () {
