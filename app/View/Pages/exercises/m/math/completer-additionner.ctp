@@ -4,11 +4,11 @@ echo $this->Html->script('exercises/Engine');
 echo $this->Html->script('exercises/Score');
 echo $this->Html->script('exercises/m/Level');
 echo $this->Html->script('exercises/m/math/Subject');
-echo $this->Html->script('exercises/m/math/completeradditionner/Topic');
-echo $this->Html->script('exercises/m/math/completeradditionner/Controller');
-echo $this->Html->script('exercises/m/math/completeradditionner/Model');
-echo $this->Html->script('exercises/m/math/completeradditionner/Module');
-echo $this->Html->script('exercises/m/math/completeradditionner/View');
+echo $this->Html->script('exercises/m/math/completer-additionner/Topic');
+echo $this->Html->script('exercises/m/math/completer-additionner/Controller');
+echo $this->Html->script('exercises/m/math/completer-additionner/Model');
+echo $this->Html->script('exercises/m/math/completer-additionner/Module');
+echo $this->Html->script('exercises/m/math/completer-additionner/View');
 ?>
 
 <script language="javascript">
@@ -20,6 +20,6 @@ echo $this->Html->script('exercises/m/math/completeradditionner/View');
     });
 </script>
 
-<div class="container" id="exercise-view">
+<div class="container" id="exercise-view" style="width: 95%">
 </div>
 <div id="alert_placeholder" style="position:absolute; top:50%; left:50%;"></div>

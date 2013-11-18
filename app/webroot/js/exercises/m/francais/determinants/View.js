@@ -1,10 +1,10 @@
 m.francais.determinants.View = function (mdl, u, div, number, min, max, sh) {
 
 // public methods
-    this.build_buttons = function () {
-        var buttons_div = $('<div/>', {
-            class: 'col-md-4'
-        });
+    this.build_buttons = function (buttons_div) {
+        /*        var buttons_div = $('<div/>', {
+         class: 'col-md-4'
+         }); */
         var buttons_div_inner = $('<div/>', {
             style: 'float: center'
         });
@@ -35,8 +35,16 @@ m.francais.determinants.View = function (mdl, u, div, number, min, max, sh) {
             'padding': '10px',
             'border-radius': '6px 6px 6px 6px'
         });
-        this.build_buttons().appendTo(view);
-        build_image(model.getImageIndex()).appendTo(view);
+
+// md and lg device
+        this.build_buttons($('<div/>', { class: 'col-md-4 visible-md visible-lg' })).appendTo(view);
+        build_image($('<div/>', { class: 'col-md-8 visible-md visible-lg' }),
+            model.getImageIndex()).appendTo(view);
+
+// sm device
+        this.build_buttons($('<div/>', { class: 'col-sm-4 visible-sm' })).appendTo(view);
+        build_image($('<div/>', { class: 'col-sm-8 visible-sm' }),
+            model.getImageIndex()).appendTo(view);
     };
 
     this.next = function () {
@@ -88,10 +96,7 @@ m.francais.determinants.View = function (mdl, u, div, number, min, max, sh) {
         return button;
     };
 
-    var build_image = function (i) {
-        var image_div = $('<div/>', {
-            class: 'col-md-8'
-        });
+    var build_image = function (image_div, i) {
         var img = $('<img/>', {
             style: 'background-color: #FFFFFF; padding: 10px; border-radius: 6px 6px 6px 6px; display: block; margin-left: auto; margin-right: auto; border: 1px solid #000000',
             src: url + 'img/exercises/m/francais/lelales/card_' + i + '.png',

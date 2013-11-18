@@ -19,11 +19,11 @@ m.math.completeradditionner.View = function (mdl, u, div, number, max) {
     this.next = function() {
         model.next();
         $('#img_operand_1').attr('src',
-            url + 'img/exercises/m/math/completeradditionner/card_' + model.getFirstOperand() + '.png');
+            url + 'img/exercises/m/math/completer-additionner/card_' + model.getFirstOperand() + '.png');
         $('#img_operand_2').attr('src',
-            url + 'img/exercises/m/math/completeradditionner/card_' + model.getSecondOperand() + '.png');
+            url + 'img/exercises/m/math/completer-additionner/card_' + model.getSecondOperand() + '.png');
         $('#img_result').attr('src',
-            url + 'img/exercises/m/math/completeradditionner/card_0.png');
+            url + 'img/exercises/m/math/completer-additionner/card_0.png');
         this.update();
     };
 
@@ -49,7 +49,7 @@ m.math.completeradditionner.View = function (mdl, u, div, number, max) {
         }
         if (model.isOkResult()) {
             $('#result').html(model.getResult());
-            $('#img_result').attr('src', url + 'img/exercises/m/math/completeradditionner/card_' +
+            $('#img_result').attr('src', url + 'img/exercises/m/math/completer-additionner/card_' +
                 model.getResult() + '.png');
             module.next();
         } else {
@@ -117,7 +117,7 @@ m.math.completeradditionner.View = function (mdl, u, div, number, max) {
 
     var build_image = function (i, name) {
         return $('<img/>', {
-            src: url + 'img/exercises/m/math/completeradditionner/card_' + i + '.png',
+            src: url + 'img/exercises/m/math/completer-additionner/card_' + i + '.png',
             height: height - 550 > 200 ? height - 550 : 200,
             id: 'img_' + name
         });

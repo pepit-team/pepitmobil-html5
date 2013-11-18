@@ -23,6 +23,6 @@ echo $this->Html->script('exercises/m/francais/lelales/View');
     });
 </script>
 
-<div class="container" id="exercise-view">
+<div class="container" id="exercise-view" style="width: 95%">
 </div>
 <div id="alert_placeholder" style="position:absolute; top:50%; left:50%;"></div>

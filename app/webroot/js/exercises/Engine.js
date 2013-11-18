@@ -100,7 +100,112 @@ var engine = function (u1, u2) {
         return badge;
     };
 
-    var buildExerciseList = function (div) {
+    var buildExerciseButton = function (div, index, style) {
+        var cell = $('<td />', { });
+        var score = buildBadgeWithScore(index, -1);
+
+// md and lg devices
+        if (style === "md_lg") {
+            var div_md_lg = $('<div style="visible-md visible-lg" />', { });
+            var text = '<div style="font-size: 30px; text-align: center">' +
+                module.getExerciseList().title[index] + '</div>';
+
+            if (module.getExerciseList().subTitle.length > 0) {
+                text += '<div style="font-size: 15px; text-align: center">' +
+                    module.getExerciseList().subTitle[index] + '</div>';
+            }
+            text += score;
+
+            var link = $('<a />', {
+                href: '#',
+                class: 'btn btn-primary btn-md active',
+                id: 'exercise_' + index,
+                role: 'button',
+                html: text,
+                click: function (e) {
+                    var e = e || window.event;
+                    var target = e.target || e.srcElement;
+
+                    if (target.nodeName != 'A') {
+                        target = target.parentNode;
+                    }
+                    currentExercise = parseInt(target.id.substring(target.id.indexOf('_') + 1, target.id.length)) + 1;
+                    buildModulePage();
+                }
+            });
+            link.appendTo(div_md_lg);
+            div_md_lg.appendTo(cell);
+        }
+
+// sm devices
+        if (style === "sm") {
+            var div_sm = $('<div style="visible-sm" />', { });
+            var text = '<div style="font-size: 20px; text-align: center">' +
+                module.getExerciseList().title[index] + '</div>';
+
+            if (module.getExerciseList().subTitle.length > 0) {
+                text += '<div style="font-size: 10px; text-align: center">' +
+                    module.getExerciseList().subTitle[index] + '</div>';
+            }
+            text += score;
+
+            var link = $('<a />', {
+                href: '#',
+                class: 'btn btn-primary btn-sm active',
+                id: 'exercise_' + index,
+                role: 'button',
+                html: text,
+                click: function (e) {
+                    var e = e || window.event;
+                    var target = e.target || e.srcElement;
+
+                    if (target.nodeName != 'A') {
+                        target = target.parentNode;
+                    }
+                    currentExercise = parseInt(target.id.substring(target.id.indexOf('_') + 1, target.id.length)) + 1;
+                    buildModulePage();
+                }
+            });
+            link.appendTo(div_sm);
+            div_sm.appendTo(cell);
+        }
+
+// xs devices
+        if (style === "xs") {
+            var div_xs = $('<div style="visible-xd" />', { });
+            var text = '<div style="font-size: 16px; text-align: center">' +
+                module.getExerciseList().title[index] + '</div>';
+
+            if (module.getExerciseList().subTitle.length > 0) {
+                text += '<div style="font-size: 10px; text-align: center">' +
+                    module.getExerciseList().subTitle[index] + '</div>';
+            }
+            text += score;
+
+            var link = $('<a />', {
+                href: '#',
+                class: 'btn btn-primary btn-xs active',
+                id: 'exercise_' + index,
+                role: 'button',
+                html: text,
+                click: function (e) {
+                    var e = e || window.event;
+                    var target = e.target || e.srcElement;
+
+                    if (target.nodeName != 'A') {
+                        target = target.parentNode;
+                    }
+                    currentExercise = parseInt(target.id.substring(target.id.indexOf('_') + 1, target.id.length)) + 1;
+                    buildModulePage();
+                }
+            });
+            link.appendTo(div_xs);
+            div_xs.appendTo(cell);
+        }
+        cell.appendTo(div);
+    };
+
+    var buildExerciseList = function (div, style) {
         var table = $('<table />', {
             style: 'text-align: center'
         });
@@ -112,33 +217,7 @@ var engine = function (u1, u2) {
             var i = 0;
 
             while (i < n && index < module.getExerciseList().title.length) {
-                var cell = $('<td />', { });
-                var text = '<h2>' + module.getExerciseList().title[index] + '</h2>';
-
-                if (module.getExerciseList().subTitle.length > 0) {
-                    text += '<h5>' + module.getExerciseList().subTitle[index] + '</h5>';
-                }
-                text += buildBadgeWithScore(index, -1);
-
-                var link = $('<a />', {
-                    href: '#',
-                    class: 'btn btn-primary btn-ms active',
-                    id: 'exercise_' + index,
-                    role: 'button',
-                    html: text,
-                    click: function (e) {
-                        var e = e || window.event;
-                        var target = e.target || e.srcElement;
-
-                        if (target.nodeName != 'A') {
-                            target = target.parentNode;
-                        }
-                        currentExercise = parseInt(target.id.substring(target.id.indexOf('_') + 1, target.id.length)) + 1;
-                        buildModulePage();
-                    }
-                });
-                link.appendTo(cell);
-                cell.appendTo(row);
+                buildExerciseButton(row, index, style);
                 ++index;
                 ++i;
             }
@@ -151,23 +230,169 @@ var engine = function (u1, u2) {
         clearView();
 
         var page_div = buildPage();
-        var presentation_div = $('<div/>', {
-            class: 'col-md-6'
+
+// md and lg devices
+        var page_div_md_lg = $('<div/>', {
+            class: 'row'
         });
-        var exercise_div = $('<div/>', {
-            class: 'col-md-6'
+        var presentation_div_md_lg = $('<div/>', {
+            class: 'col-md-6 visible-md visible-lg'
+        });
+        var exercise_div_md_lg = $('<div/>', {
+            class: 'col-md-6 visible-md visible-lg'
         });
 
-        module.buildExercisePresentation(presentation_div);
-        buildExerciseList(exercise_div);
+        module.buildExercisePresentation(presentation_div_md_lg);
+        buildExerciseList(exercise_div_md_lg, "md_lg");
+        presentation_div_md_lg.appendTo(page_div_md_lg);
+        exercise_div_md_lg.appendTo(page_div_md_lg);
+        page_div_md_lg.appendTo(page_div);
 
-        presentation_div.appendTo(page_div);
-        exercise_div.appendTo(page_div);
+// sm devices
+        var page_div_sm = $('<div/>', {
+            class: 'row'
+        });
+        var presentation_div_sm = $('<div/>', {
+            class: 'col-sm-6 visible-sm'
+        });
+        var exercise_div_sm = $('<div/>', {
+            class: 'col-sm-6 visible-sm'
+        });
+
+        module.buildExercisePresentation(presentation_div_sm);
+        buildExerciseList(exercise_div_sm, "sm");
+        presentation_div_sm.appendTo(page_div_sm);
+        exercise_div_sm.appendTo(page_div_sm);
+        page_div_sm.appendTo(page_div);
+
+// xs devices
+        var page_div_xs = $('<div/>', {
+        });
+        var presentation_div_xs = $('<div/>', {
+            class: 'visible-xs'
+        });
+        var exercise_div_xs = $('<div/>', {
+            class: 'visible-xs'
+        });
+
+        module.buildExercisePresentation(presentation_div_xs);
+        buildExerciseList(exercise_div_xs, "xs");
+        presentation_div_xs.appendTo(page_div_xs);
+        exercise_div_xs.appendTo(page_div_xs);
+        page_div_xs.appendTo(page_div);
+
         currentExercise = -1;
         currentModule = -1;
     };
 
-    var buildModuleList = function (div) {
+    var buildModuleButton = function (div, index, style) {
+        var cell = $('<td />', { });
+        var score = buildBadgeWithScore(currentExercise - 1, index);
+
+// md and lg devices
+        if (style === "md_lg") {
+            var div_md_lg = $('<div style="visible-md visible-lg" />', { });
+            var text_md_lg = '<div style="font-size: 30px; text-align: center">' +
+                module.getModuleList(currentExercise).title[index] + '</div>';
+
+            if (module.getModuleList(currentExercise).subTitle.length > 0) {
+                text_md_lg += '<div style="font-size: 15px; text-align: center">' +
+                    module.getModuleList(currentExercise).subTitle[index] + '</div>';
+            }
+            text_md_lg += score;
+            var link_md_lg = $('<a />', {
+                class: 'btn btn-primary btn-md active',
+                html: text_md_lg,
+                href: '#',
+                id: 'module_' + index,
+                role: 'button',
+                click: function (e) {
+                    var e = e || window.event;
+                    var target = e.target || e.srcElement;
+
+                    if (target.nodeName != 'A') {
+                        target = target.parentNode;
+                    }
+                    currentModule = parseInt(target.id.substring(target.id.indexOf('_') + 1,
+                        target.id.length)) + 1;
+                    buildQuestionPage();
+                }
+            });
+            link_md_lg.appendTo(div_md_lg);
+            div_md_lg.appendTo(cell);
+        }
+
+// sm devices
+        if (style === "sm") {
+            var div_sm = $('<div style="visible-sm" />', { });
+            var text_sm = '<div style="font-size: 20px; text-align: center">' +
+                module.getModuleList(currentExercise).title[index] + '</div>';
+
+            if (module.getModuleList(currentExercise).subTitle.length > 0) {
+                text_sm += '<div style="font-size: 10px; text-align: center">' +
+                    module.getModuleList(currentExercise).subTitle[index] + '</div>';
+            }
+            text_sm += score;
+
+            var link_sm = $('<a />', {
+                class: 'btn btn-primary btn-sm active',
+                html: text_sm,
+                href: '#',
+                id: 'module_' + index,
+                role: 'button',
+                click: function (e) {
+                    var e = e || window.event;
+                    var target = e.target || e.srcElement;
+
+                    if (target.nodeName != 'A') {
+                        target = target.parentNode;
+                    }
+                    currentModule = parseInt(target.id.substring(target.id.indexOf('_') + 1,
+                        target.id.length)) + 1;
+                    buildQuestionPage();
+                }
+            });
+            link_sm.appendTo(div_sm);
+            div_sm.appendTo(cell);
+        }
+
+// xs devices
+        if (style === "xs") {
+            var div_xs = $('<div style="visible-xs" />', { });
+            var text_xs = '<div style="font-size: 16px; text-align: center">' +
+                module.getModuleList(currentExercise).title[index] + '</div>';
+
+            if (module.getModuleList(currentExercise).subTitle.length > 0) {
+                text_xs += '<div style="font-size: 10px; text-align: center">' +
+                    module.getModuleList(currentExercise).subTitle[index] + '</div>';
+            }
+            text_xs += score;
+
+            var link_xs = $('<a />', {
+                class: 'btn btn-primary btn-xs active',
+                html: text_xs,
+                href: '#',
+                id: 'module_' + index,
+                role: 'button',
+                click: function (e) {
+                    var e = e || window.event;
+                    var target = e.target || e.srcElement;
+
+                    if (target.nodeName != 'A') {
+                        target = target.parentNode;
+                    }
+                    currentModule = parseInt(target.id.substring(target.id.indexOf('_') + 1,
+                        target.id.length)) + 1;
+                    buildQuestionPage();
+                }
+            });
+            link_xs.appendTo(div_xs);
+            div_xs.appendTo(cell);
+        }
+        cell.appendTo(div);
+    };
+
+    var buildModuleList = function (div, style) {
         var table = $('<table />', {
             style: 'text-align: center'
         });
@@ -179,37 +404,7 @@ var engine = function (u1, u2) {
             var i = 0;
 
             while (i < n && index < module.getModuleList(currentExercise).title.length) {
-                var cell = $('<td />', { });
-                var text = '<h2>' + module.getModuleList(currentExercise).title[index] + '</h2>';
-
-                if (module.getModuleList(currentExercise).subTitle.length > 0) {
-                    text += '<h5>' + module.getModuleList(currentExercise).subTitle[index] + '</h5>';
-                }
-                text += buildBadgeWithScore(currentExercise - 1, index);
-
-                var link = $('<a />', {
-                    href: '#',
-                    class: 'btn btn-primary btn-ms active',
-                    id: 'module_' + index,
-                    role: 'button',
-                    html: text,
-                    click: function (e) {
-                        var e = e || window.event;
-                        var target = e.target || e.srcElement;
-
-                        if (target.nodeName != 'A') {
-                            target = target.parentNode;
-                        }
-
-                        currentModule = parseInt(target.id.substring(target.id.indexOf('_') + 1,
-                            target.id.length)) + 1;
-
-
-                        buildQuestionPage();
-                    }
-                });
-                link.appendTo(cell);
-                cell.appendTo(row);
+                buildModuleButton(row, index, style);
                 ++index;
                 ++i;
             }
@@ -222,18 +417,57 @@ var engine = function (u1, u2) {
         clearView();
 
         var page_div = buildPage();
-        var explanation_div = $('<div/>', {
-            class: 'col-md-6'
+
+// md and lg devices
+        var page_div_md_lg = $('<div/>', {
+            class: 'row'
         });
-        var module_div = $('<div/>', {
-            class: 'col-md-6'
+        var explanation_div_md_lg = $('<div/>', {
+            class: 'col-md-6 visible-md visible-lg'
+        });
+        var module_div_md_lg = $('<div/>', {
+            class: 'col-md-6 visible-md visible-lg'
         });
 
-        module.buildExplanation(explanation_div, currentExercise);
-        buildModuleList(module_div);
+        module.buildExplanation(explanation_div_md_lg, currentExercise);
+        buildModuleList(module_div_md_lg, "md_lg");
+        explanation_div_md_lg.appendTo(page_div_md_lg);
+        module_div_md_lg.appendTo(page_div_md_lg);
+        page_div_md_lg.appendTo(page_div);
 
-        explanation_div.appendTo(page_div);
-        module_div.appendTo(page_div);
+// sm devices
+        var page_div_sm = $('<div/>', {
+            class: 'row'
+        });
+        var explanation_div_sm = $('<div/>', {
+            class: 'col-sm-6 visible-sm'
+        });
+        var module_div_sm = $('<div/>', {
+            class: 'col-sm-6 visible-sm'
+        });
+
+        module.buildExplanation(explanation_div_sm, currentExercise);
+        buildModuleList(module_div_sm, "sm");
+        explanation_div_sm.appendTo(page_div_sm);
+        module_div_sm.appendTo(page_div_sm);
+        page_div_sm.appendTo(page_div);
+
+// xs devices
+        var page_div_xs = $('<div/>', {
+        });
+        var explanation_div_xs = $('<div/>', {
+            class: 'visible-xs'
+        });
+        var module_div_xs = $('<div/>', {
+            class: 'visible-xs'
+        });
+
+        module.buildExplanation(explanation_div_xs, currentExercise);
+        buildModuleList(module_div_xs, "xs");
+        explanation_div_xs.appendTo(page_div_xs);
+        module_div_xs.appendTo(page_div_xs);
+        page_div_xs.appendTo(page_div);
+
         currentModule = -1;
     };
 
@@ -246,37 +480,14 @@ var engine = function (u1, u2) {
                 'color: #ffffff',
             class: 'row'
         });
-        var copyright = $('<img/>', {
-            class: 'col-md-2',
-            src: root + 'img/by-nc-nd.eu.png'
-        });
-        var title = $('<div/>', {
-            style: 'font-size: 40px; text-align: center',
-            class: 'col-md-8',
-            html: module.getName()
-        });
-        var nav = $('<a/>', {
-            href: '#',
-            class: 'col-md_2 btn btn-primary btn-ms active',
-            role: 'button',
-            html: 'Retour',
-            click: function (e) {
-                var e = e || window.event;
-                var target = e.target || e.srcElement;
 
-                back();
-            }
-        });
         var spacing_div = $('<div/>', {
             style: 'padding: 5px;'
         });
         var row_div = $('<div/>', {
-            class: 'row'
         });
 
-        copyright.appendTo(title_div);
-        title.appendTo(title_div);
-        nav.appendTo(title_div);
+        buildTitle(title_div);
         title_div.appendTo(view);
         spacing_div.appendTo(view);
         row_div.appendTo(global_div);
@@ -288,9 +499,84 @@ var engine = function (u1, u2) {
         clearView();
 
         var page_div = buildPage();
+        var row = $('<div/>', {
+            class: 'row'
+        });
 
+        row.appendTo(page_div);
         score.clear(currentExercise - 1, currentModule - 1);
-        module.buildQuestion(page_div, currentExercise, currentModule);
+        module.buildQuestion(row, currentExercise, currentModule);
+    };
+
+    var buildTitle = function (title_div) {
+// md and lg device
+        $('<img/>', {
+            class: 'col-md-2 visible-md visible-lg',
+            src: root + 'img/by-nc-nd.eu.png'
+        }).appendTo(title_div);
+        $('<div/>', {
+            class: 'col-md-8 visible-md visible-lg',
+            style: 'font-size: 40px; text-align: center',
+            html: module.getName()
+        }).appendTo(title_div);
+        $('<a/>', {
+            class: 'col-md-2 btn btn-primary btn-ms active visible-md visible-lg',
+            href: '#',
+            role: 'button',
+            html: 'Retour',
+            click: function (e) {
+                var e = e || window.event;
+                var target = e.target || e.srcElement;
+
+                back();
+            }
+        }).appendTo(title_div);
+
+// sm device
+        $('<img/>', {
+            class: 'col-sm-2 visible-sm',
+            src: root + 'img/by-nc-nd.eu.png'
+        }).appendTo(title_div);
+        $('<div/>', {
+            class: 'col-sm-8 visible-sm',
+            style: 'font-size: 30px; text-align: center',
+            html: module.getName()
+        }).appendTo(title_div);
+        $('<a/>', {
+            class: 'col-sm-2 btn btn-primary btn-sm active visible-sm',
+            href: '#',
+            role: 'button',
+            html: 'Retour',
+            click: function (e) {
+                var e = e || window.event;
+                var target = e.target || e.srcElement;
+
+                back();
+            }
+        }).appendTo(title_div);
+
+// xs device
+        $('<img/>', {
+            class: 'col-xs-2 visible-xs',
+            src: root + 'img/by-nc-nd.eu.png'
+        }).appendTo(title_div);
+        $('<div/>', {
+            class: 'col-xs-8 visible-xs',
+            style: 'font-size: 20px; text-align: center',
+            html: module.getName()
+        }).appendTo(title_div);
+        $('<a/>', {
+            class: 'col-xs-2 btn btn-primary btn-xs active visible-xs',
+            href: '#',
+            role: 'button',
+            html: 'Retour',
+            click: function (e) {
+                var e = e || window.event;
+                var target = e.target || e.srcElement;
+
+                back();
+            }
+        }).appendTo(title_div);
     };
 
     var clearView = function () {
