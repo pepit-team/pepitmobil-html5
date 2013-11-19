@@ -2,9 +2,6 @@ m.francais.determinants.View = function (mdl, u, div, number, min, max, sh) {
 
 // public methods
     this.build_buttons = function (buttons_div) {
-        /*        var buttons_div = $('<div/>', {
-         class: 'col-md-4'
-         }); */
         var buttons_div_inner = $('<div/>', {
             style: 'float: center'
         });
