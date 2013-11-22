@@ -49,7 +49,9 @@
 </head>
 <body>
 
+<div id="#content">
 <?php echo $content_for_layout; ?>
+</div>
 
 </body>
 </html>

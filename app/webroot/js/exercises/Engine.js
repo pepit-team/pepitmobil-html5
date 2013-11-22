@@ -24,6 +24,11 @@ var engine = function (u1, u2) {
 
 // public methods
     this.init = function (m) {
+
+        if ($.support.fullscreen) {
+            $('#content').fullScreen();
+        }
+
         module = m;
         score = new module.initScore();
         score.load(module.getLevel(), module.getSubject(), module.getTopic());
@@ -238,7 +243,7 @@ var engine = function (u1, u2) {
             var row = $('<tr />', { });
             var i = 0;
 
-            while (i < 4 && index < module.getExerciseList().title.length) {
+            while (i < 3 && index < module.getExerciseList().title.length) {
                 buildExerciseButton(row, index, style);
                 ++index;
                 ++i;

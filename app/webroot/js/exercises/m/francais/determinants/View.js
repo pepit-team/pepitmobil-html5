@@ -1,14 +1,29 @@
 m.francais.determinants.View = function (mdl, u, div, number, min, max, sh) {
 
 // public methods
-    this.build_buttons = function (buttons_div) {
-        var buttons_div_inner = $('<div/>', {
-            style: 'float: center'
-        });
+    this.build_buttons = function (buttons_div, style) {
+        var buttons_div_inner;
 
-        build_button_for_response(this.getDeterminant(0)).appendTo(buttons_div_inner);
-        build_button_for_response(this.getDeterminant(1)).appendTo(buttons_div_inner);
-        build_button_for_response(this.getDeterminant(2)).appendTo(buttons_div_inner);
+        if (style === 'md_lg') {
+            buttons_div_inner = $('<div/>', {
+                class: 'visible-md visible-lg',
+                style: 'float: center'
+            });
+        } else if (style === 'sm') {
+            buttons_div_inner = $('<div/>', {
+                class: 'visible-sm',
+                style: 'float: center'
+            });
+        } else if (style === 'xs') {
+            buttons_div_inner = $('<div/>', {
+                class: 'visible-xs',
+                style: 'float: center'
+            });
+        }
+
+        build_button_for_response(this.getDeterminant(0), style).appendTo(buttons_div_inner);
+        build_button_for_response(this.getDeterminant(1), style).appendTo(buttons_div_inner);
+        build_button_for_response(this.getDeterminant(2), style).appendTo(buttons_div_inner);
         buttons_div_inner.appendTo(buttons_div);
 
         return buttons_div;
@@ -32,21 +47,31 @@ m.francais.determinants.View = function (mdl, u, div, number, min, max, sh) {
             'padding': '10px',
             'border-radius': '6px 6px 6px 6px'
         });
+        view.addClass('row');
 
 // md and lg device
-        this.build_buttons($('<div/>', { class: 'col-md-4 visible-md visible-lg' })).appendTo(view);
+        this.build_buttons($('<div/>', { class: 'col-md-4 visible-md visible-lg' }), "md_lg").appendTo(view);
         build_image($('<div/>', { class: 'col-md-8 visible-md visible-lg' }),
-            model.getImageIndex()).appendTo(view);
+            model.getImageIndex(), "md_lg").appendTo(view);
 
 // sm device
-        this.build_buttons($('<div/>', { class: 'col-sm-4 visible-sm' })).appendTo(view);
+        this.build_buttons($('<div/>', { class: 'col-sm-4 visible-sm' }), "sm").appendTo(view);
         build_image($('<div/>', { class: 'col-sm-8 visible-sm' }),
-            model.getImageIndex()).appendTo(view);
+            model.getImageIndex(), "sm").appendTo(view);
+
+// xs device
+        this.build_buttons($('<div/>', { class: 'col-xs-4 visible-xs' }), "xs").appendTo(view);
+        build_image($('<div/>', { class: 'col-xs-8 visible-xs' }),
+            model.getImageIndex(), "xs").appendTo(view);
     };
 
     this.next = function () {
         model.next();
-        $('#image').attr('src',
+        $('#image_md_lg').attr('src',
+            url + 'img/exercises/m/francais/lelales/card_' + model.getImageIndex() + '.png');
+        $('#image_sm').attr('src',
+            url + 'img/exercises/m/francais/lelales/card_' + model.getImageIndex() + '.png');
+        $('#image_xs').attr('src',
             url + 'img/exercises/m/francais/lelales/card_' + model.getImageIndex() + '.png');
         this.update();
     };
@@ -67,45 +92,104 @@ m.francais.determinants.View = function (mdl, u, div, number, min, max, sh) {
 
     this.update = function () {
         if (model.isOkResult()) {
-            $('#word').html(model.getWord());
+            $('#word_md_lg').html(model.getWord());
+            $('#word_sm').html(model.getWord());
+            $('#word_xs').html(model.getWord());
             module.next();
         } else {
-            $('#word').html('???');
+            $('#word_md_lg').html('???');
+            $('#word_sm').html('???');
+            $('#word_xs').html('???');
         }
     };
 
 // private methods
-    var build_button_for_response = function (name) {
+    var build_button_for_response = function (name, style) {
         var button = $('<div/>', {
             style: 'align: center; padding: 10px'
         });
-        var link = $('<a/>', {
-            href: '#',
-            style: 'background-color: #FFFFFF; padding: 10px',
-            class: 'btn btn-ms active',
-            id: 'button_' + name,
-            role: 'button',
-            html: '<div style="font-size: 50px; color: #006600; text-align: center; font-weight: bold;" id="' +
-                name + '">' + name + '</div>'
-        });
+        var link;
+
+        if (style === 'md_lg') {
+            button.addClass('visible-md visible-lg');
+            link = $('<a/>', {
+                class: 'btn btn-ms active visible-md visible-lg',
+                href: '#',
+                style: 'background-color: #FFFFFF; padding: 10px',
+                id: 'button_' + name + '_md_lg',
+                role: 'button',
+                html: '<div style="font-size: 50px; color: #006600; text-align: center; font-weight: bold;" id="' +
+                    name + '">' + name + '</div>'
+            });
+        } else if (style === 'sm') {
+            button.addClass('visible-sm');
+            link = $('<a/>', {
+                class: 'btn btn-ms active visible-sm',
+                href: '#',
+                style: 'background-color: #FFFFFF; padding: 10px',
+                id: 'button_' + name + '_sm',
+                role: 'button',
+                html: '<div style="font-size: 30px; color: #006600; text-align: center; font-weight: bold;" id="' +
+                    name + '">' + name + '</div>'
+            });
+        } else if (style === 'xs') {
+            button.addClass('visible-xs');
+            link = $('<a/>', {
+                class: 'btn btn-ms active visible-xs',
+                href: '#',
+                style: 'background-color: #FFFFFF; padding: 10px',
+                id: 'button_' + name + '_xs',
+                role: 'button',
+                html: '<div style="font-size: 20px; color: #006600; text-align: center; font-weight: bold;" id="' +
+                    name + '">' + name + '</div>'
+            });
+        }
 
         link.appendTo(button);
         return button;
     };
 
-    var build_image = function (image_div, i) {
-        var img = $('<img/>', {
-            style: 'background-color: #FFFFFF; padding: 10px; border-radius: 6px 6px 6px 6px; display: block; margin-left: auto; margin-right: auto; border: 1px solid #000000',
-            src: url + 'img/exercises/m/francais/lelales/card_' + i + '.png',
-            height: height / 2,
-            id: 'image'
-        });
+    var build_image = function (image_div, i, style) {
+        var img;
+        var word_div;
 
-        var word_div = $('<div/>', {
-            style: 'background-color: #FFFFFF; padding: 10px; font-size: 50px; color: #006600; text-align: center; font-weight: bold; border-radius: 6px 6px 6px 6px; border: 1px solid #000000',
-            id: 'word',
-            html: '???'
-        });
+        if (style === "md_lg") {
+            img = $('<img/>', {
+                style: 'background-color: #FFFFFF; padding: 10px; border-radius: 6px 6px 6px 6px; display: block; margin-left: auto; margin-right: auto; border: 1px solid #000000',
+                src: url + 'img/exercises/m/francais/lelales/card_' + i + '.png',
+                height: height / 2,
+                id: 'image_md_lg'
+            });
+            word_div = $('<div/>', {
+                style: 'background-color: #FFFFFF; padding: 10px; font-size: 50px; color: #006600; text-align: center; font-weight: bold; border-radius: 6px 6px 6px 6px; border: 1px solid #000000',
+                id: 'word_md_lg',
+                html: '???'
+            });
+        } else if (style === "sm") {
+            img = $('<img/>', {
+                style: 'background-color: #FFFFFF; padding: 10px; border-radius: 6px 6px 6px 6px; display: block; margin-left: auto; margin-right: auto; border: 1px solid #000000',
+                src: url + 'img/exercises/m/francais/lelales/card_' + i + '.png',
+                height: height / 2,
+                id: 'image_sm'
+            });
+            word_div = $('<div/>', {
+                style: 'background-color: #FFFFFF; padding: 10px; font-size: 30px; color: #006600; text-align: center; font-weight: bold; border-radius: 6px 6px 6px 6px; border: 1px solid #000000',
+                id: 'word_sm',
+                html: '???'
+            });
+        } else if (style === "xs") {
+            img = $('<img/>', {
+                style: 'background-color: #FFFFFF; padding: 10px; border-radius: 6px 6px 6px 6px; display: block; margin-left: auto; margin-right: auto; border: 1px solid #000000',
+                src: url + 'img/exercises/m/francais/lelales/card_' + i + '.png',
+                height: height / 3,
+                id: 'image_xs'
+            });
+            word_div = $('<div/>', {
+                style: 'background-color: #FFFFFF; padding: 10px; font-size: 20px; color: #006600; text-align: center; font-weight: bold; border-radius: 6px 6px 6px 6px; border: 1px solid #000000',
+                id: 'word_xs',
+                html: '???'
+            });
+        }
 
         img.appendTo(image_div);
         build_spacing().appendTo(image_div);

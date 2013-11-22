@@ -7,7 +7,27 @@ m.francais.lelales.Module = function (e, u) {
             'font-size': '20px',
             'color': '#ffffff'
         });
-        div.html('<h1>Déterminants<br>Le, la, les</h1>');
+
+// sm, md and lg devices
+        var title_sm_md_lg = $('<div/>', {
+            html: "<h1>Retrouver le déterminant<br>correspondant à l'image</h1>",
+            class: 'visible-sm visible-md visible-lg'
+        });
+        title_sm_md_lg.appendTo(div);
+
+// xs devices
+        var title_xs = $('<div/>', {
+            html: "<h3>Retrouver le déterminant<br>correspondant à l'image</h3>",
+            class: 'visible-xs'
+        });
+        title_xs.appendTo(div);
+
+        var image = $('<img/>', {
+            style: 'width: 50%',
+            src: url + 'img/exercises/m/francais/lelales/card_1.png'
+        });
+
+        image.appendTo(div);
     };
 
     this.buildExplanation = function (div, currentExercise) {
@@ -16,7 +36,26 @@ m.francais.lelales.Module = function (e, u) {
             'font-size': '20px',
             'color': '#ffffff'
         });
-        div.html('<h1>Déterminants : le, la, les</h1>');
+// sm, md and lg devices
+        var title_sm_md_lg = $('<div/>', {
+            html: "<h1>Retrouver le déterminant<br>correspondant à l'image</h1>",
+            class: 'visible-sm visible-md visible-lg'
+        });
+        title_sm_md_lg.appendTo(div);
+
+// xs devices
+        var title_xs = $('<div/>', {
+            html: "<h3>Retrouver le déterminant<br>correspondant à l'image</h3>",
+            class: 'visible-xs'
+        });
+        title_xs.appendTo(div);
+
+        var image = $('<img/>', {
+            style: 'width: 80%',
+            src: url + 'img/exercises/m/francais/lelales/example.png'
+        });
+
+        image.appendTo(div);
     };
 
     this.buildQuestion = function (div, currentExercise, currentModule) {

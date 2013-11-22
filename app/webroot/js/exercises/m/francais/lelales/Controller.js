@@ -2,7 +2,19 @@ m.francais.lelales.Controller = function (model, view) {
 
 // private methods
     var click = function(name) {
-        $('#button_' + name).on('click', function (e) {
+        init_button(name, 'md_lg');
+        init_button(name, 'sm');
+        init_button(name, 'xs');
+    };
+
+    var init = function() {
+        click('le');
+        click('la');
+        click('les');
+    };
+
+    var init_button = function(name, style) {
+        $('#button_' + name + '_' + style).on('click', function (e) {
             var e = e || window.event;
             var target = e.target || e.srcElement;
 
@@ -13,12 +25,6 @@ m.francais.lelales.Controller = function (model, view) {
                 view.update();
             }
         });
-    };
-
-    var init = function() {
-        click('le');
-        click('la');
-        click('les');
     };
 
 // private attributes
