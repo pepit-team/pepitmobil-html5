@@ -7,7 +7,27 @@ m.math.completeradditionner.Module = function (e, u) {
             'font-size': '20px',
             'color': '#ffffff'
         });
-        div.html('<h1>Compléter<br>Additionner</h1>');
+
+// sm, md and lg devices
+        var title_sm_md_lg = $('<div/>', {
+            html: "<h1>Retrouver les nombres<br>et réaliser des additions</h1>",
+            class: 'visible-sm visible-md visible-lg'
+        });
+        title_sm_md_lg.appendTo(div);
+
+// xs devices
+        var title_xs = $('<div/>', {
+            html: "<h3>Retrouver les nombres<br>et réaliser des additions</h3>",
+            class: 'visible-xs'
+        });
+        title_xs.appendTo(div);
+
+        var image = $('<img/>', {
+            style: 'width: 50%',
+            src: url + 'img/exercises/m/math/completer-additionner/card_5.png'
+        });
+
+        image.appendTo(div);
     };
 
     this.buildExplanation = function (div, currentExercise) {
@@ -16,7 +36,26 @@ m.math.completeradditionner.Module = function (e, u) {
             'font-size': '20px',
             'color': '#ffffff'
         });
-        div.html('<h1>Compléter et additionner</h1>');
+// sm, md and lg devices
+        var title_sm_md_lg = $('<div/>', {
+            html: "<h1>Réaliser l'addition en complétant<br>les 3 cases sous les cartes.<br>Sélectionner un nombre puis l'une des cases.</h1>",
+            class: 'visible-sm visible-md visible-lg'
+        });
+        title_sm_md_lg.appendTo(div);
+
+// xs devices
+        var title_xs = $('<div/>', {
+            html: "<h3>Réaliser l'addition en complétant<br>les 3 cases sous les cartes.<br>Sélectionner un nombre puis l'une des cases.</h3>",
+            class: 'visible-xs'
+        });
+        title_xs.appendTo(div);
+
+        var image = $('<img/>', {
+            style: 'width: 80%',
+            src: url + 'img/exercises/m/math/completer-additionner/example.png'
+        });
+
+        image.appendTo(div);
     };
 
     this.buildQuestion = function (div, currentExercise, currentModule) {
