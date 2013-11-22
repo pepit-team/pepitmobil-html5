@@ -8,36 +8,26 @@ m.divers.formes.Module = function (e, u) {
             'color': '#ffffff'
         });
 
-        var title = $('<div/>', {
-            html: '<h1>Les formes<br>Les couleurs</h1><p>Reconnaître et colorier diverses formes</p>'
+// sm, md and lg devices
+        var title_sm_md_lg = $('<div/>', {
+            html: '<h1>Reconnaître et colorier diverses formes</h1>',
+            class: 'visible-sm visible-md visible-lg'
         });
-        var canvas = $('<canvas/>', {
-            id: 'canvas_element'
+        title_sm_md_lg.appendTo(div);
+
+// xs devices
+        var title_xs = $('<div/>', {
+            html: '<h3>Reconnaître et colorier diverses formes</h3>',
+            class: 'visible-xs'
+        });
+        title_xs.appendTo(div);
+
+        var image = $('<img/>', {
+            style: 'width: 80%',
+            src: url + 'img/exercises/m/divers/formes/example2.png'
         });
 
-        title.appendTo(div);
-        canvas.appendTo(div);
-
-        var width = window.innerWidth / 4;
-        var height = width / 3;
-
-        canvas.width = width;
-        canvas.height = height;
-        var context = canvas[0].getContext("2d");
-        context.lineWidth = 1.;
-        context.fillStyle = "#ffff00";
-        context.beginPath();
-        context.arc(width / 4, height / 2, height / 2 - 2, 0.0, 2 * Math.PI, false);
-        context.fill();
-        context.stroke();
-        context.closePath();
-
-        context.fillStyle = "#ff0000";
-        context.beginPath();
-        context.rect(width / 2, height / 2, width / 2 - 2, height / 2 - 2);
-        context.fill();
-        context.stroke();
-        context.closePath();
+        image.appendTo(div);
     };
 
     this.buildExplanation = function (div, currentExercise) {
@@ -46,15 +36,25 @@ m.divers.formes.Module = function (e, u) {
             'font-size': '20px',
             'color': '#ffffff'
         });
-        var title = $('<div/>', {
-            html: '<h1>Les formes et les couleurs</h1><p>Cliquer sur les formes et les couleurs<br>pour les reconnaître</p>'
+// sm, md and lg devices
+        var title_sm_md_lg = $('<div/>', {
+            html: '<h1>Cliquer sur les formes et les couleurs<br>pour les reconnaître</h1>',
+            class: 'visible-sm visible-md visible-lg'
         });
+        title_sm_md_lg.appendTo(div);
+        
+// xs devices
+        var title_xs = $('<div/>', {
+            html: '<h3>Cliquer sur les formes et les couleurs<br>pour les reconnaître</h3>',
+            class: 'visible-xs'
+        });
+        title_xs.appendTo(div);
+
         var image = $('<img/>', {
             style: 'width: 80%',
             src: url + 'img/exercises/m/divers/formes/example.png'
         });
 
-        title.appendTo(div);
         image.appendTo(div);
     };
 

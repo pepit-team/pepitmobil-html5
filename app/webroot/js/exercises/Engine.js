@@ -206,8 +206,10 @@ var engine = function (u1, u2) {
     };
 
     var buildExerciseList = function (div, style) {
+// sm, md and lg devices
         var table = $('<table />', {
-            style: 'text-align: center'
+            style: 'text-align: center',
+            class: 'visible-sm visible-md visible-lg'
         });
         var n = Math.ceil(module.getExerciseList().title.length / 3);
         var index = 0;
@@ -223,6 +225,27 @@ var engine = function (u1, u2) {
             }
             row.appendTo(table);
         }
+        table.appendTo(div);
+
+// xs devices
+        var table = $('<table />', {
+            style: 'text-align: center',
+            class: 'visible-xs'
+        });
+        var index = 0;
+
+        while (index < module.getExerciseList().title.length) {
+            var row = $('<tr />', { });
+            var i = 0;
+
+            while (i < 4 && index < module.getExerciseList().title.length) {
+                buildExerciseButton(row, index, style);
+                ++index;
+                ++i;
+            }
+            row.appendTo(table);
+        }
+        buildSpacing().appendTo(div);
         table.appendTo(div);
     };
 
@@ -242,11 +265,11 @@ var engine = function (u1, u2) {
             class: 'col-md-6 visible-md visible-lg'
         });
 
-        module.buildExercisePresentation(presentation_div_md_lg);
-        buildExerciseList(exercise_div_md_lg, "md_lg");
         presentation_div_md_lg.appendTo(page_div_md_lg);
         exercise_div_md_lg.appendTo(page_div_md_lg);
         page_div_md_lg.appendTo(page_div);
+        module.buildExercisePresentation(presentation_div_md_lg);
+        buildExerciseList(exercise_div_md_lg, "md_lg");
 
 // sm devices
         var page_div_sm = $('<div/>', {
@@ -259,11 +282,11 @@ var engine = function (u1, u2) {
             class: 'col-sm-6 visible-sm'
         });
 
-        module.buildExercisePresentation(presentation_div_sm);
-        buildExerciseList(exercise_div_sm, "sm");
         presentation_div_sm.appendTo(page_div_sm);
         exercise_div_sm.appendTo(page_div_sm);
         page_div_sm.appendTo(page_div);
+        module.buildExercisePresentation(presentation_div_sm);
+        buildExerciseList(exercise_div_sm, "sm");
 
 // xs devices
         var page_div_xs = $('<div/>', {
@@ -275,11 +298,11 @@ var engine = function (u1, u2) {
             class: 'visible-xs'
         });
 
-        module.buildExercisePresentation(presentation_div_xs);
-        buildExerciseList(exercise_div_xs, "xs");
         presentation_div_xs.appendTo(page_div_xs);
         exercise_div_xs.appendTo(page_div_xs);
         page_div_xs.appendTo(page_div);
+        module.buildExercisePresentation(presentation_div_xs);
+        buildExerciseList(exercise_div_xs, "xs");
 
         currentExercise = -1;
         currentModule = -1;
@@ -393,8 +416,10 @@ var engine = function (u1, u2) {
     };
 
     var buildModuleList = function (div, style) {
+// sm, md and lg devices
         var table = $('<table />', {
-            style: 'text-align: center'
+            style: 'text-align: center',
+            class: 'visible-sm visible-md visible-lg'
         });
         var n = Math.ceil(module.getModuleList(currentExercise).title.length / 3);
         var index = 0;
@@ -410,6 +435,27 @@ var engine = function (u1, u2) {
             }
             row.appendTo(table);
         }
+        table.appendTo(div);
+
+// xs devices
+        var table = $('<table />', {
+            style: 'text-align: center',
+            class: 'visible-xs'
+        });
+        var index = 0;
+
+        while (index < module.getModuleList(currentExercise).title.length) {
+            var row = $('<tr />', { });
+            var i = 0;
+
+            while (i < 3 && index < module.getModuleList(currentExercise).title.length) {
+                buildModuleButton(row, index, style);
+                ++index;
+                ++i;
+            }
+            row.appendTo(table);
+        }
+        buildSpacing().appendTo(div);
         table.appendTo(div);
     };
 
@@ -481,15 +527,12 @@ var engine = function (u1, u2) {
             class: 'row'
         });
 
-        var spacing_div = $('<div/>', {
-            style: 'padding: 5px;'
-        });
         var row_div = $('<div/>', {
         });
 
         buildTitle(title_div);
         title_div.appendTo(view);
-        spacing_div.appendTo(view);
+        buildSpacing().appendTo(view);
         row_div.appendTo(global_div);
         global_div.appendTo(view);
         return row_div;
@@ -508,14 +551,20 @@ var engine = function (u1, u2) {
         module.buildQuestion(row, currentExercise, currentModule);
     };
 
+    var buildSpacing = function () {
+        return $('<div/>', {
+            style: 'padding: 5px;'
+        });
+    };
+
     var buildTitle = function (title_div) {
 // md and lg device
         $('<img/>', {
-            class: 'col-md-2 visible-md visible-lg',
-            src: root + 'img/by-nc-nd.eu.png'
+            class: 'col-md-1 visible-md visible-lg',
+            src: root + 'img/logo.png'
         }).appendTo(title_div);
         $('<div/>', {
-            class: 'col-md-8 visible-md visible-lg',
+            class: 'col-md-9 visible-md visible-lg',
             style: 'font-size: 40px; text-align: center',
             html: module.getName()
         }).appendTo(title_div);
@@ -534,11 +583,11 @@ var engine = function (u1, u2) {
 
 // sm device
         $('<img/>', {
-            class: 'col-sm-2 visible-sm',
-            src: root + 'img/by-nc-nd.eu.png'
+            class: 'col-sm-1 visible-sm',
+            src: root + 'img/logo.png'
         }).appendTo(title_div);
         $('<div/>', {
-            class: 'col-sm-8 visible-sm',
+            class: 'col-sm-9 visible-sm',
             style: 'font-size: 30px; text-align: center',
             html: module.getName()
         }).appendTo(title_div);
@@ -548,9 +597,6 @@ var engine = function (u1, u2) {
             role: 'button',
             html: 'Retour',
             click: function (e) {
-                var e = e || window.event;
-                var target = e.target || e.srcElement;
-
                 back();
             }
         }).appendTo(title_div);
@@ -558,7 +604,7 @@ var engine = function (u1, u2) {
 // xs device
         $('<img/>', {
             class: 'col-xs-2 visible-xs',
-            src: root + 'img/by-nc-nd.eu.png'
+            src: root + 'img/logo.png'
         }).appendTo(title_div);
         $('<div/>', {
             class: 'col-xs-8 visible-xs',
