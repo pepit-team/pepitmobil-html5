@@ -30,69 +30,129 @@ m.divers.formes.View = function (mdl, u, div, i, s) {
 
     this.unselect_color_cells = function () {
         for (var index in color_names) {
-            $('#cell_' + color_names[index]).css({'border-width': '1px'});
+            $('#cell_' + color_names[index] + "_md_lg").css({'border-width': '1px'});
+        }
+        for (var index in color_names) {
+            $('#cell_' + color_names[index] + "_xs_sm").css({'border-width': '1px'});
         }
     };
 
     this.update = function () {
-        draw_shapes($('#canvas_element'));
+        draw_shapes($('#canvas_element_md_lg'));
+        draw_shapes($('#canvas_element_xs_sm'));
         if (model.isOkResult()) {
             module.next();
         }
     };
 
 // private methods
-    var build_canvas = function (div) {
-        var canvas_div = $('<div />', {
-            style: 'background-color: #99CC66; width: 75%; align: center',
-            id: 'canvas_id'
-        });
+    var build_canvas = function (div, style) {
+// md and lg devices
+        if (style === "md_lg") {
+            var canvas_div = $('<div />', {
+                style: 'background-color: #99CC66; width: 75%; align: center',
+                id: 'canvas_id_md_lg'
+            });
 
-        var text = $('<div />', {
-            style: 'background-color: #ffffff; padding: 10px; border-radius: 6px 6px 6px 6px; font-size: 24px',
-            id: 'instructions',
-            html: model.getInstructions()
-        });
-        var canvas = $('<canvas/>', {
-            style: 'background-color: #ffffff; padding-left: 0; padding-right: 0; margin-left: auto; margin-right: auto;display: block',
-            id: 'canvas_element'
-        });
+            var text_md_lg = $('<div />', {
+                class: 'visible-md visible-lg',
+                style: 'background-color: #ffffff; padding: 10px; border-radius: 6px 6px 6px 6px; font-size: 24px',
+                id: 'instructions',
+                html: model.getInstructions()
+            });
+            text_md_lg.appendTo(canvas_div);
 
-        text.appendTo(canvas_div);
-        build_spacing().appendTo(canvas_div);
-        canvas.appendTo(canvas_div);
-        canvas_div.appendTo(div);
+            var canvas = $('<canvas/>', {
+                class: 'visible-md visible-lg',
+                style: 'background-color: #ffffff; padding-left: 0; padding-right: 0; margin-left: auto; margin-right: auto;display: block',
+                id: 'canvas_element_md_lg'
+            });
 
-        var js_canvas_div = document.getElementById("canvas_id");
-        var js_canvas = document.getElementById("canvas_element");
+            build_spacing().appendTo(canvas_div);
+            canvas.appendTo(canvas_div);
+            canvas_div.appendTo(div);
 
-        js_canvas.width = js_canvas_div.clientWidth * 0.8;
-        js_canvas.height = js_canvas_div.clientWidth * 0.8;
+            var js_canvas_div = document.getElementById("canvas_id_md_lg");
+            var js_canvas = document.getElementById("canvas_element_md_lg");
 
-        draw_shapes(canvas);
+            js_canvas.width = js_canvas_div.clientWidth * 0.8;
+            js_canvas.height = js_canvas_div.clientWidth * 0.8;
+
+            draw_shapes(canvas);
+        }
+
+// xs and sm devices
+        if (style === "xs_sm") {
+            var canvas_div = $('<div />', {
+                style: 'background-color: #99CC66; align: center',
+                id: 'canvas_id_xs_sm'
+            });
+            var text_xs_sm = $('<div />', {
+                class: 'visible-xs visible-sm',
+                style: 'background-color: #ffffff; padding: 10px; border-radius: 6px 6px 6px 6px; font-size: 16px',
+                id: 'instructions',
+                html: model.getInstructions()
+            });
+            text_xs_sm.appendTo(canvas_div);
+
+            var canvas = $('<canvas/>', {
+                class: 'visible-xs visible-sm',
+                style: 'background-color: #ffffff; padding-left: 0; padding-right: 0; margin-left: auto; margin-right: auto;display: block',
+                id: 'canvas_element_xs_sm'
+            });
+
+            build_spacing().appendTo(canvas_div);
+            canvas.appendTo(canvas_div);
+            canvas_div.appendTo(div);
+
+            var js_canvas_div = document.getElementById("canvas_id_xs_sm");
+            var js_canvas = document.getElementById("canvas_element_xs_sm");
+
+            js_canvas.width = js_canvas_div.clientWidth * 0.8;
+            js_canvas.height = js_canvas_div.clientWidth * 0.8;
+
+            draw_shapes(canvas);
+        }
     };
 
-    var build_color = function (div) {
-        var table = $("<table />", {
-            style: 'width: 50%; border-style: solid; border-width:1px; border-color: #000000'
-        });
+    var build_color = function (div, vertical, style) {
+        var table;
+        var row;
 
+        if (vertical) {
+            table = $("<table />", {
+                style: 'width: 50%; border-style: solid; border-width:1px; border-color: #000000'
+            });
+        } else {
+            table = $("<table />", {
+                style: 'width: 100%; border-style: solid; border-width:1px; border-color: #000000'
+            });
+            row = $("<tr />", {
+                style: 'height: 50px'
+            });
+            row.appendTo(table);
+        }
         for (var index in color_codes) {
-            build_color_cell(table, color_codes[index], color_names[index]);
+            build_color_cell(table, row, color_codes[index], color_names[index], vertical, style);
         }
         table.appendTo(div);
     };
 
-    var build_color_cell = function (table, color, color_name) {
-        var row = $("<tr />", {
-            style: 'height: 50px'
-        });
+    var build_color_cell = function (table, row, color, color_name, vertical, style) {
         var line = $("<td />", {
             style: 'background: ' + color + '; border-style: solid; border-width:1px; border-color: #000000',
-            id: 'cell_' + color_name
+            id: 'cell_' + color_name + "_" + style
         });
-        line.appendTo(row);
-        row.appendTo(table);
+
+        if (vertical) {
+            row = $("<tr />", {
+                style: 'height: 50px'
+            });
+            line.appendTo(row);
+            row.appendTo(table);
+        } else {
+            line.appendTo(row);
+        }
     };
 
     var build_spacing = function () {
@@ -196,20 +256,38 @@ m.divers.formes.View = function (mdl, u, div, i, s) {
             'padding': '10px',
             'border-radius': '6px 6px 6px 6px'
         });
+        view.addClass('row');
 
-        var canvas_div = $('<div/>', {
-            class: 'col-md-9',
+// md and lg devices
+        var canvas_div_md_lg = $('<div/>', {
+            class: 'col-md-9 visible-md visible-lg',
             style: 'background-color: #99CC66'
         });
-        var color_div = $('<div/>', {
-            class: 'col-md-3'
+        var color_div_md_lg = $('<div/>', {
+            class: 'col-md-3 visible-md visible-lg'
         });
 
-        canvas_div.appendTo(view);
-        color_div.appendTo(view);
+        canvas_div_md_lg.appendTo(view);
+        color_div_md_lg.appendTo(view);
+        build_canvas(canvas_div_md_lg, "md_lg");
+        build_color(color_div_md_lg, true, "md_lg");
 
-        build_canvas(canvas_div);
-        build_color(color_div);
+// xs and sm devices
+        var global_div = $('<div/>', {
+            class: 'col-xs-12 visible-xs visible-sm',
+        });
+        var canvas_div_xs_sm = $('<div/>', {
+            style: 'background-color: #99CC66'
+        });
+        var color_div_xs_sm = $('<div/>', {
+        });
+
+        canvas_div_xs_sm.appendTo(global_div);
+        build_spacing().appendTo(global_div);
+        color_div_xs_sm.appendTo(global_div);
+        global_div.appendTo(view);
+        build_canvas(canvas_div_xs_sm, "xs_sm");
+        build_color(color_div_xs_sm, false, "xs_sm");
     };
 
 // private attributes

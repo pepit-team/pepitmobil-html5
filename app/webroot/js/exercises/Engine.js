@@ -527,28 +527,20 @@ var engine = function (u1, u2) {
             class: 'row'
         });
 
-        var row_div = $('<div/>', {
-        });
-
         buildTitle(title_div);
         title_div.appendTo(view);
         buildSpacing().appendTo(view);
-        row_div.appendTo(global_div);
         global_div.appendTo(view);
-        return row_div;
+        return global_div;
     };
 
     var buildQuestionPage = function () {
         clearView();
 
         var page_div = buildPage();
-        var row = $('<div/>', {
-            class: 'row'
-        });
 
-        row.appendTo(page_div);
         score.clear(currentExercise - 1, currentModule - 1);
-        module.buildQuestion(row, currentExercise, currentModule);
+        module.buildQuestion(page_div, currentExercise, currentModule);
     };
 
     var buildSpacing = function () {

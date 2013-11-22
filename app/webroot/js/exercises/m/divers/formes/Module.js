@@ -42,7 +42,7 @@ m.divers.formes.Module = function (e, u) {
             class: 'visible-sm visible-md visible-lg'
         });
         title_sm_md_lg.appendTo(div);
-        
+
 // xs devices
         var title_xs = $('<div/>', {
             html: '<h3>Cliquer sur les formes et les couleurs<br>pour les reconnaître</h3>',
