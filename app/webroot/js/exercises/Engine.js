@@ -532,6 +532,7 @@ var engine = function (u1, u2) {
             class: 'row'
         });
 
+        buildSpacing().appendTo(view);
         buildTitle(title_div);
         title_div.appendTo(view);
         buildSpacing().appendTo(view);

@@ -32,7 +32,7 @@
                         {
                             "name": "ecrire-lettre",
                             "label": "Écrire un mot en sélectionnant les lettres",
-                            "version": "0"
+                            "version": "1"
                         },
                         {
                             "name": "ecrire-coccinelle",

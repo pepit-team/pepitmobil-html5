@@ -9,8 +9,16 @@ m.francais.determinants.Model = function (number, min, max, sh) {
         return okResult;
     };
 
+    this.getIndex = function () {
+        return index;
+    };
+
     this.getImageIndex = function() {
         return image_index[shift + index];
+    };
+
+    this.getImageIndex2 = function(i) {
+        return image_index[shift + i];
     };
 
     this.isOkResult = function() {
@@ -27,6 +35,10 @@ m.francais.determinants.Model = function (number, min, max, sh) {
         index = 0;
     };
 
+    this.setOkResult = function (r) {
+        okResult = r;
+    };
+
 // private methods
     var init = function (number, min, max, sh) {
         var i = 0;
@@ -37,7 +49,7 @@ m.francais.determinants.Model = function (number, min, max, sh) {
         shift = sh;
         image_index = [];
         do {
-            n = Math.floor(Math.random() * (max + 1)) + min + 1;
+            n = Math.floor(Math.random() * (max - min + 1)) + min + 1;
             found = false;
 
             j = 0;
