@@ -43,6 +43,7 @@
 
     echo $this->Html->script('jquery.min');
     echo $this->Html->script('bootstrap.min');
+    echo $this->Html->script('buzz.min');
 
     echo $scripts_for_layout;
     ?>

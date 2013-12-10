@@ -70,7 +70,8 @@ m.divers.formes.Module = function (e, u) {
                         { type: 'square', number: 8, color: 'yellow' }
                     ], [ { type: 'square', number: 8, color: 'blue' },
                         { type: 'triangle', number: 8, color: 'red' }
-                    ]]);
+                    ]],
+                    [ 'e1m1q1', 'e1m1q2' ]);
             } else if (currentModule == 2) {
                 view = new m.divers.formes.View(this, url, div,
                     [
@@ -81,7 +82,8 @@ m.divers.formes.Module = function (e, u) {
                         { type: 'triangle', number: 8, color: 'blue' }
                     ], [ { type: 'oval', number: 8, color: 'red' },
                         { type: 'rectangle', number: 8, color: 'yellow' }
-                    ]]);
+                    ]],
+                    [ 'e1m2q1', 'e1m2q2' ]);
             } else if (currentModule == 3) {
                 view = new m.divers.formes.View(this, url, div,
                     [
@@ -92,7 +94,8 @@ m.divers.formes.Module = function (e, u) {
                         { type: 'square', number: 8, color: 'green' }
                     ], [ { type: 'circle', number: 8, color: 'brun' },
                         { type: 'oval', number: 8, color: 'yellow' }
-                    ]]);
+                    ]],
+                    [ 'e1m3q1', 'e1m3q2' ]);
             }
         } else if (currentExercise == 2) {
             if (currentModule == 1) {
@@ -107,7 +110,8 @@ m.divers.formes.Module = function (e, u) {
                     ], [ { type: 'rectangle', number: 6, color: 'green' },
                         { type: 'oval', number: 5, color: 'blue' },
                         { type: 'diamond', number: 5, color: 'yellow' }
-                    ]]);
+                    ]],
+                    [ 'e2m1q1', 'e2m1q2' ]);
             } else if (currentModule == 2) {
                 view = new m.divers.formes.View(this, url, div,
                     [
@@ -120,7 +124,8 @@ m.divers.formes.Module = function (e, u) {
                     ], [ { type: 'circle', number: 5, color: 'green' },
                         { type: 'square', number: 6, color: 'red' },
                         { type: 'triangle', number: 5, color: 'pink' }
-                    ]]);
+                    ]],
+                    [ 'e2m2q1', 'e2m2q2' ]);
             } else if (currentModule == 3) {
                 view = new m.divers.formes.View(this, url, div,
                     [
@@ -133,7 +138,8 @@ m.divers.formes.Module = function (e, u) {
                     ], [ { type: 'rectangle', number: 5, color: 'green' },
                         { type: 'square', number: 5, color: 'orange' },
                         { type: 'diamond', number: 6, color: 'yellow' }
-                    ]]);
+                    ]],
+                    [ 'e2m3q1', 'e2m3q2' ]);
             }
         } else if (currentExercise == 3) {
             if (currentModule == 1) {
@@ -150,7 +156,8 @@ m.divers.formes.Module = function (e, u) {
                         { type: 'rectangle', number: 4, color: 'yellow' },
                         { type: 'square', number: 4, color: 'red' },
                         { type: 'triangle', number: 5, color: 'yellow' }
-                    ]]);
+                    ]],
+                    [ 'e3m1q1', 'e3m1q2' ]);
             } else if (currentModule == 2) {
                 view = new m.divers.formes.View(this, url, div,
                     [
@@ -165,7 +172,8 @@ m.divers.formes.Module = function (e, u) {
                         { type: 'circle', number: 4, color: 'grey' },
                         { type: 'square', number: 4, color: 'blue' },
                         { type: 'diamond', number: 4, color: 'blue' }
-                    ]]);
+                    ]],
+                    [ 'e3m2q1', 'e3m2q2' ]);
             } else if (currentModule == 3) {
                 view = new m.divers.formes.View(this, url, div,
                     [
@@ -180,7 +188,8 @@ m.divers.formes.Module = function (e, u) {
                         { type: 'oval', number: 4, color: 'green' },
                         { type: 'triangle', number: 4, color: 'pink' },
                         { type: 'diamond', number: 4, color: 'blue' }
-                    ]]);
+                    ]],
+                    [ 'e3m31q1', 'e3m3q2' ]);
             }
         }
         questionIndex = 1;

@@ -1,4 +1,4 @@
-m.divers.formes.View = function (mdl, u, div, i, s) {
+m.divers.formes.View = function (mdl, u, div, i, s, sd) {
 
 // public methods
     this.error = function () {
@@ -13,10 +13,10 @@ m.divers.formes.View = function (mdl, u, div, i, s) {
         return color_names[i];
     };
 
-    this.init = function (mdl, u, view, i, s) {
+    this.init = function (mdl, u, view, i, s, sd) {
         module = mdl;
         url = u;
-        model = new m.divers.formes.Model(i, s);
+        model = new m.divers.formes.Model(i, s, sd);
         init_div(view);
         controller = new m.divers.formes.Controller(model, this);
     };
@@ -58,8 +58,17 @@ m.divers.formes.View = function (mdl, u, div, i, s) {
                 class: 'visible-md visible-lg',
                 style: 'background-color: #ffffff; padding: 10px; border-radius: 6px 6px 6px 6px; font-size: 24px',
                 id: 'instructions',
-                html: model.getInstructions()
+                html: model.getInstructions() + ' '
             });
+            $('<img />', {
+                src: url + 'img/audio-icon.png',
+                width: 50,
+                height: 50
+            }).click(function() {
+                    var mySound = new buzz.sound(url + '/sounds/exercises/m/divers/formes/'+
+                        model.getSound()+'.ogg');
+                    mySound.play();
+                }).appendTo(text_md_lg);
             text_md_lg.appendTo(canvas_div);
 
             var canvas = $('<canvas/>', {
@@ -93,6 +102,15 @@ m.divers.formes.View = function (mdl, u, div, i, s) {
                 id: 'instructions',
                 html: model.getInstructions()
             });
+            $('<img />', {
+                src: url + 'img/audio-icon.png',
+                width: 50,
+                height: 50
+            }).click(function() {
+                    var mySound = new buzz.sound(url + '/sounds/exercises/m/divers/formes/'+
+                        model.getSound()+'.ogg');
+                    mySound.play();
+                }).appendTo(text_xs_sm);
             text_xs_sm.appendTo(canvas_div);
 
             var canvas = $('<canvas/>', {
@@ -301,5 +319,5 @@ m.divers.formes.View = function (mdl, u, div, i, s) {
     var model;
     var controller;
 
-    this.init(mdl, u, div, i, s);
+    this.init(mdl, u, div, i, s, sd);
 };

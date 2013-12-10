@@ -1,4 +1,4 @@
-m.divers.formes.Model = function (i, s) {
+m.divers.formes.Model = function (i, s, sd) {
 
 // public attributes
     this.checkColor = function (x, y) {
@@ -36,6 +36,10 @@ m.divers.formes.Model = function (i, s) {
 
     this.getShapes = function () {
         return shapes[index];
+    };
+
+    this.getSound = function () {
+        return sounds[index];
     };
 
     this.isOkResult = function() {
@@ -239,6 +243,7 @@ m.divers.formes.Model = function (i, s) {
 // private attributes
     var instructions = i;
     var shapeNumbers = s;
+    var sounds = sd;
 
     var shapes = [];
     var result;
