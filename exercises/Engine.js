@@ -54,7 +54,7 @@ var Engine = function (r) {
 // private methods
     var back = function () {
         if (currentExercise == -1) {
-            new Menu().buildSubMenu(module.getLevel());
+            new Menu().buildSubMenu(module.getLevel(), -1);
         } else {
             if (currentModule == -1) {
                 buildExercisePage();

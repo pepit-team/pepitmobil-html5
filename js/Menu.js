@@ -51,6 +51,19 @@ var Menu = function () {
 
         container.empty();
         $.getJSON('data/exercises.json', function (exercises) {
+            if (levelIndex == -1) {
+                var found = false;
+                var i =0;
+
+                while (!found) {
+                    if (exercises['levels'][i]['name'] == level) {
+                        found = true;
+                    } else {
+                        ++i;
+                    }
+                }
+                levelIndex = i;
+            }
             buildSubMenu(container, level, levelIndex, exercises);
         });
     };
