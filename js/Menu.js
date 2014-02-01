@@ -134,12 +134,13 @@ var Menu = function () {
             for (var exercise_index = 0; exercise_index < subject["topics"].length; exercise_index++) {
                 var exercise = subject["topics"][exercise_index];
 
-                list += '<li class="list-group-item">' +
-                    '<a href="#" onclick="new Menu().launchExercise(' +
-                    '\'' + level + '\',' + levelIndex + ',\'' + subject["name"] + '\',' + subject_index + ',\'' + exercise["name"] + '\',' + exercise_index + ');">' + exercise['label'] + '</a>';
+                list += '<li class="list-group-item">';
                 if (exercise["version"] > 0) {
+                    list += '<a href="#" onclick="new Menu().launchExercise(' +
+                        '\'' + level + '\',' + levelIndex + ',\'' + subject["name"] + '\',' + subject_index + ',\'' + exercise["name"] + '\',' + exercise_index + ');">' + exercise['label'] + '</a>';
                     list += '<span class="glyphicon glyphicon-check" style="float: right"></span>';
                 } else {
+                    list += exercise['label'];
                     list += '<span class="glyphicon glyphicon-import" style="float: right"></span>';
                 }
                 list += '</li>';
