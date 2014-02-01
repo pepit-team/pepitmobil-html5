@@ -30,7 +30,12 @@ var Menu = function () {
             id: 'container'
         });
 
+        content.empty();
         container.appendTo(content);
+        container.append(
+            $('<ol/>', { class: 'breadcrumb' }).append(
+                $('<li/>', { class: 'active' }).append(
+                    $('<a/>', { href: '#' }).append('Home'))));
 
         $.getJSON('data/exercises.json', function (exercises) {
 
@@ -50,10 +55,17 @@ var Menu = function () {
         var container = $("#container");
 
         container.empty();
+        container.append(
+            $('<ol/>', { class: 'breadcrumb'}).append(
+                    $('<li/>').append(
+                        $('<a/>', { href: '#', onclick: 'new Menu().buildMainMenu();'}).append('Home'))).append(
+                    $('<li/>', { class: 'active' }).append(
+                        $('<a/>', { href: '#' }).append(level)))
+        );
         $.getJSON('data/exercises.json', function (exercises) {
             if (levelIndex == -1) {
                 var found = false;
-                var i =0;
+                var i = 0;
 
                 while (!found) {
                     if (exercises['levels'][i]['name'] == level) {
@@ -72,6 +84,17 @@ var Menu = function () {
         var container = $("#container");
 
         container.empty();
+        container.append(
+            $('<ol/>', { class: 'breadcrumb'}).append(
+                    $('<li/>').append(
+                        $('<a/>', { href: '#', onclick: 'new Menu().buildMainMenu();'}).append('Home'))).append(
+                    $('<li/>').append(
+                        $('<a/>', { href: '#', onclick: 'new Menu().buildSubMenu(\'' + level + '\',' + levelIndex + ');'}).append(level))).append(
+                    $('<li/>').append(
+                        $('<a/>', { href: '#', onclick: 'new Menu().buildSubMenu(\'' + level + '\',' + levelIndex + ');'}).append(subject))).append(
+                    $('<li/>', { class: 'active' }).append(
+                        $('<a/>', { href: '#'}).append(topic)))
+        );
         $.getJSON('data/exercises.json', function (exercises) {
             launchExercise(container, level, levelIndex, subject, subjectIndex, topic, topicIndex, exercises);
         });

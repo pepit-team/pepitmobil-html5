@@ -566,15 +566,6 @@ var Engine = function (r) {
             style: 'font-size: 40px; text-align: center',
             html: module.getName()
         }).appendTo(title_div);
-        $('<a/>', {
-            class: 'col-md-2 btn btn-primary btn-ms active visible-md visible-lg',
-            href: '#',
-            role: 'button',
-            html: 'Retour',
-            click: function (e) {
-                back();
-            }
-        }).appendTo(title_div);
 
 // sm device
         $('<img/>', {
@@ -586,15 +577,6 @@ var Engine = function (r) {
             style: 'font-size: 30px; text-align: center',
             html: module.getName()
         }).appendTo(title_div);
-        $('<a/>', {
-            class: 'col-sm-2 btn btn-primary btn-sm active visible-sm',
-            href: '#',
-            role: 'button',
-            html: 'Retour',
-            click: function (e) {
-                back();
-            }
-        }).appendTo(title_div);
 
 // xs device
         $('<img/>', {
@@ -605,15 +587,6 @@ var Engine = function (r) {
             class: 'col-xs-8 visible-xs',
             style: 'font-size: 20px; text-align: center',
             html: module.getName()
-        }).appendTo(title_div);
-        $('<a/>', {
-            class: 'col-xs-2 btn btn-primary btn-xs active visible-xs',
-            href: '#',
-            role: 'button',
-            html: 'Retour',
-            click: function (e) {
-                back();
-            }
         }).appendTo(title_div);
     };
 
