@@ -1,1 +1,1 @@
-body {    background: #ebebeb;    color: #fff;    margin: 0;    min-height: 100%;    position: relative;}
+body {    background: url('../img/pattern-white.png');    color: #fff;    margin: 0;    min-height: 100%;    position: relative;}#footer {    clear: both;    height: 200px;    margin: auto;    background-image: url('../img/back-foot.png');    background-position: center bottom;    background-repeat: no-repeat;    font-size: 12px;    color: #FFF;    font-weight: bold;}

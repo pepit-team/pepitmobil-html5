@@ -35,7 +35,7 @@ var Menu = function () {
         container.append(
             $('<ol/>', { class: 'breadcrumb' }).append(
                 $('<li/>', { class: 'active' }).append(
-                    $('<a/>', { href: '#' }).append('Home'))));
+                    $('<a/>', { href: '#' }).append('Accueil'))));
 
         $.getJSON('data/exercises.json', function (exercises) {
 
