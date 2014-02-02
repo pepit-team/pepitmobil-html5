@@ -34,8 +34,7 @@ var Menu = function () {
         container.appendTo(content);
         container.append(
             $('<ol/>', { class: 'breadcrumb' }).append(
-                $('<li/>', { class: 'active' }).append(
-                    $('<a/>', { href: '#' }).append('Accueil'))));
+                $('<li/>', { class: 'active' }).append('Accueil')));
 
         $.getJSON('data/exercises.json', function (exercises) {
 
@@ -55,13 +54,6 @@ var Menu = function () {
         var container = $("#container");
 
         container.empty();
-        container.append(
-            $('<ol/>', { class: 'breadcrumb'}).append(
-                    $('<li/>').append(
-                        $('<a/>', { href: '#', onclick: 'new Menu().buildMainMenu();'}).append('Accueil'))).append(
-                    $('<li/>', { class: 'active' }).append(
-                        $('<a/>', { href: '#' }).append(level)))
-        );
         $.getJSON('data/exercises.json', function (exercises) {
             if (levelIndex == -1) {
                 var found = false;
@@ -76,6 +68,12 @@ var Menu = function () {
                 }
                 levelIndex = i;
             }
+            container.append(
+                $('<ol/>', { class: 'breadcrumb'}).append(
+                        $('<li/>').append(
+                            $('<a/>', { href: '#', onclick: 'new Menu().buildMainMenu();'}).append('Accueil'))).append(
+                        $('<li/>', { class: 'active' }).append(exercises['levels'][levelIndex]['label']))
+            );
             buildSubMenu(container, level, levelIndex, exercises);
         });
     };
@@ -84,18 +82,17 @@ var Menu = function () {
         var container = $("#container");
 
         container.empty();
-        container.append(
-            $('<ol/>', { class: 'breadcrumb'}).append(
-                    $('<li/>').append(
-                        $('<a/>', { href: '#', onclick: 'new Menu().buildMainMenu();'}).append('Accueil'))).append(
-                    $('<li/>').append(
-                        $('<a/>', { href: '#', onclick: 'new Menu().buildSubMenu(\'' + level + '\',' + levelIndex + ');'}).append(level))).append(
-                    $('<li/>').append(
-                        $('<a/>', { href: '#', onclick: 'new Menu().buildSubMenu(\'' + level + '\',' + levelIndex + ');'}).append(subject))).append(
-                    $('<li/>', { class: 'active' }).append(
-                        $('<a/>', { href: '#'}).append(topic)))
-        );
         $.getJSON('data/exercises.json', function (exercises) {
+            container.append(
+                $('<ol/>', { class: 'breadcrumb'}).append(
+                        $('<li/>').append(
+                            $('<a/>', { href: '#', onclick: 'new Menu().buildMainMenu();'}).append('Accueil'))).append(
+                        $('<li/>').append(
+                            $('<a/>', { href: '#', onclick: 'new Menu().buildSubMenu(\'' + level + '\',' + levelIndex + ');'}).append(exercises['levels'][levelIndex]['label']))).append(
+                        $('<li/>').append(
+                            $('<a/>', { href: '#', onclick: 'new Menu().buildSubMenu(\'' + level + '\',' + levelIndex + ');'}).append(exercises['levels'][levelIndex]['subjects'][subjectIndex]['label']))).append(
+                        $('<li/>', { class: 'active' }).append(exercises['levels'][levelIndex]['subjects'][subjectIndex]['topics'][topicIndex]['label']))
+            );
             launchExercise(container, level, levelIndex, subject, subjectIndex, topic, topicIndex, exercises);
         });
     };
