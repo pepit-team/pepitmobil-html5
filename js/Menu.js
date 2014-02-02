@@ -58,7 +58,7 @@ var Menu = function () {
         container.append(
             $('<ol/>', { class: 'breadcrumb'}).append(
                     $('<li/>').append(
-                        $('<a/>', { href: '#', onclick: 'new Menu().buildMainMenu();'}).append('Home'))).append(
+                        $('<a/>', { href: '#', onclick: 'new Menu().buildMainMenu();'}).append('Accueil'))).append(
                     $('<li/>', { class: 'active' }).append(
                         $('<a/>', { href: '#' }).append(level)))
         );
@@ -87,7 +87,7 @@ var Menu = function () {
         container.append(
             $('<ol/>', { class: 'breadcrumb'}).append(
                     $('<li/>').append(
-                        $('<a/>', { href: '#', onclick: 'new Menu().buildMainMenu();'}).append('Home'))).append(
+                        $('<a/>', { href: '#', onclick: 'new Menu().buildMainMenu();'}).append('Accueil'))).append(
                     $('<li/>').append(
                         $('<a/>', { href: '#', onclick: 'new Menu().buildSubMenu(\'' + level + '\',' + levelIndex + ');'}).append(level))).append(
                     $('<li/>').append(
