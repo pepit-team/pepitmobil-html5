@@ -22,7 +22,7 @@
                             "depends": [ "determinants" ]
                         },
                         {
-                            "name": "autre-moitie",
+                            "name": "autremoitie",
                             "label": "L'autre moitié de l'illustration",
                             "version": "0",
                             "depends": [ ]
@@ -40,19 +40,19 @@
                             "depends": [ "determinants" ]
                         },
                         {
-                            "name": "ecrire-coccinelle",
+                            "name": "ecrirecoccinelle",
                             "label": "Écrire un mot avec la coccinelle",
                             "version": "0",
                             "depends": [ ]
                         },
                         {
-                            "name": "mot-desordre",
+                            "name": "motdesordre",
                             "label": "Les mots en désordre",
                             "version": "0",
                             "depends": [ ]
                         },
                         {
-                            "name": "mot-identique",
+                            "name": "motidentique",
                             "label": "Les mots identiques",
                             "version": "0",
                             "depends": [ ]
