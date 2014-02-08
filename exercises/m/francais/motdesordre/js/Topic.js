@@ -1,2 +1,2 @@
-// namespace m.francais.motdesorde
-m.francais.motdesorde = { };
+// namespace m.francais.motdesordre
+m.francais.motdesordre = { };

@@ -24,13 +24,13 @@
                         {
                             "name": "autremoitie",
                             "label": "L'autre moitié de l'illustration",
-                            "version": "0",
+                            "version": "1",
                             "depends": [ ]
                         },
                         {
                             "name": "scrabble",
                             "label": "Le scrabble (mots de 3 à 5 lettres)",
-                            "version": "0",
+                            "version": "1",
                             "depends": [ ]
                         },
                         {
@@ -42,31 +42,31 @@
                         {
                             "name": "ecrirecoccinelle",
                             "label": "Écrire un mot avec la coccinelle",
-                            "version": "0",
+                            "version": "1",
                             "depends": [ ]
                         },
                         {
                             "name": "motdesordre",
                             "label": "Les mots en désordre",
-                            "version": "0",
+                            "version": "1",
                             "depends": [ ]
                         },
                         {
                             "name": "motidentique",
                             "label": "Les mots identiques",
-                            "version": "0",
+                            "version": "1",
                             "depends": [ ]
                         },
                         {
                             "name": "sons",
                             "label": "Quatre sons : in - oi - on - ou",
-                            "version": "0",
+                            "version": "1",
                             "depends": [ ]
                         },
                         {
                             "name": "syllabes",
-                            "label": "Syllabes phoniques Dogs",
-                            "version": "0",
+                            "label": "Syllabes phoniques",
+                            "version": "1",
                             "depends": [ ]
                         }
                     ]
