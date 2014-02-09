@@ -76,29 +76,29 @@
                     "label": "Mathématiques",
                     "topics": [
                         {
-                            "name": "ajouter-carte",
+                            "name": "ajoutercarte",
                             "label": "Ajouter une carte",
-                            "version": "0",
+                            "version": "1",
                             "depends": [ ]
                         },                        {
-                            "name": "boulier-additionner",
-                            "label": "Boulier, additionner",
-                            "version": "0",
+                            "name": "boulieradditionner",
+                            "label": "Boulier : additionner",
+                            "version": "1",
                             "depends": [ ]
                         },                        {
-                            "name": "boulier-soustraire",
-                            "label": "Boulier, soustraire",
-                            "version": "0",
+                            "name": "bouliersoustraire",
+                            "label": "Boulier : soustraire",
+                            "version": "1",
                             "depends": [ ]
                         },                        {
-                            "name": "colorier-autantque",
+                            "name": "colorierautantque",
                             "label": "Colorier autant que",
-                            "version": "0",
+                            "version": "1",
                             "depends": [ ]
                         },                        {
                             "name": "colorier",
                             "label": "Colorier selon la consigne",
-                            "version": "0",
+                            "version": "1",
                             "depends": [ ]
                         },
                         {
@@ -108,39 +108,39 @@
                             "depends": [ ]
                         },
                         {
-                            "name": "completer-soustraire",
-                            "label": "Compléter, soustraire",
-                            "version": "0",
+                            "name": "completersoustraire",
+                            "label": "Compléter et soustraire",
+                            "version": "1",
                             "depends": [ ]
                         },
                         {
-                            "name": "completer-images",
+                            "name": "completerimages",
                             "label": "Compter les images",
-                            "version": "0",
+                            "version": "1",
                             "depends": [ ]
                         },
                         {
-                            "name": "diviser-partager",
+                            "name": "diviserpartager",
                             "label": "Diviser et partager",
-                            "version": "0",
+                            "version": "1",
                             "depends": [ ]
                         },
                         {
-                            "name": "compter-ecrire",
-                            "label": "Le pommier, compter, écrire",
-                            "version": "0",
+                            "name": "compterecrire",
+                            "label": "Le pommier : compter et écrire",
+                            "version": "1",
                             "depends": [ ]
                         },
                         {
-                            "name": "coccinelle-mouvement-compter",
-                            "label": "Les coccinelles en mouvement, compter",
-                            "version": "0",
+                            "name": "coccinellemouvementcompter",
+                            "label": "Les coccinelles en mouvement : compter",
+                            "version": "1",
                             "depends": [ ]
                         },
                         {
-                            "name": "lourd-leger",
-                            "label": "Le plus lourd, le plus léger",
-                            "version": "0",
+                            "name": "lourdleger",
+                            "label": "Le plus lourd et le plus léger",
+                            "version": "1",
                             "depends": [ ]
                         }
                     ]
