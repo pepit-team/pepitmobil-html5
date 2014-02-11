@@ -18,4 +18,5 @@ Main programmer and founder
 
 Contributors
 ------------
-- Smagghe Tony <smagtony@gmail.com>
+- Tony Smagghe <smagtony@gmail.com>
+- Antoine Lecoustre <a.lecoustre@gmail.com>
