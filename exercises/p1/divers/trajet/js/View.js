@@ -228,10 +228,10 @@ p1.divers.trajet.View = function (mdl, div, n, m, min, max) {
     var compute_path_dimensions = function(canvas_width, canvas_height) {
         pts_x = [];
         pts_y = [];
-        margin_x = 10;
-        margin_y = 10;
+        margin_x = 5;
+        margin_y = 5;
         width = canvas_width - (margin_x * 2);
-        height = canvas_height - 10;
+        height = canvas_height;
         space_x = width / maxSize;
         space_y = height;
         width = space_x * maxSize;
@@ -254,19 +254,19 @@ p1.divers.trajet.View = function (mdl, div, n, m, min, max) {
 
             if (r == p1.divers.trajet.Direction.UNDEFINED) {
                 a.init2(r, pts_x[i] + (space_x / 4), height - space_y);
-                a.draw(context, space_y - (margin_y * 3), space_x < space_y ? space_x : space_y);
+                a.draw(context, space_y - margin_y, space_x < space_y ? space_x : space_y);
             } else if (r == p1.divers.trajet.Direction.NORTH) {
                 a.init2(r, pts_x[i] + space_x / 2, space_y);
-                a.draw(context, space_y - (margin_y * 3), space_x < space_y ? space_x : space_y);
+                a.draw(context, space_y - margin_y, space_x < space_y ? space_x : space_y);
             } else if (r == p1.divers.trajet.Direction.EAST) {
                 a.init2(r, pts_x[i] + margin_x, space_y / 2);
-                a.draw(context, space_x - (margin_x * 3), space_x < space_y ? space_x : space_y);
+                a.draw(context, space_x - margin_x, space_x < space_y ? space_x : space_y);
             } else if (r == p1.divers.trajet.Direction.SOUTH) {
                 a.init2(r, pts_x[i] + (space_x / 2), margin_y * 2);
-                a.draw(context, space_y - (margin_y * 3), space_x < space_y ? space_x : space_y);
+                a.draw(context, space_y - margin_y, space_x < space_y ? space_x : space_y);
             } else if (r == p1.divers.trajet.Direction.WEST) {
                 a.init2(r, pts_x[i] + (space_x - margin_x), space_y / 2);
-                a.draw(context, space_x - (margin_x * 3), space_x < space_y ? space_x : space_y);
+                a.draw(context, space_x - margin_x, space_x < space_y ? space_x : space_y);
             }
         }
     };

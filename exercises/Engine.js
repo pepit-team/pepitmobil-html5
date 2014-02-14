@@ -38,17 +38,18 @@ var Engine = function (r) {
     };
 
     this.next = function () {
-        bootstrap_alert.info(module.getGoodResponseMessage(), module.getNextQuestionButtonText(), this);
-    };
-
-    this.next2 = function () {
         score.add(currentExercise - 1, currentModule - 1, module.getScore());
         score.save(module.getLevel(), module.getSubject(), module.getTopic());
         if (module.finishModule(currentExercise, currentModule)) {
+            bootstrap_alert.info("Module fini", "", this);
             buildModulePage();
         } else {
-            module.nextQuestion(currentExercise, currentModule);
+            bootstrap_alert.info(module.getGoodResponseMessage(), module.getNextQuestionButtonText(), this);
         }
+    };
+
+    this.next2 = function () {
+        module.nextQuestion(currentExercise, currentModule);
     };
 
 // private methods
