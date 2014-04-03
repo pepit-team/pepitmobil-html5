@@ -2,13 +2,38 @@ m.math.boulieradditionner.Module = function (e) {
 
 // public methods
     this.buildExercisePresentation = function (div) {
+        div.css({
+            'text-align':'center'
+        });
+
+        var title_xs_ms_md_lg = $('</div>',{
+            html: "<h1>Complètez le Boulier et<br/>Entrez le résultat</h1>",
+            class: 'visible_md visible_lg visible_xs visible_ms'
+        });
+        title_xs_ms_md_lg.appendTo(div);
+
     };
 
     this.buildExplanation = function (div, currentExercise) {
     };
 
+    this.getFirstOperand = function() {
+        return Math.floor((Math.random() * 6) + 1);
+    }
+
+    this.getSecondOperand = function() {
+        return Math.floor((Math.random() * 6) + 1);
+    }
+
     this.buildQuestion = function (div, currentExercise, currentModule) {
         view = new m.math.boulieradditionner.View(this, div);
+        if(currentExercice == 1){
+            view = new m.math.boulieradditionner.View(this, div,5);
+        }
+        else if(currentExercice == 2){
+            view = new m.math.boulieradditionner.View(this,div,10);
+        }
+
         questionIndex = 1;
         currentScore = this.getQuestionScore(currentExercise, currentModule);
     };
@@ -25,8 +50,8 @@ m.math.boulieradditionner.Module = function (e) {
 
     this.getExerciseList = function () {
         return {
-            title: [ 'Exercice 1' ],
-            subTitle: [ ]
+            title: [ 'Exercice 1'],
+            subTitle: [ 'Jusqu\'à 5']
         };
     };
 
@@ -58,7 +83,7 @@ m.math.boulieradditionner.Module = function (e) {
     };
 
     this.getQuestionScore = function (currentExercise, currentModule) {
-        return 0;  // total = 1000 pts
+        return 100;  // total = 1000 pts
     };
 
     this.getScore = function () {
@@ -66,7 +91,7 @@ m.math.boulieradditionner.Module = function (e) {
     };
 
     this.getSubject = function () {
-        return 'francais';
+        return 'maths';
     };
 
     this.getTopic = function () {

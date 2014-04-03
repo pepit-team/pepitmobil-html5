@@ -14,7 +14,15 @@ m.math.boulieradditionner.Controller = function (m, v) {
         });
     };
 
-// private methods
+    var init_button_abacus = function(){
+        $("#abacus_plus").on('click',function(e){
+            
+        });
+        $("#abacus_minus").on('click',function(e){
+
+        });
+
+    }
 
 // private attributes
     var model = m;

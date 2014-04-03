@@ -26,16 +26,21 @@ m.math.compterecrire.View = function (mdl, div) {
 
 // private methods
     var init_div = function (view) {
-        var button;
+        var cadre = $('<div/>',{
+            class: 'visible-xs visible-sm visible-md visible-lg',
+            style: 'background:white;'
+        });
 
-        button = $('<a/>', {
+         var button = $('<a/>', {
             href: '#',
             class: 'btn btn-lg btn-warning active',
             id: 'valid',
             role: 'button',
             html: 'valid'
         });
-        button.appendTo(div);
+        button.appendTo(cadre);
+
+        cadre.appendTo(div);
     };
 
 // private attributes

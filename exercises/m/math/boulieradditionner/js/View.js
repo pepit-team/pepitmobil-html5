@@ -1,4 +1,4 @@
-m.math.boulieradditionner.View = function (mdl, div) {
+m.math.boulieradditionner.View = function (mdl, div, max) {
 
 // public methods
     this.error = function () {
@@ -6,6 +6,9 @@ m.math.boulieradditionner.View = function (mdl, div) {
     };
 
     this.init = function (mdl, view) {
+        width = window.innerWidth;
+        height= window.innerHeight;
+
         module = mdl;
         model = new m.math.boulieradditionner.Model();
         init_div(view);
@@ -25,237 +28,173 @@ m.math.boulieradditionner.View = function (mdl, div) {
     };
 
 // private methods
-    var build_abacus = function(view, lO){
-        //md and lg devices
-        var line_div_abacus_md_lg = $('<div/>', {
-            class: 'visible-md visible-lg text-center',
-            style: 'background-color: #2d6ca2; margin:10px; padding: 2px; border-radius: 6px 6px 6px 6px'
+
+
+    var build_abacus = function (div, lO) {
+        //xs & sm
+        var abacus_div_xs_sm = $('<div/>', {
+            class: 'visible-sm visible-xs',
+            style: 'text-align:center;'
         });
 
-        var line_abacus_md_lg = $('<div/>', {
-            class: 'visible-md visible-lg',
-            style: 'background:url("exercises/m/math/boulieradditionner/img/line.jpg")repeat-x; background-position:center; min-height:10px; margin:10px;'
-        });
-
-        //img
-        var line_abacus_table_md_lg = $('<table/>',{
-            class: 'visible-md visible-lg'
-        });
-        var line_abacus_tr_md_lg = $('<tr/>',{
-            class: 'visible-md visible-lg',
+        var abacus_table_xs_sm = $('<table/>', {
+            class: 'table visible-sm visible-xs',
             style: 'margin:auto;'
         });
 
-        for(var i = 0; i<lO;i++){
-            $('<td/>',{
-                html: '<img src="exercises/m/math/boulieradditionner/img/boule.png"/>',
-                class: 'visible-md visible-lg'
-            }).appendTo(line_abacus_tr_md_lg);
-        }
+        abacus_table_xs_sm.appendTo(abacus_div_xs_sm);
+        abacus_div_xs_sm.appendTo(div);
 
-        line_abacus_tr_md_lg.appendTo(line_abacus_table_md_lg);
-        line_abacus_table_md_lg.appendTo(line_abacus_md_lg);
-        line_abacus_md_lg.appendTo(line_div_abacus_md_lg);
-        line_div_abacus_md_lg.appendTo(view);
-
-        //xs and ms devices
-        var line_div_abacus_xs_ms = $('<div/>', {
-            class: 'visible-xs visible-sm',
-            style: 'background-color: #2d6ca2; margin:10px; padding: 2px; border-radius: 6px 6px 6px 6px'
-        });
-
-        var line_abacus_xs_ms = $('<div/>', {
-            class: 'visible-xs visible-sm',
-            style: 'background:url("exercises/m/math/boulieradditionner/img/line.jpg")repeat-x; background-position:center; min-height:10px; margin:10px;'
-        });
-
-        var line_abacus_table_xs_sm = $('<table/>',{
-            class: 'visible-xs visible-sm'
-        });
-        var line_abacus_tr_xs_sm = $('<tr/>',{
-            class: 'visible-xs visible-sm',
-            style: 'margin:auto;'
-        });
-
-        for(var i = 0; i<lO;i++){
-            $('<td/>',{
-                html: '<img src="exercises/m/math/boulieradditionner/img/boule.png"/>',
-                class: 'visible-xs visible-sm img-rounded'
-            }).appendTo(line_abacus_tr_xs_sm);
-        }
-
-        line_abacus_tr_xs_sm.appendTo(line_abacus_table_xs_sm);
-        line_abacus_table_xs_sm.appendTo(line_abacus_xs_ms);
-        line_abacus_xs_ms.appendTo(line_div_abacus_xs_ms);
-        line_div_abacus_xs_ms.appendTo(view);
-
-    }
-
-    var build_operator = function(view){
-        //md and lg devices
-        var line_div_operator_md_lg = $('<div/>', {
-            class: 'visible-md visible-lg text-center',
-            style: 'background-color: #2d6ca2; padding: 2px; border-radius: 6px 6px 6px 6px'
-        });
-
-        var button_plus_md_lg = $('<a/>', {
-            href: '#',
-            class: 'btn btn-lg btn-md btn-warning active',
-            id: 'plus',
-            role: 'button',
-            style: 'margin:5px;',
-            html: '+'
-        });
-
-        var input_result_md_lg = $('<input/>',{
-            style: 'visible-md visible-lg',
-            placeholder:'Résultat'
-        });
-
-        var button_minus_md_lg = $('<a/>', {
-            href: '#',
-            class: 'btn btn-lg btn-md btn-warning active',
-            id: 'minus',
-            role: 'button',
-            style: 'margin:5px;',
-            html: '-'
-        });
-
-        var line_div_valid_md_lg = $('<div/>', {
-            class: 'visible-md visible-lg text-center'
-        });
-
-        var button_valid_md_lg = $('<a/>', {
-            href: '#',
-            class: 'btn btn-lg btn-md btn-warning active',
-            id: 'valid',
-            role: 'button',
-            style: 'margin:5px; background:#04B404; text-transform:uppercase; border:0px; font-size:10pt',
-            html: 'Valider'
-        });
-
-
-        button_plus_md_lg.appendTo(line_div_operator_md_lg);
-        input_result_md_lg.appendTo(line_div_operator_md_lg);
-        button_minus_md_lg.appendTo(line_div_operator_md_lg);
-        button_valid_md_lg.appendTo(line_div_valid_md_lg);
-        line_div_valid_md_lg.appendTo(line_div_operator_md_lg);
-        line_div_operator_md_lg.appendTo(view);
-
-        //xs and ms devices
-        var line_div_operator_xs_sm = $('<div/>', {
-            class: 'visible-xs visible-sm text-center',
-            style: 'background-color: #2d6ca2; padding: 2px; border-radius: 6px 6px 6px 6px'
-        });
-
-        var button_plus_xs_sm = $('<a/>', {
-            href: '#',
-            class: 'btn btn-sm btn-xs btn-warning active',
-            id: 'plus',
-            role: 'button',
-            style: 'margin:5px;',
-            html: '+'
-        });
-
-        var input_result_xs_sm = $('<input/>',{
-            class: ' visible_xs visible_sm',
-            placeholder:'Résultat'
-        });
-
-        var button_minus_xs_sm = button = $('<a/>', {
-            href: '#',
-            class: 'btn btn-sm btn-xs btn-warning active',
-            id: 'minus',
-            role: 'button',
-            style: 'margin:5px;',
-            html: '-'
-        });
-
-        var line_div_valid_xs_sm = $('<div/>', {
-            class: 'visible-xs visible-sm text-center'
-        });
-
-        var button_valid_xs_sm = $('<a/>', {
-            href: '#',
-            class: 'btn btn-xs btn-sm btn-warning active',
-            id: 'valid',
-            role: 'button',
-            style: 'margin:5px; background:#04B404; text-transform:uppercase; border:0px; font-size:10pt',
-            html: 'Valider'
-        });
-
-        button_plus_xs_sm.appendTo(line_div_operator_xs_sm);
-        input_result_xs_sm.appendTo(line_div_operator_xs_sm);
-        button_minus_xs_sm.appendTo(line_div_operator_xs_sm);
-        button_valid_xs_sm.appendTo(line_div_valid_xs_sm);
-        line_div_valid_xs_sm.appendTo(line_div_operator_xs_sm);
-        line_div_operator_xs_sm.appendTo(view);
-    }
-
-    var build_operation = function(view, lO, rO){
-
-        var operation = lO + " + " + rO + " = ";
-
-        // md and lg devices
-        var line_div_operation_md_lg = $('<div/>', {
+        //md & lg
+        var abacus_div_md_lg = $('<div/>', {
             class: 'visible-md visible-lg',
-            style: 'background-color: #2d6ca2; padding: 2px; border-radius: 6px 6px 6px 6px'
+            style: 'text-align:center;'
         });
 
-        var line_div_operation_order_md_lg =  $('<div/>', {
-            class: 'visible-md visible-lg text-center',
-            style: 'text-decoration:underline',
-            html: '<h5>Complétez le boulier et entrez le résultat de l\'addition</h5>'
+        var abacus_table_md_lg = $('<table/>', {
+            id: 'abacus_table',
+            class: 'table table-condensed',
+            style: 'max-width:60%; margin:auto; border-left:10px solid #B4B4B4; border-right:10px solid #B4B4B4;'
         });
 
-        var line_h1_operation_md_lg = $('<h1/>',{
-            class: 'visible-md visible-lg text-center',
-            style: 'margin:5px; color:white;',
-            html: operation
+        /* GENERATION DU TABLEAU */
+        var maximum = 5; //A INIT AVEC LA VALEUR MAX DU CALCUL DE L'EXERCICE
+
+        //On fait un tableau de 5 colonnes
+        var nb_ball_display = 0;
+
+        for (var i = 0; i < maximum; i += 5) {
+
+            var abacus_tr = $('<tr/>', {
+                class: 'tr',
+                style: 'background:url("exercises/m/math/boulieradditionner/img/line.jpg")repeat-x center'
+            });
+
+            for (var j = 0; j < 5; j++) {
+                var abacus_td = $('<td/>', {
+                    class: 'td',
+                    style: 'padding:0; border:0;'
+                });
+                if (nb_ball_display < lO) {
+                    var abacus_ball = $('<img/>', {
+                        src: 'exercises/m/math/boulieradditionner/img/boule.png',
+                        width: (width * 0.05).toFixed(0)
+                    });
+                    nb_ball_display++;
+                }
+                else {
+                    var abacus_ball = $('<img/>', {
+                        src: 'exercises/m/math/boulieradditionner/img/boule_empty.png',
+                        width: (width * 0.05).toFixed(0)
+                    });
+                }
+                abacus_ball.appendTo(abacus_td);
+                abacus_td.appendTo(abacus_tr);
+            }
+            abacus_tr.appendTo(abacus_table_md_lg);
+        }
+        /* END */
+
+        var abacus_button = $('<div/>', {
+            class: 'visible-md visible-lg',
+            style: 'text-align:center; margin-top:20px;'
         });
 
-        line_div_operation_order_md_lg.appendTo(line_div_operation_md_lg);
-        line_h1_operation_md_lg.appendTo(line_div_operation_md_lg);
-        line_div_operation_md_lg.appendTo(view);
+        var abacus_button_plus = $('<button/>', {
+            id: 'abacus_plus',
+            html: '<h3>+1</h3>',
+            style: 'background:red; color:white; border:0; border-radius:7px; margin-right:2px;',
+            width: (width * 0.1).toFixed(0)
+        });
 
-        // xs and ms devices
-        var line_div_operation_xs_sm = $('<div/>', {
+        var abacus_button_minus = $('<button/>', {
+            id: 'abacus_minus',
+            html: '<h3>-1</h3>',
+            style: 'background:blue; color:white; border:0; border-radius:7px; margin-left:2px;',
+            width: (width * 0.1).toFixed(0)
+        });
+
+        abacus_table_md_lg.appendTo(abacus_div_md_lg);
+        abacus_div_md_lg.appendTo(div);
+        abacus_button_plus.appendTo(abacus_button);
+        abacus_button_minus.appendTo(abacus_button);
+        abacus_button.appendTo(div);
+
+        build_hr(div);
+    }
+
+    var build_form = function (div) {
+        var form_input = $('<input/>', {
+            id: 'form_result',
+            type:'number',
+            class: 'visible-md visible-lg',
+            style:'border-radius:5px; text-align:center; color:black; margin:auto; margin-bottom:5px;'
+        }).appendTo(div);
+
+        var form_valid = $('<button/>',{
+            id:'form_submit',
+            class:'visible-md visible-lg',
+            style:'background:green; color:white; border-radius:5px; text-transform:uppercase; margin:auto; border:0;',
+            width:(width*0.2).toFixed(0),
+            height:(height*0.05).toFixed(0),
+            html:'Valider'
+        }).appendTo(div);
+
+    }
+
+    var build_hr = function (div) {
+        var operation_hr = $('<hr/>', {
+            class: 'visible-xs visible-sm visible-md visible-lg',
+            style: 'width:80%;'
+        });
+        operation_hr.appendTo(div);
+
+    };
+
+    var build_operation = function (div, lO, rO) {
+
+        //xs & sm
+        var operation_div_xs_sm = $('<div/>', {
             class: 'visible-xs visible-sm',
-            style: 'background-color: #2d6ca2; padding: 2px; border-radius: 6px 6px 6px 6px'
+            html: '<h3>' + lO + ' + ' + rO + ' = ?</h3>',
+            style: 'text-align:center; color:white;'
         });
 
-        var line_div_operation_order_xs_sm =  $('<div/>', {
-            class: 'visible-xs visible-sm text-center',
-            style: 'text-decoration:underline',
-            html: '<h5>Complétez le boulier et entrez le résultat de l\'addition</h5>'
-        });
+        operation_div_xs_sm.appendTo(div);
 
-        var line_h1_operation_xs_sm = $('<h1/>',{
-            class: 'visible-xs visible-sm text-center',
-            style: 'margin:5px; color:white;',
-            html: operation
+        //md & lg
+        var operation_div_md_lg = $('<div/>', {
+            class: 'visible-md visible-lg',
+            html: '<h1>' + lO + ' + ' + rO + ' = ?</h1>',
+            style: 'text-align:center; color:white'
         });
+        operation_div_md_lg.appendTo(div);
 
-        line_div_operation_order_xs_sm.appendTo(line_div_operation_xs_sm);
-        line_h1_operation_xs_sm.appendTo(line_div_operation_xs_sm);
-        line_div_operation_xs_sm.appendTo(view);
+        //both
+        build_hr(div);
+
     }
 
     var init_div = function (view) {
 
-        var leftOperand = Math.floor((Math.random()*6)+1);
-        var rightOperand = Math.floor((Math.random()*6)+1);
+        var div_exercice = $('<div/>', {
+            class: 'visible-sm visible-xs visible-md visible-lg',
+            style: 'background-color: #2d6ca2; padding: 2px; border-radius:6px;'
+        });
 
-        build_operation(view,leftOperand,rightOperand);//Parameters : view, leftOperand, rightOperand
-        build_abacus(view,leftOperand);//Parameters : view,
-        build_operator(view);//parameters : view, leftOperand
-
+        build_operation(div_exercice, model.getFirstOperand(), model.getSecondOperand());
+        build_abacus(div_exercice, model.getFirstOperand());
+        build_form(div_exercice);
+        div_exercice.appendTo(view);
     };
 
 // private attributes
     var module;
     var model;
     var controller;
+
+    var current_ball_in_Abacus;
+    var width,height;
 
     this.init(mdl, div);
 };
