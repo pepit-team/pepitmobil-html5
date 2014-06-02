@@ -12,6 +12,18 @@ m.math.compterecrire.Controller = function (m, v) {
                 view.error();
             }
         });
+
+        $('#button_plus').on('click', function (e) {
+            model.incrementCurrentBallOn();
+            view.updateAbacus();
+            console.log("Call +");
+        });
+
+        $('#button_minus').on('click', function (e) {
+            model.decrementCurrentBallOn();
+            view.updateAbacus();
+            console.log("Call -");
+        });
     };
 
 // private methods

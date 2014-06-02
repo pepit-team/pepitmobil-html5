@@ -1,40 +1,63 @@
 m.math.boulieradditionner.Model = function () {
 
 // public methods
-    this.check = function() {
+    this.check = function () {
         okResult = true;
         return true;
     };
 
-    this.getFirstOperand = function(){
+    this.decrementCurrentBallOn = function () {
+        if (current_ball_on > 1) {
+            current_ball_on--;
+        }
+    }
+
+    this.getFirstOperand = function () {
         return firstOperand;
-    }
+    };
 
-    this.getSecondOperand = function(){
+    this.getCurrentBallOn = function () {
+        return current_ball_on;
+    };
+
+    this.getSecondOperand = function () {
         return secondOperand;
-    }
+    };
 
-    this.isOkResult = function() {
+    this.incrementCurrentBallOn = function () {
+        if (current_ball_on < 12) {
+            current_ball_on++;
+        }
+        console.log(current_ball_on);
+    };
+
+    this.isOkResult = function () {
         return okResult;
     };
 
-    this.next = function() {
+    this.next = function () {
         okResult = false;
     };
 
-    this.reset = function() {
+    this.reset = function () {
     };
 
+
 // private methods
-    var init = function(){
+    var init = function () {
         var max = 6;
         firstOperand = Math.floor(Math.random() * max) + 1;
-        secondOperand = Math.floor(Math.random() *max) + 1;
+        secondOperand = Math.floor(Math.random() * max) + 1;
+
+        current_ball_on = firstOperand;
     };
 
 // private attributes
     var firstOperand;
     var secondOperand;
+
+    var current_ball_on;
+
 
     var okResult;
 
