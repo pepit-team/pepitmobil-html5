@@ -58,7 +58,7 @@ m.math.diviserpartager.Module = function (e) {
     };
 
     this.getQuestionScore = function (currentExercise, currentModule) {
-        return 0;  // total = 1000 pts
+        return 8;  // total = 1000 pts
     };
 
     this.getScore = function () {
@@ -66,7 +66,7 @@ m.math.diviserpartager.Module = function (e) {
     };
 
     this.getSubject = function () {
-        return 'francais';
+        return 'math';
     };
 
     this.getTopic = function () {

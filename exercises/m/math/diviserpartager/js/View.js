@@ -15,8 +15,29 @@ m.math.diviserpartager.View = function (mdl, div) {
     this.next = function () {
         model.next();
 
+        //reinitialisation du canvas
+        model.initPieCanvasData();
+        model.initNbPieClicked();
+        drawPieCtx.clearRect(0,0,269,270);
+
+        var img_cake = new Image();
+        img_cake.src = 'exercises/m/math/diviserpartager/img/cake.png';
+        img_cake.onload = function(){
+            drawPieCtx.drawImage(img_cake,0,0);
+        }
+
+
+// md and lg devices
+        col_left_md_lg.empty();
+        build_tab_characters(col_left_md_lg, model.getNbRandom(),'md_lg');
+
+// xs and ms devices
+        col_left_xs_ms.empty();
+        build_tab_characters(col_left_xs_ms, model.getNbRandom(),'xs_ms');
+
         this.update();
     };
+
 
 
     this.update = function () {
@@ -24,6 +45,40 @@ m.math.diviserpartager.View = function (mdl, div) {
             module.next();
         }
     };
+
+    this.drawPie = function(canvas){
+        var pieData = model.getPieCanvasData();
+        var center = model.getCenter();
+        var radius = model.getRadius();
+
+        drawPieCtx = canvas.getContext("2d");
+
+
+        var img_cake = new Image();
+        img_cake.src = 'exercises/m/math/diviserpartager/img/cake.png';
+
+        img_cake.onload = function(){
+            drawPieCtx.drawImage(img_cake,0,0);
+
+            for(var i = 0; i <= 8; i++){
+                drawPieCtx.beginPath();
+                drawPieCtx.moveTo(center.x,center.y);
+                drawPieCtx.arc(center.x,center.y,radius,pieData[i]['startAngle'],pieData[i]['endAngle'],false);
+                drawPieCtx.lineTo(center.x,center.y);
+                drawPieCtx.closePath();
+
+                if(pieData[i]['visible'] == 1){
+                    drawPieCtx.fillStyle = "#BFC0C0";
+                }else{
+                    drawPieCtx.fillStyle = "rgba(0, 0, 200, 0)";
+                }
+
+                drawPieCtx.fill();
+            }
+        }
+
+    }
+
 
 // private methods
     var build_character = function(i, size, style,offset){
@@ -41,15 +96,17 @@ m.math.diviserpartager.View = function (mdl, div) {
             });
         }
 
-        var img_character = $('<img></img>').attr('src',
-            'exercises/m/math/diviserpartager/img/character-' + i + '.png');
+        var img_character = $('<img>',{
+            class : 'img-responsive',
+            src : 'exercises/m/math/diviserpartager/img/character-' + i + '.png'
+        });
 
         img_character.appendTo(div_character);
 
         return div_character;
     }
 
-    var build_tab_characters = function(div, number){
+    var build_tab_characters = function(div, number, style){
 
 
         //Nombre d'éléments sur les lignes
@@ -67,7 +124,7 @@ m.math.diviserpartager.View = function (mdl, div) {
         });
 
         for(var i=0;i<nbEleLine1;i++){
-            build_character(i + 1, sizeElements, 'md_lg',0).appendTo(rowLine1);
+            build_character(i + 1, sizeElements, style,0).appendTo(rowLine1);
         }
 
         //Creation 2eme ligne
@@ -77,70 +134,99 @@ m.math.diviserpartager.View = function (mdl, div) {
 
         //offset si le nombre aléatoire est impaire
         if(number%2 != 0){
-            //var offsetElement = Math.round(sizeElements /2);
-            build_character(i + 1, sizeElements, 'md_lg',1).appendTo(rowLine2);
+            build_character(i + 1, sizeElements, style,1).appendTo(rowLine2);
         }else{
-            build_character(i + 1, sizeElements, 'md_lg',0).appendTo(rowLine2);
+            build_character(i + 1, sizeElements, style,0).appendTo(rowLine2);
         }
 
-
         for(var i=0;i<nbEleLine2-1;i++){
-            build_character(i + 1, sizeElements, 'md_lg',0).appendTo(rowLine2);
+            build_character(i + 1, sizeElements, style,0).appendTo(rowLine2);
         }
 
         rowLine1.appendTo(div);
         rowLine2.appendTo(div);
-
-
     }
 
     var build_tab_right = function(div){
+        //canvas tarte
+        canvas_cake = $('<canvas>',{
+            id: 'canvas_cake'
+        });
+
+        canvas_cake.attr("width", "269px");
+        canvas_cake.attr("height", "270px");
+
+        build_canvas_cake(canvas_cake);
+
         //zone de texte pour saisir le nombre de part
         var input_number = $('<input/>',{
+            id: 'input_number',
             type : 'text',
-            class : 'form-control input-lg col-lg-2'
+            class : 'form-control input-lg',
+            style: 'margin-left:auto; margin-right:auto; margin-top:20px; text-align:center;',
+            width: '30px'
         });
 
-        //image de la tarte
-        var img_cake = $('<img></img>',{
-            style: 'margin-bottom:15px'
-        }).attr('src',
-            'exercises/m/math/diviserpartager/img/cake.png');
-
-        //Creation du tableau de la colonne de droite
-        var table = $('<table/>');
-        var row_desc_cake = $('<tr/>',{
+        //création des div
+        var row_desc_cake = $('<div>',{
+            id: 'desc_cake',
+            class: 'row',
             html : '<h5>Clique sur la tarte pour donner un morceau à chaque invité.</h5>',
-            style: 'text-align: center'
+            style: 'text-align:center'
         });
-        var row_cake = $('<tr/>',{
-            style: 'text-align: center'
 
+        var container_canvas_cake = $('<div>',{
+            id : 'container_canvas_cake',
+            class : 'row',
+            class: 'visible-lg',
+            style: 'margin-right: auto; margin-left: auto; width:269px; height:270px;'
         });
-        img_cake.appendTo(row_cake);
 
-        var row_number = $('<tr/>',{
-            style: 'text-align: center'
+        canvas_cake.appendTo(container_canvas_cake);
+
+        var row_input_number = $('<div>',{
+            id : 'row_input_number',
+            class : 'row'
         });
-        input_number.appendTo(row_number);
+        input_number.appendTo(row_input_number);
 
-        var row_desc_number = $('<tr/>',{
+        var row_desc_number = $('<div>',{
+            id: 'desc_number',
+            class: 'row',
             html : '<h5>Inscris dans la case ce que tu as donné.</h5>',
-            style: 'text-align: center'
+            style: 'text-align:center'
         });
 
+        row_desc_cake.appendTo(div);
+        container_canvas_cake.appendTo(div);
+        row_input_number.appendTo(div);
+        row_desc_number.appendTo(div);
 
-
-        table.appendTo(div);
-        row_desc_cake.appendTo(table);
-        row_cake.appendTo(table);
-        row_number.appendTo(table);
-        row_desc_number.appendTo(table);
     }
 
-    var build_col_exercise = function(view){
-        //Génération d'un nombre aléatoire de 4 à 8 pour afficher les personnages
-        var nbRandom = Math.round(Math.random() * (8 - 4) + 4);
+    var build_canvas_cake = function(canvas){
+        if(!canvas){
+            alert("Impossible de récupérer le canvas");
+            return;
+        }
+
+        var context = canvas[0].getContext("2d");
+        if(!context){
+            alert("Impossible de récupérer le context du canvas");
+            return;
+        }
+
+        var img_cake = new Image();
+        img_cake.onload = function(){
+            context.drawImage(img_cake,0,0);
+            model.setRadius(canvas.width,canvas.height);
+            model.initPieCanvasData();
+        }
+        img_cake.src = 'exercises/m/math/diviserpartager/img/cake.png';
+    };
+
+    var init_div = function (view) {
+        var button;
 
 // md and lg devices
         var exercise_div_md_lg = $('<div/>', {
@@ -150,20 +236,22 @@ m.math.diviserpartager.View = function (mdl, div) {
 
         //Creation de la classe row
         var row_md_lg = $('<div/>', {
-            class: 'row'
+            id : 'row_md_lg',
+            class: 'row',
+            style: 'margin-right: 10px'
         });
 
         //Div des colonnes
-        var col_left_md_lg = $('<div/>', {
+        col_left_md_lg = $('<div/>', {
             class: 'col-md-8'
         });
-        var col_right_md_lg = $('<div/>', {
+
+        col_right_md_lg = $('<div/>', {
             class: 'col-md-4'
         });
 
-        build_tab_characters(col_left_md_lg, nbRandom);
+        build_tab_characters(col_left_md_lg, model.getNbRandom(), 'md_lg');
         build_tab_right(col_right_md_lg);
-
 
         col_left_md_lg.appendTo(row_md_lg);
         col_right_md_lg.appendTo(row_md_lg);
@@ -178,42 +266,27 @@ m.math.diviserpartager.View = function (mdl, div) {
 
         //Creation de la classe row
         var row_xs_ms = $('<div/>', {
+            id : "row_xs_ms",
             class: 'row'
         });
 
         //Div des colonnes
-        var col_left_xs_ms = $('<div/>', {
-            class: 'col-xs-8'
+        col_left_xs_ms = $('<div/>', {
+            class: 'col-xs-12'
         });
-        var col_right_xs_ms = $('<div/>', {
-            class: 'col-xs-4'
+        col_right_xs_ms = $('<div/>', {
+            class: 'col-xs-12'
         });
 
-        build_tab_characters(col_left_xs_ms, nbRandom);
+        build_tab_characters(col_left_xs_ms, model.getNbRandom(), 'xs_sm');
         build_tab_right(col_right_xs_ms);
 
         col_left_xs_ms.appendTo(row_xs_ms);
         col_right_xs_ms.appendTo(row_xs_ms);
         row_xs_ms.appendTo(exercise_div_xs_ms);
         exercise_div_xs_ms.appendTo(view);
-    };
-
-    var init_div = function (view) {
-        var button;
-
-
-        build_col_exercise(view);
-
 
         button = $('<a/>', {
-            href: '#',
-            class: 'btn btn-lg btn-warning active',
-            id: 'valid',
-            role: 'button',
-            html: 'valid'
-        });
-
-        row = $('<a/>', {
             href: '#',
             class: 'btn btn-lg btn-warning active',
             id: 'valid',
@@ -228,6 +301,18 @@ m.math.diviserpartager.View = function (mdl, div) {
     var module;
     var model;
     var controller;
+
+    //Div des colonnes (md and ld devices)
+    var col_left_md_lg;
+    var col_right_md_lg;
+
+    //Div des colonnes (xs and ms devices)
+    var col_left_xs_ms;
+    var col_right_xs_ms;
+
+    //canvas
+    var canvas_cake;
+    var drawPieCtx;
 
     this.init(mdl, div);
 };
