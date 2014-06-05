@@ -2,7 +2,7 @@ m.math.boulieradditionner.Controller = function (m, v) {
 
 // private methods
     var init = function () {
-        $('#valid').on('click', function (e) {
+        $('#button_valid').on('click', function (e) {
             var e = e || window.event;
             var target = e.target || e.srcElement;
 
@@ -12,17 +12,31 @@ m.math.boulieradditionner.Controller = function (m, v) {
                 view.error();
             }
         });
+
+        $('#button_plus').on('click', function (e) {
+            model.incrementCurrentBallOn();
+            view.updateAbacus();
+        });
+
+        $('#button_minus').on('click', function (e) {
+            model.decrementCurrentBallOn();
+            view.updateAbacus();
+        });
+
+        $('.answer').on('click', function (e) {
+            $('.answer').removeClass('active');
+            $('.answer').css("opacity", "0.6");
+            model.setCurrentAnswerSelected($(this).attr('id'));
+            $(this).addClass('active');
+            $(this).css("opacity", "1");
+        });
+
+        $(window).resize(function () {
+            view.resize();
+        });
     };
 
-    var init_button_abacus = function(){
-        $("#abacus_plus").on('click',function(e){
-            
-        });
-        $("#abacus_minus").on('click',function(e){
 
-        });
-
-    }
 
 // private attributes
     var model = m;

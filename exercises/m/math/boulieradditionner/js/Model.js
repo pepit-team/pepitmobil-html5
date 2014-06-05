@@ -2,8 +2,13 @@ m.math.boulieradditionner.Model = function () {
 
 // public methods
     this.check = function () {
-        okResult = true;
-        return true;
+        var total = parseInt(firstOperand + secondOperand);
+
+        if(current_answer_selected == total && current_ball_on == total){
+            okResult = true;
+            return true;
+        }
+        return false;
     };
 
     this.decrementCurrentBallOn = function () {
@@ -28,7 +33,6 @@ m.math.boulieradditionner.Model = function () {
         if (current_ball_on < 12) {
             current_ball_on++;
         }
-        console.log(current_ball_on);
     };
 
     this.isOkResult = function () {
@@ -40,16 +44,29 @@ m.math.boulieradditionner.Model = function () {
     };
 
     this.reset = function () {
+        current_answer_selected = -1;
+        $('.answer').css("opacity","1");
     };
+
+    this.setCurrentAnswerSelected = function(val) {
+        current_answer_selected = val;
+    }
 
 
 // private methods
     var init = function () {
-        var max = 6;
-        firstOperand = Math.floor(Math.random() * max) + 1;
-        secondOperand = Math.floor(Math.random() * max) + 1;
+        var max = 5;
+
+        firstOperand = 0;
+        secondOperand = 0;
+
+        while(parseInt(firstOperand+secondOperand) == 0 || parseInt(firstOperand + secondOperand) > max ){
+            firstOperand = Math.floor(Math.random() * max) + 1;
+            secondOperand = Math.floor(Math.random() * max) + 1;
+        }
 
         current_ball_on = firstOperand;
+        current_answer_selected = -1;
     };
 
 // private attributes
@@ -57,7 +74,7 @@ m.math.boulieradditionner.Model = function () {
     var secondOperand;
 
     var current_ball_on;
-
+    var current_answer_selected;
 
     var okResult;
 

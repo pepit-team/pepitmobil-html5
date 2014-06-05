@@ -3,6 +3,7 @@ m.math.boulieradditionner.View = function (mdl, div, max) {
 // public methods
     this.error = function () {
         module.error();
+        bootstrap_alert.info(module.getWrongResponseMessage(), '');
     };
 
     this.init = function (mdl, view) {
@@ -21,13 +22,17 @@ m.math.boulieradditionner.View = function (mdl, div, max) {
         this.update();
     };
 
+    this.resize = function(){
+        size_canvas();
+    }
+
     this.update = function () {
         if (model.isOkResult()) {
             module.next();
         }
     };
 
-    this.updateAbacus = function(){
+    this.updateAbacus = function () {
         draw_abacus();
     }
 
@@ -38,37 +43,44 @@ m.math.boulieradditionner.View = function (mdl, div, max) {
         var canvas = $('<canvas/>', {
             id: 'canvas',
             class: 'visible-sm visible-md visible-lg visible-xs',
-            style: 'width:600px; height:300px; margin: auto;'
+            style: 'width:600px; height:300px; margin: auto; margin-top:20px; margin-bottom:20px;'
         }).appendTo(div);
+
+        size_canvas();
 
         build_hr(div);
 
         var button_plus = $('<button/>', {
             id: 'button_plus',
             class: 'btn btn-success btn-lg',
-            html: '+1'
+            html: '+1',
+            style: 'margin-right:5px;'
         }).appendTo(div);
 
         var button_minus = $('<button/>', {
             id: 'button_minus',
             class: ' btn btn-danger btn-lg',
-            html: '-1'
+            html: '-1',
+            style: 'margin-left:5px;'
         }).appendTo(div);
 
         build_hr(div);
     }
 
     var build_form = function (div) {
-        var form_input = $('<input/>', {
-            id: 'form_result',
-            type: 'number',
-            class: 'form-control',
-            style: 'border-radius:5px; text-align:center; color:black; margin:auto; margin-bottom:5px;'
+
+        var div_answer = $('<div/>', {
+            id: 'answer',
+            class: 'visible-xs visible-sm visible-md visible-lg'
         }).appendTo(div);
 
-        var form_valid = $('<button/>', {
-            id: 'form_submit',
-            class: 'btn btn-warning',
+        for (var i = 0; i < max; i++) {
+            div_answer.append('<button type="button" id="' + (i + 1) + '" class="btn btn-warning answer" style="margin:5px;">' + (i + 1) + '</button>');
+        }
+
+        var button_valid = $('<button/>', {
+            id: 'button_valid',
+            class: 'btn btn-default',
             html: 'Valider'
         }).appendTo(div);
 
@@ -77,7 +89,7 @@ m.math.boulieradditionner.View = function (mdl, div, max) {
     var build_hr = function (div) {
         var operation_hr = $('<hr/>', {
             class: 'visible-xs visible-sm visible-md visible-lg',
-            style: 'width:80%;'
+            style: 'width:80%; margin-top:5px; margin-bottom:5px'
         });
         operation_hr.appendTo(div);
 
@@ -142,7 +154,7 @@ m.math.boulieradditionner.View = function (mdl, div, max) {
         ctx.lineTo(height * 0.015, height - height * 0.015);
         ctx.lineTo(width - height * 0.015, height - height * 0.015);
         ctx.lineTo(width - height * 0.015, height * 0.015);
-        ctx.lineTo(height * 0.015, height*0.015);
+        ctx.lineTo(height * 0.015, height * 0.015);
         ctx.stroke();
 
         //Creation des Etages
@@ -179,7 +191,7 @@ m.math.boulieradditionner.View = function (mdl, div, max) {
 
         var div_exercice = $('<div/>', {
             class: 'visible-sm visible-xs visible-md visible-lg',
-            style: 'background-color: #2d6ca2; padding: 2px; border-radius:6px; text-align:center;'
+            style: 'background-color: #2d6ca2; padding: 2px 2px 10px 2px; border-radius:6px; text-align:center; '
         });
 
         div_exercice.appendTo(view);
@@ -188,6 +200,21 @@ m.math.boulieradditionner.View = function (mdl, div, max) {
         build_form(div_exercice);
 
         draw_abacus(model.getFirstOperand());
+    };
+
+    var size_canvas = function(){
+        var wc = parseInt($('#canvas').css("width"));
+        var wp = parseInt($('#canvas').parent().css("width"));
+        var wce = parseInt(wp * 0.8);
+
+        if(wp > 750 ){
+            $("#canvas").css("width","600");
+            $("#canvas").css("height","300");
+        }
+        else{
+            $("#canvas").css("width",wce);
+            $("#canvas").css("height",parseInt(wce/2));
+        }
     };
 
 // private attributes
