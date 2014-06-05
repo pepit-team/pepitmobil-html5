@@ -16,8 +16,6 @@ m.math.diviserpartager.View = function (mdl, div) {
         model.next();
 
         //reinitialisation du canvas
-        model.initPieCanvasData();
-        model.initNbPieClicked();
         drawPieCtx.clearRect(0,0,269,270);
 
         var img_cake = new Image();
@@ -47,17 +45,18 @@ m.math.diviserpartager.View = function (mdl, div) {
     };
 
     this.drawPie = function(canvas){
+        var center = {x: canvas.width / 2, y: canvas.height / 2}
+        var radius = Math.min(canvas.width -2, canvas.height -2) / 2;
         var pieData = model.getPieCanvasData();
-        var center = model.getCenter();
-        var radius = model.getRadius();
 
         drawPieCtx = canvas.getContext("2d");
 
-
+        console.log(center);
         var img_cake = new Image();
         img_cake.src = 'exercises/m/math/diviserpartager/img/cake.png';
 
         img_cake.onload = function(){
+            drawPieCtx.clearRect(0,0,269,270);
             drawPieCtx.drawImage(img_cake,0,0);
 
             for(var i = 0; i <= 8; i++){
@@ -65,19 +64,21 @@ m.math.diviserpartager.View = function (mdl, div) {
                 drawPieCtx.moveTo(center.x,center.y);
                 drawPieCtx.arc(center.x,center.y,radius,pieData[i]['startAngle'],pieData[i]['endAngle'],false);
                 drawPieCtx.lineTo(center.x,center.y);
-                drawPieCtx.closePath();
 
-                if(pieData[i]['visible'] == 1){
+
+                if(pieData[i]['visible'] == true){
                     drawPieCtx.fillStyle = "#BFC0C0";
                 }else{
                     drawPieCtx.fillStyle = "rgba(0, 0, 200, 0)";
                 }
 
                 drawPieCtx.fill();
+                drawPieCtx.closePath();
             }
         }
 
     }
+
 
 
 // private methods
@@ -153,8 +154,7 @@ m.math.diviserpartager.View = function (mdl, div) {
             id: 'canvas_cake'
         });
 
-        canvas_cake.attr("width", "269px");
-        canvas_cake.attr("height", "270px");
+        canvas_cake.attr({width: 269,height: 270}).css({width:'269px',height:'270px'});
 
         build_canvas_cake(canvas_cake);
 
@@ -205,6 +205,7 @@ m.math.diviserpartager.View = function (mdl, div) {
     }
 
     var build_canvas_cake = function(canvas){
+
         if(!canvas){
             alert("Impossible de récupérer le canvas");
             return;
@@ -215,14 +216,14 @@ m.math.diviserpartager.View = function (mdl, div) {
             alert("Impossible de récupérer le context du canvas");
             return;
         }
-
+        context.clearRect(0,0,canvas.width(),canvas.height());
         var img_cake = new Image();
-        img_cake.onload = function(){
-            context.drawImage(img_cake,0,0);
-            model.setRadius(canvas.width,canvas.height);
-            model.initPieCanvasData();
-        }
         img_cake.src = 'exercises/m/math/diviserpartager/img/cake.png';
+        img_cake.onload = function(){
+
+            context.drawImage(img_cake,0,0);
+        }
+
     };
 
     var init_div = function (view) {

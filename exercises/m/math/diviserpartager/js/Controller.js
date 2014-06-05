@@ -31,12 +31,10 @@ m.math.diviserpartager.Controller = function (m, v) {
             var x = e.clientX - pos.x;
             var y = e.clientY - pos.y;
 
-            model.setCenter(target.width,target.height);
-            model.setRadius(target.width,target.height);
 
+            var center = {x: target.width / 2, y: target.height / 2};
+            var radius = Math.min(target.width -2, target.height -2) / 2;
             var pieData = model.getPieCanvasData();
-            var center = model.getCenter();
-            var radius = model.getRadius();
 
             var fromCenterX = x - center.x;
             var fromCenterY = y - center.y;
@@ -50,19 +48,21 @@ m.math.diviserpartager.Controller = function (m, v) {
                 for (var pie in pieData) {
                     if (angle >= pieData[pie]['startAngle'] && angle <= pieData[pie]['endAngle']) {
 
-                        if(pieData[pie]['visible'] == 0){
+                        if(pieData[pie]['visible'] == false){
                             model.selectNbPieClicked();
-                            pieData[pie]['visible'] = 1;
+                            model.setVisiblePie(pie, true);
                         }else{
                             model.unselectNbPieClicked();
-                            pieData[pie]['visible'] = 0;
+                            model.setVisiblePie(pie, false);
                         }
-                        view.drawPie(target);
-                        console.log(model.getNbPieClicked());
                     }
                 }
             }
+            view.drawPie(target);
+            console.log("Après clic canvas :");
+            console.log(model.getPieCanvasData());
         });
+
     };
 
     var find_pos = function(obj) {

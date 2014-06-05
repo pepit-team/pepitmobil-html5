@@ -19,6 +19,8 @@ m.math.diviserpartager.Model = function () {
         //Génération d'un nombre aléatoire de 4 à 8 pour afficher les personnages
         nbRandom = Math.round(Math.random() * (8 - 4) + 4);
         okResult = false;
+        nbPieClicked = 0;
+        initPieCanvasData();
     };
 
     this.reset = function() {
@@ -37,40 +39,13 @@ m.math.diviserpartager.Model = function () {
         pieSelectedNumber = n;
     };
 
-    this.initPieCanvasData = function(){
-        var lastPosition = 0;
-
-        for(var i=0;i<=8;i++) {
-            pieCanvasData[i] = [];
-            pieCanvasData[i]['value'] = 12.5;
-            pieCanvasData[i]['nb'] = i;
-            pieCanvasData[i]['visible'] = 0;
-            pieCanvasData[i]['startAngle'] = 2 * Math.PI * lastPosition;
-            pieCanvasData[i]['endAngle'] = 2 * Math.PI * (lastPosition + 0.125);
-            lastPosition += 0.125;
-        }
-    };
 
     this.getPieCanvasData = function(){
         return pieCanvasData;
     };
 
-    this.setCenter = function(pWidth, pHeight){
-        var width = pWidth;
-        var height = pHeight;
-        center = {x: width / 2, y: height / 2}
-    };
-
-    this.getCenter = function(){
-        return center;
-    }
-
-    this.setRadius = function(width, height){
-        radius = Math.min(width -2, height -2) / 2;
-    }
-
-    this.getRadius = function(){
-        return radius;
+    this.setVisiblePie = function(i,bool){
+        pieCanvasData[i]['visible'] = bool;
     }
 
     this.initNbPieClicked = function(){
@@ -94,6 +69,22 @@ m.math.diviserpartager.Model = function () {
         //Génération d'un nombre aléatoire de 4 à 8 pour afficher les personnages
         nbRandom = Math.round(Math.random() * (8 - 4) + 4);
         okResult = false;
+        nbPieClicked = 0;
+        initPieCanvasData();
+    };
+
+    var initPieCanvasData = function(){
+        var lastPosition = 0;
+
+        for(var i=0;i<=8;i++) {
+            pieCanvasData[i] = [];
+            pieCanvasData[i]['value'] = 12.5;
+            pieCanvasData[i]['nb'] = i;
+            pieCanvasData[i]['visible'] = false;
+            pieCanvasData[i]['startAngle'] = 2 * Math.PI * lastPosition;
+            pieCanvasData[i]['endAngle'] = 2 * Math.PI * (lastPosition + 0.125);
+            lastPosition += 0.125;
+        }
     };
 
 // private attributes
@@ -107,9 +98,7 @@ m.math.diviserpartager.Model = function () {
 
     //Canvas
     var pieCanvasData = [];
-    var center;
-    var radius;
-    var nbPieClicked = 0;
+    var nbPieClicked;
 
     init();
 };
