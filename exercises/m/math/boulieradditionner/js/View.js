@@ -11,7 +11,7 @@ m.math.boulieradditionner.View = function (mdl, div, max) {
         height = window.innerHeight;
 
         module = mdl;
-        model = new m.math.boulieradditionner.Model();
+        model = new m.math.boulieradditionner.Model(mdl,max);
         init_div(view);
 
         controller = new m.math.boulieradditionner.Controller(model, this);
@@ -20,6 +20,9 @@ m.math.boulieradditionner.View = function (mdl, div, max) {
     this.next = function () {
         model.next();
         this.update();
+
+        this.updateOperators();
+        this.updateAbacus();
     };
 
     this.resize = function(){
@@ -34,6 +37,13 @@ m.math.boulieradditionner.View = function (mdl, div, max) {
 
     this.updateAbacus = function () {
         draw_abacus();
+    }
+
+    this.updateOperators = function () {
+        $("#operation_md_lg").html("<h1>" + model.getFirstOperand() + " + " + model.getSecondOperand() +" = ?</h1>");
+        $("#operation_xs_sm").html("<h3>" + model.getFirstOperand() + " + " + model.getSecondOperand() +" = ?</h3>");
+        $(".answer").css("opacity","1");
+        $(".answer").removeClass('active');
     }
 
 // private methods
@@ -92,13 +102,13 @@ m.math.boulieradditionner.View = function (mdl, div, max) {
             style: 'width:80%; margin-top:5px; margin-bottom:5px'
         });
         operation_hr.appendTo(div);
-
     };
 
     var build_operation = function (div, lO, rO) {
 
         //xs & sm
         var operation_div_xs_sm = $('<div/>', {
+            id: 'operation_xs_sm',
             class: 'visible-xs visible-sm',
             html: '<h3>' + lO + ' + ' + rO + ' = ?</h3>',
             style: 'text-align:center; color:white;'
@@ -108,6 +118,7 @@ m.math.boulieradditionner.View = function (mdl, div, max) {
 
         //md & lg
         var operation_div_md_lg = $('<div/>', {
+            id: 'operation_md_lg',
             class: 'visible-md visible-lg',
             html: '<h1>' + lO + ' + ' + rO + ' = ?</h1>',
             style: 'text-align:center; color:white'
@@ -120,6 +131,7 @@ m.math.boulieradditionner.View = function (mdl, div, max) {
     }
 
     var draw_abacus = function () {
+
         var c = $("#canvas")[0];
         var ctx = c.getContext("2d");
 

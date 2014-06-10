@@ -1,8 +1,8 @@
-m.math.boulieradditionner.Model = function () {
+m.math.boulieradditionner.Model = function (mdl,max) {
 
 // public methods
     this.check = function () {
-        var total = parseInt(firstOperand + secondOperand);
+        var total = parseInt(firstOperand[index] + secondOperand[index]);
 
         if(current_answer_selected == total && current_ball_on == total){
             okResult = true;
@@ -18,7 +18,7 @@ m.math.boulieradditionner.Model = function () {
     }
 
     this.getFirstOperand = function () {
-        return firstOperand;
+        return firstOperand[index];
     };
 
     this.getCurrentBallOn = function () {
@@ -26,7 +26,7 @@ m.math.boulieradditionner.Model = function () {
     };
 
     this.getSecondOperand = function () {
-        return secondOperand;
+        return secondOperand[index];
     };
 
     this.incrementCurrentBallOn = function () {
@@ -41,11 +41,14 @@ m.math.boulieradditionner.Model = function () {
 
     this.next = function () {
         okResult = false;
+        index++;
+        current_ball_on = firstOperand[index];
+        current_answer_selected = -1;
     };
 
     this.reset = function () {
         current_answer_selected = -1;
-        $('.answer').css("opacity","1");
+        current_ball_on = firstOperand[index];
     };
 
     this.setCurrentAnswerSelected = function(val) {
@@ -55,28 +58,35 @@ m.math.boulieradditionner.Model = function () {
 
 // private methods
     var init = function () {
-        var max = 5;
 
-        firstOperand = 0;
-        secondOperand = 0;
+        for(var i=0;i<mdl.getQuestionNumber();i++){
 
-        while(parseInt(firstOperand+secondOperand) == 0 || parseInt(firstOperand + secondOperand) > max ){
-            firstOperand = Math.floor(Math.random() * max) + 1;
-            secondOperand = Math.floor(Math.random() * max) + 1;
+            firstOperand[i] = 0;
+            secondOperand[i] = 0;
+
+            while(parseInt(firstOperand[i]+secondOperand[i]) == 0 || parseInt(firstOperand[i] + secondOperand[i]) > max ){
+                firstOperand[i] = Math.floor(Math.random() * max) + 1;
+                secondOperand[i] = Math.floor(Math.random() * max) + 1;
+            }
         }
 
-        current_ball_on = firstOperand;
+        index=0;
+        current_ball_on = firstOperand[index];
         current_answer_selected = -1;
     };
 
 // private attributes
-    var firstOperand;
-    var secondOperand;
+
+
+    var firstOperand = [];
+    var secondOperand = [];
 
     var current_ball_on;
     var current_answer_selected;
 
     var okResult;
+
+    var index;
 
     init();
 };

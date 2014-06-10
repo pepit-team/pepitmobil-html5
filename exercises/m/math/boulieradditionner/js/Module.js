@@ -42,12 +42,11 @@ m.math.boulieradditionner.Module = function (e) {
     this.buildQuestion = function (div, currentExercise, currentModule) {
         //view = new m.math.boulieradditionner.View(this, div,5);
         if (currentExercise == 1) {
-            view = new m.math.boulieradditionner.View(this, div, 5);
+            view = new m.math.boulieradditionner.View(this, div, 8);
         }
         else if (currentExercise == 2) {
             view = new m.math.boulieradditionner.View(this, div, 10);
         }
-
         questionIndex = 1;
         currentScore = this.getQuestionScore(currentExercise, currentModule);
     };
@@ -64,8 +63,8 @@ m.math.boulieradditionner.Module = function (e) {
 
     this.getExerciseList = function () {
         return {
-            title: [ 'Exercice 1'],
-            subTitle: [ 'Jusqu\'à 5']
+            title: [ 'Exercice 1' ],
+            subTitle: [ 'Jusqu\'à 5' ]
         };
     };
 
@@ -90,6 +89,10 @@ m.math.boulieradditionner.Module = function (e) {
 
     this.getNextQuestionButtonText = function () {
         return 'Suivante';
+    };
+
+    this.getQuestionIndex = function(){
+        return questionIndex;
     };
 
     this.getQuestionNumber = function (currentExercise, currentModule) {
@@ -120,6 +123,7 @@ m.math.boulieradditionner.Module = function (e) {
         // un exercice à un module
         return new Score([
             [ -1 ],
+            [ -1 ]
         ]);
     };
 
