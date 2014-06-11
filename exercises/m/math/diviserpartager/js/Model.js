@@ -17,7 +17,15 @@ m.math.diviserpartager.Model = function () {
 
     this.next = function() {
         //Génération d'un nombre aléatoire de 4 à 8 pour afficher les personnages
-        nbRandom = Math.round(Math.random() * (8 - 4) + 4);
+        var nbRandomNext;
+
+        do {
+            nbRandomNext = Math.round(Math.random() * (8 - 4) + 4);
+        }
+        while (nbRandom == nbRandomNext)
+
+        nbRandom = nbRandomNext;
+
         okResult = false;
         nbPieClicked = 0;
         initPieCanvasData();
@@ -46,10 +54,6 @@ m.math.diviserpartager.Model = function () {
 
     this.setVisiblePie = function(i,bool){
         pieCanvasData[i]['visible'] = bool;
-    }
-
-    this.initNbPieClicked = function(){
-        nbPieClicked = 0;
     }
 
     this.selectNbPieClicked = function(){
