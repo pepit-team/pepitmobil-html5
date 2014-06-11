@@ -12,7 +12,15 @@ m.math.boulieradditionner.Module = function (e) {
             html: "<h1>Complètez le Boulier<br/>et choisir le résultat</h1>",
             class: 'visible_md visible_lg visible_xs visible_sm'
         });
+
+
+        var illustration = $('<img/>', {
+            src: 'exercises/m/math/boulieradditionner/img/illustration.png',
+            style: 'width:80%'
+        });
+
         title_xs_ms_md_lg.appendTo(div);
+        illustration.appendTo(div);
     };
 
     this.buildExplanation = function (div, currentExercise) {
@@ -22,31 +30,31 @@ m.math.boulieradditionner.Module = function (e) {
             'color': 'white'
         });
 
-        if (currentExercise == 1) {
-            var title_Exercise_1 = $('<div/>', {
-                html: "<h1>Faire l\'opération,<br/>complèter le boulier<br/>et cliquer sur le bon résultat.</h1>"
-            });
 
-            var img_Exercise_1 = $('<img>', {
-                src: 'exercises/m/math/boulieradditionner/img/explanation_exercice1.jpg',
-                style: 'width:80%'
-            });
+        var title_Exercise_1 = $('<div/>', {
+            html: "<h1>Faire l\'opération,<br/>complèter le boulier<br/>et cliquer sur le bon résultat.</h1>"
+        });
 
-            title_Exercise_1.appendTo(div);
-            img_Exercise_1.appendTo(div);
-        }
+        var img_Exercise = $('<img>', {
+            src: 'exercises/m/math/boulieradditionner/img/explanation_exercice1.jpg',
+            style: 'width:80%'
+        });
 
-
+        title_Exercise_1.appendTo(div);
+        img_Exercise.appendTo(div);
     };
 
     this.buildQuestion = function (div, currentExercise, currentModule) {
-        //view = new m.math.boulieradditionner.View(this, div,5);
         if (currentExercise == 1) {
-            view = new m.math.boulieradditionner.View(this, div, 8);
+            view = new m.math.boulieradditionner.View(this, div, 5);
         }
         else if (currentExercise == 2) {
-            view = new m.math.boulieradditionner.View(this, div, 10);
+            view = new m.math.boulieradditionner.View(this, div, 9);
         }
+        else if (currentExercise == 3) {
+            view = new m.math.boulieradditionner.View(this, div, 12);
+        }
+
         questionIndex = 1;
         currentScore = this.getQuestionScore(currentExercise, currentModule);
     };
@@ -63,8 +71,8 @@ m.math.boulieradditionner.Module = function (e) {
 
     this.getExerciseList = function () {
         return {
-            title: [ 'Exercice 1' ],
-            subTitle: [ 'Jusqu\'à 5' ]
+            title: [ 'Exercice 1','Exercice 2','Exercice 3' ],
+            subTitle: [ 'Jusqu\'à 5','Jusqu\'à 9', 'Jusqu\'à 12' ]
         };
     };
 
@@ -79,7 +87,7 @@ m.math.boulieradditionner.Module = function (e) {
     this.getModuleList = function (currentExercise) {
         return {
             title: [ 'Module 1'],
-            subTitle: [ ]
+            subTitle: [ '' ]
         };
     };
 
@@ -100,7 +108,7 @@ m.math.boulieradditionner.Module = function (e) {
     };
 
     this.getQuestionScore = function (currentExercise, currentModule) {
-        return 100;  // total = 1000 pts
+        return 66;  // 3 Exercices 1 Module
     };
 
     this.getScore = function () {
@@ -122,6 +130,7 @@ m.math.boulieradditionner.Module = function (e) {
     this.initScore = function () {
         // un exercice à un module
         return new Score([
+            [ -1 ],
             [ -1 ],
             [ -1 ]
         ]);
