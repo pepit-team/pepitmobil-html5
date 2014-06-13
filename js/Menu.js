@@ -177,8 +177,8 @@ var Menu = function () {
     };
 
     var launchExercise = function (container, level, levelIndex, subject, subjectIndex, topic, topicIndex, exercises) {
-//        loadModule(container, level, subject, topic,
-//            exercises["levels"][levelIndex]["subjects"][subjectIndex]["topics"][topicIndex]["depends"]);
+        loadModule(container, level, subject, topic,
+            exercises["levels"][levelIndex]["subjects"][subjectIndex]["topics"][topicIndex]["depends"]);
 
         $('<div/>', {
             class: 'container',
