@@ -26,7 +26,7 @@ m.math.diviserpartager.Controller = function (m, v) {
                 view.error();
             }
         });
-    }
+    };
 
     var init_canvas_cake = function (style) {
         $('#canvas_element_' + style).on('click', function (e) {
@@ -68,9 +68,9 @@ m.math.diviserpartager.Controller = function (m, v) {
             }
         }
         view.drawPie(target);
-    }
+    };
 
-    var find_pos = function(obj) {
+    var find_pos = function (obj) {
         var left = 0, top = 0;
 
         if (obj.offsetParent) {
@@ -84,8 +84,6 @@ m.math.diviserpartager.Controller = function (m, v) {
         }
         return undefined;
     };
-
-
 
 // private attributes
     var model = m;

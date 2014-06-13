@@ -18,7 +18,6 @@ m.math.diviserpartager.View = function (mdl, div) {
         //reinitialisation des parts de tarte
         deletePies();
 
-
 // md and lg devices
         col_left_md_lg.empty();
         build_tab_characters(col_left_md_lg, model.getNbRandom(), 'md_lg');
@@ -29,7 +28,6 @@ m.math.diviserpartager.View = function (mdl, div) {
 
         this.update();
     };
-
 
     this.update = function () {
         if (model.isOkResult()) {
@@ -45,32 +43,26 @@ m.math.diviserpartager.View = function (mdl, div) {
         drawPieCtx = canvas.getContext("2d");
 
         var img_cake = new Image();
-        img_cake.src = 'exercises/m/math/diviserpartager/img/cake.png';
 
+        img_cake.src = 'exercises/m/math/diviserpartager/img/cake.png';
         img_cake.onload = function () {
             drawPieCtx.clearRect(0, 0, 269, 270);
             drawPieCtx.drawImage(img_cake, 0, 0, canvas.width, canvas.height);
-
             for (var i = 0; i <= 8; i++) {
                 drawPieCtx.beginPath();
                 drawPieCtx.moveTo(center.x, center.y);
                 drawPieCtx.arc(center.x, center.y, radius, pieData[i]['startAngle'], pieData[i]['endAngle'], false);
                 drawPieCtx.lineTo(center.x, center.y);
-
-
                 if (pieData[i]['visible'] == true) {
                     drawPieCtx.fillStyle = "#BFC0C0";
                 } else {
                     drawPieCtx.fillStyle = "rgba(0, 0, 200, 0)";
                 }
-
                 drawPieCtx.fill();
                 drawPieCtx.closePath();
             }
         }
-
-    }
-
+    };
 
 // private methods
     var build_spacing = function () {
@@ -102,19 +94,15 @@ m.math.diviserpartager.View = function (mdl, div) {
         img_character.appendTo(div_character);
 
         return div_character;
-    }
+    };
 
     var build_tab_characters = function (div, number, style) {
-
-
         //Nombre d'éléments sur les lignes
         var nbEleLine1 = Math.round(number / 2);
         var nbEleLine2 = number - nbEleLine1;
 
-
         //Taille des elements
         var sizeElements = 12 / nbEleLine1;
-
 
         //Creation 1ere ligne
         var rowLine1 = $('<div>', {
@@ -136,17 +124,14 @@ m.math.diviserpartager.View = function (mdl, div) {
         } else {
             build_character(i + 1, sizeElements, style, 0).appendTo(rowLine2);
         }
-
         for (var i = 0; i < nbEleLine2 - 1; i++) {
             build_character(i + 1, sizeElements, style, 0).appendTo(rowLine2);
         }
-
         rowLine1.appendTo(div);
         rowLine2.appendTo(div);
-    }
+    };
 
     var build_tab_right = function (div, style) {
-
         if (style == 'md_lg') {
             //zone de texte pour saisir le nombre de part
             var input_number_md_lg = $('<input/>', {
@@ -221,12 +206,9 @@ m.math.diviserpartager.View = function (mdl, div) {
             build_spacing().appendTo(div);
             desc_number_xs_sm.appendTo(div);
         }
-
-
-    }
+    };
 
     var build_canvas = function (div, style) {
-
         if (style === "md_lg") {
             var canvas_div = $('<div />', {
                 id: 'canvas_id_md_lg',
@@ -245,7 +227,6 @@ m.math.diviserpartager.View = function (mdl, div) {
 
             var js_canvas_div = document.getElementById("canvas_id_md_lg");
             var js_canvas = document.getElementById("canvas_element_md_lg");
-
 
             js_canvas.width = js_canvas_div.clientWidth;
             js_canvas.height = js_canvas_div.clientWidth;
@@ -275,27 +256,27 @@ m.math.diviserpartager.View = function (mdl, div) {
 
             drawCake(js_canvas);
         }
-
     };
 
     var drawCake = function (canvas) {
-
         if (!canvas) {
             alert("Impossible de récupérer le canvas");
             return;
         }
 
         var drawPieCtx = canvas.getContext("2d");
+
         if (!drawPieCtx) {
             alert("Impossible de récupérer le context du canvas");
             return;
         }
 
         drawPieCtx.clearRect(0, 0, canvas.width, canvas.height);
+
         var img_cake = new Image();
+
         img_cake.src = 'exercises/m/math/diviserpartager/img/cake.png';
         img_cake.onload = function () {
-
             drawPieCtx.drawImage(img_cake, 0, 0, canvas.width, canvas.height);
         }
 
@@ -304,18 +285,16 @@ m.math.diviserpartager.View = function (mdl, div) {
     var deletePies = function () {
 // md and lg devices
         var js_canvas = document.getElementById("canvas_element_md_lg");
+
         drawPieCtx.clearRect(0, 0, js_canvas.width, js_canvas.height);
-        console.log(js_canvas.width);
         drawCake(js_canvas);
 
 // xs and sm devices
         var js_canvas = document.getElementById("canvas_element_xs_sm");
+
         drawPieCtx.clearRect(0, 0, js_canvas.width, js_canvas.height);
-
-        console.log(js_canvas.width);
         drawCake(js_canvas);
-
-    }
+    };
 
     var init_div = function (view) {
 
@@ -341,7 +320,6 @@ m.math.diviserpartager.View = function (mdl, div) {
             class: 'col-md-4',
             style: 'background-color:#FFFFFF; margin-bottom:10px; border-radius: 6px 6px 6px 6px; border:1px solid #252538'
         });
-
 
         col_left_md_lg.appendTo(row_md_lg);
         col_right_md_lg.appendTo(row_md_lg);
@@ -383,7 +361,6 @@ m.math.diviserpartager.View = function (mdl, div) {
             class: 'col-xs-12'
         });
 
-
         col_left_xs_sm.appendTo(row_xs_sm);
         col_right_xs_sm.appendTo(row_xs_sm);
         row_xs_sm.appendTo(exercise_div_xs_sm);
@@ -418,7 +395,6 @@ m.math.diviserpartager.View = function (mdl, div) {
     var col_right_xs_sm;
 
     //canvas
-    //var canvas_cake;
     var drawPieCtx;
 
     this.init(mdl, div);

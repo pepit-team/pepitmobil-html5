@@ -1,21 +1,20 @@
 m.math.diviserpartager.Model = function () {
 
 // public methods
-    this.check = function() {
-        if(nbRandom == inputNumber && nbRandom == nbPieClicked){
+    this.check = function () {
+        if (nbRandom == inputNumber && nbRandom == nbPieClicked) {
             okResult = true;
-        }else{
+        } else {
             okResult = false;
         }
-
         return okResult;
     };
 
-    this.isOkResult = function() {
+    this.isOkResult = function () {
         return okResult;
     };
 
-    this.next = function() {
+    this.next = function () {
         //Génération d'un nombre aléatoire de 4 à 8 pour afficher les personnages
         var nbRandomNext;
 
@@ -31,45 +30,43 @@ m.math.diviserpartager.Model = function () {
         initPieCanvasData();
     };
 
-    this.reset = function() {
+    this.reset = function () {
     };
 
-    this.getNbRandom = function(){
+    this.getNbRandom = function () {
         return nbRandom;
     };
 
-    this.setInputNumber = function(n){
+    this.setInputNumber = function (n) {
         inputNumber = n;
-
     };
 
-    this.setPieSelectedNumber = function(n){
+    this.setPieSelectedNumber = function (n) {
         pieSelectedNumber = n;
     };
 
-
-    this.getPieCanvasData = function(){
+    this.getPieCanvasData = function () {
         return pieCanvasData;
     };
 
-    this.setVisiblePie = function(i,bool){
+    this.setVisiblePie = function (i, bool) {
         pieCanvasData[i]['visible'] = bool;
-    }
+    };
 
-    this.selectNbPieClicked = function(){
+    this.selectNbPieClicked = function () {
         nbPieClicked++;
-    }
+    };
 
-    this.unselectNbPieClicked = function(){
+    this.unselectNbPieClicked = function () {
         nbPieClicked--;
-    }
+    };
 
-    this.getNbPieClicked = function(){
+    this.getNbPieClicked = function () {
         return nbPieClicked;
-    }
+    };
 
 // private methods
-    var init = function() {
+    var init = function () {
         //Génération d'un nombre aléatoire de 4 à 8 pour afficher les personnages
         nbRandom = Math.round(Math.random() * (8 - 4) + 4);
         okResult = false;
@@ -77,10 +74,10 @@ m.math.diviserpartager.Model = function () {
         initPieCanvasData();
     };
 
-    var initPieCanvasData = function(){
+    var initPieCanvasData = function () {
         var lastPosition = 0;
 
-        for(var i=0;i<=8;i++) {
+        for (var i = 0; i <= 8; i++) {
             pieCanvasData[i] = [];
             pieCanvasData[i]['value'] = 12.5;
             pieCanvasData[i]['nb'] = i;
