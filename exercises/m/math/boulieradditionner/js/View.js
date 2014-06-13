@@ -11,7 +11,7 @@ m.math.boulieradditionner.View = function (mdl, div, max) {
         height = window.innerHeight;
 
         module = mdl;
-        model = new m.math.boulieradditionner.Model(mdl,max);
+        model = new m.math.boulieradditionner.Model(mdl, max);
         init_div(view);
 
         controller = new m.math.boulieradditionner.Controller(model, this);
@@ -25,9 +25,9 @@ m.math.boulieradditionner.View = function (mdl, div, max) {
         this.updateAbacus();
     };
 
-    this.resize = function(){
+    this.resize = function () {
         size_canvas();
-    }
+    };
 
     this.update = function () {
         if (model.isOkResult()) {
@@ -37,18 +37,16 @@ m.math.boulieradditionner.View = function (mdl, div, max) {
 
     this.updateAbacus = function () {
         draw_abacus();
-    }
+    };
 
     this.updateOperators = function () {
-        $("#operation_md_lg").html("<h1>" + model.getFirstOperand() + " + " + model.getSecondOperand() +" = ?</h1>");
-        $("#operation_xs_sm").html("<h3>" + model.getFirstOperand() + " + " + model.getSecondOperand() +" = ?</h3>");
-        $(".answer").css("opacity","1");
+        $("#operation_md_lg").html("<h1>" + model.getFirstOperand() + " + " + model.getSecondOperand() + " = ?</h1>");
+        $("#operation_xs_sm").html("<h3>" + model.getFirstOperand() + " + " + model.getSecondOperand() + " = ?</h3>");
+        $(".answer").css("opacity", "1");
         $(".answer").removeClass('active');
-    }
+    };
 
 // private methods
-
-
     var build_abacus = function (div, lO) {
         var canvas = $('<canvas/>', {
             id: 'canvas',
@@ -93,8 +91,7 @@ m.math.boulieradditionner.View = function (mdl, div, max) {
             class: 'btn btn-default',
             html: 'Valider'
         }).appendTo(div);
-
-    }
+    };
 
     var build_hr = function (div) {
         var operation_hr = $('<hr/>', {
@@ -105,7 +102,6 @@ m.math.boulieradditionner.View = function (mdl, div, max) {
     };
 
     var build_operation = function (div, lO, rO) {
-
         //xs & sm
         var operation_div_xs_sm = $('<div/>', {
             id: 'operation_xs_sm',
@@ -127,11 +123,9 @@ m.math.boulieradditionner.View = function (mdl, div, max) {
 
         //both
         build_hr(div);
-
-    }
+    };
 
     var draw_abacus = function () {
-
         var c = $("#canvas")[0];
         var ctx = c.getContext("2d");
 
@@ -156,7 +150,6 @@ m.math.boulieradditionner.View = function (mdl, div, max) {
         ctx.fillStyle = "#2d6ca2";
         ctx.fillRect(0, 0, width, height);
 
-
         //Creation contour
         ctx.strokeStyle = "#B4B4B4";
         ctx.lineWidth = height * 0.03;
@@ -179,7 +172,6 @@ m.math.boulieradditionner.View = function (mdl, div, max) {
             ctx.stroke();
         }
 
-
         //Dessin des Boules
         ctx.strokeStyle = "#EB9317";
         ctx.fillStyle = "#EB9317";
@@ -197,7 +189,7 @@ m.math.boulieradditionner.View = function (mdl, div, max) {
             ctx.fill();
             ctx.stroke();
         }
-    }
+    };
 
     var init_div = function (view) {
 
@@ -214,18 +206,18 @@ m.math.boulieradditionner.View = function (mdl, div, max) {
         draw_abacus(model.getFirstOperand());
     };
 
-    var size_canvas = function(){
+    var size_canvas = function () {
         var wc = parseInt($('#canvas').css("width"));
         var wp = parseInt($('#canvas').parent().css("width"));
         var wce = parseInt(wp * 0.8);
 
-        if(wp > 750 ){
-            $("#canvas").css("width","600");
-            $("#canvas").css("height","300");
+        if (wp > 750) {
+            $("#canvas").css("width", "600");
+            $("#canvas").css("height", "300");
         }
-        else{
-            $("#canvas").css("width",wce);
-            $("#canvas").css("height",parseInt(wce/2));
+        else {
+            $("#canvas").css("width", wce);
+            $("#canvas").css("height", parseInt(wce / 2));
         }
     };
 

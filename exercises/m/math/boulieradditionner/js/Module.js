@@ -13,7 +13,6 @@ m.math.boulieradditionner.Module = function (e) {
             class: 'visible_md visible_lg visible_xs visible_sm'
         });
 
-
         var illustration = $('<img/>', {
             src: 'exercises/m/math/boulieradditionner/img/illustration.png',
             style: 'width:80%'
@@ -29,7 +28,6 @@ m.math.boulieradditionner.Module = function (e) {
             'text-align': 'center',
             'color': 'white'
         });
-
 
         var title_Exercise_1 = $('<div/>', {
             html: "<h1>Faire l\'opération,<br/>complèter le boulier<br/>et cliquer sur le bon résultat.</h1>"
@@ -54,7 +52,6 @@ m.math.boulieradditionner.Module = function (e) {
         else if (currentExercise == 3) {
             view = new m.math.boulieradditionner.View(this, div, 12);
         }
-
         questionIndex = 1;
         currentScore = this.getQuestionScore(currentExercise, currentModule);
     };
@@ -71,8 +68,8 @@ m.math.boulieradditionner.Module = function (e) {
 
     this.getExerciseList = function () {
         return {
-            title: [ 'Exercice 1','Exercice 2','Exercice 3' ],
-            subTitle: [ 'Jusqu\'à 5','Jusqu\'à 9', 'Jusqu\'à 12' ]
+            title: [ 'Exercice 1', 'Exercice 2', 'Exercice 3' ],
+            subTitle: [ 'Jusqu\'à 5', 'Jusqu\'à 9', 'Jusqu\'à 12' ]
         };
     };
 
@@ -99,7 +96,7 @@ m.math.boulieradditionner.Module = function (e) {
         return 'Suivante';
     };
 
-    this.getQuestionIndex = function(){
+    this.getQuestionIndex = function () {
         return questionIndex;
     };
 

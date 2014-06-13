@@ -1,10 +1,10 @@
-m.math.boulieradditionner.Model = function (mdl,max) {
+m.math.boulieradditionner.Model = function (mdl, max) {
 
 // public methods
     this.check = function () {
         var total = parseInt(firstOperand[index] + secondOperand[index]);
 
-        if(current_answer_selected == total && current_ball_on == total){
+        if (current_answer_selected == total && current_ball_on == total) {
             okResult = true;
             return true;
         }
@@ -15,7 +15,7 @@ m.math.boulieradditionner.Model = function (mdl,max) {
         if (current_ball_on > 1) {
             current_ball_on--;
         }
-    }
+    };
 
     this.getFirstOperand = function () {
         return firstOperand[index];
@@ -51,32 +51,31 @@ m.math.boulieradditionner.Model = function (mdl,max) {
         current_ball_on = firstOperand[index];
     };
 
-    this.setCurrentAnswerSelected = function(val) {
+    this.setCurrentAnswerSelected = function (val) {
         current_answer_selected = val;
-    }
-
+    };
 
 // private methods
     var init = function () {
 
-        for(var i=0;i<mdl.getQuestionNumber();i++){
+        for (var i = 0; i < mdl.getQuestionNumber(); i++) {
 
             firstOperand[i] = 0;
             secondOperand[i] = 0;
 
-            while(parseInt(firstOperand[i]+secondOperand[i]) == 0 || parseInt(firstOperand[i] + secondOperand[i]) > max ){
+            while (parseInt(firstOperand[i] + secondOperand[i]) == 0 ||
+                parseInt(firstOperand[i] + secondOperand[i]) > max) {
                 firstOperand[i] = Math.floor(Math.random() * max) + 1;
                 secondOperand[i] = Math.floor(Math.random() * max) + 1;
             }
         }
 
-        index=0;
+        index = 0;
         current_ball_on = firstOperand[index];
         current_answer_selected = -1;
     };
 
 // private attributes
-
 
     var firstOperand = [];
     var secondOperand = [];

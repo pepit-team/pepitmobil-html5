@@ -36,8 +36,6 @@ m.math.boulieradditionner.Controller = function (m, v) {
         });
     };
 
-
-
 // private attributes
     var model = m;
     var view = v;
