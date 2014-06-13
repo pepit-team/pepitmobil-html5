@@ -50,11 +50,22 @@ p1.divers.trajet.Arrow = function () {
                 context.lineTo(x - length + l, y - l2);
                 break;
             case p1.divers.trajet.Direction.UNDEFINED:
-                context.strokeStyle = "#ff0000";
+/*                context.strokeStyle = "#ff0000";
                 context.textAlign = "middle";
                 context.textBaseline = "middle";
                 context.font = length + "pt New roman";
-                context.strokeText("?", x, y + length);
+                context.strokeText("?", x, y + length); */
+                context.lineWidth = 3.;
+                context.beginPath();
+                context.moveTo(x, y);
+                context.lineTo(x + length, y + length2);
+                context.stroke();
+                context.closePath();
+                context.beginPath();
+                context.lineTo(x + length, y);
+                context.lineTo(x, y + length2);
+                context.stroke();
+                context.closePath();
                 break;
         }
 
@@ -230,12 +241,10 @@ p1.divers.trajet.View = function (mdl, div, n, m, min, max) {
         pts_y = [];
         margin_x = 5;
         margin_y = 5;
-        width = canvas_width - (margin_x * 2);
+        width = canvas_width;
         height = canvas_height;
-        space_x = width / maxSize;
+        space_x = (width - 2 * margin_x) / maxSize;
         space_y = height;
-        width = space_x * maxSize;
-        height = space_y;
         for (var i = 0; i <= maxSize; i++) {
             if (i == 0) {
                 pts_x[i] = 0 + margin_x;
@@ -244,7 +253,7 @@ p1.divers.trajet.View = function (mdl, div, n, m, min, max) {
             }
         }
         pts_y[0] = margin_y;
-        pts_y[1] = height + margin_y;
+        pts_y[1] = height - margin_y;
     };
 
     var draw_current_path = function(context) {
@@ -253,8 +262,8 @@ p1.divers.trajet.View = function (mdl, div, n, m, min, max) {
             var a = new p1.divers.trajet.Arrow();
 
             if (r == p1.divers.trajet.Direction.UNDEFINED) {
-                a.init2(r, pts_x[i] + (space_x / 4), height - space_y);
-                a.draw(context, space_y - margin_y, space_x < space_y ? space_x : space_y);
+                a.init2(r, pts_x[i], margin_y);
+                a.draw(context, space_x, space_y - 2 * margin_y);
             } else if (r == p1.divers.trajet.Direction.NORTH) {
                 a.init2(r, pts_x[i] + space_x / 2, space_y);
                 a.draw(context, space_y - margin_y, space_x < space_y ? space_x : space_y);
@@ -337,7 +346,7 @@ p1.divers.trajet.View = function (mdl, div, n, m, min, max) {
         context.lineWidth = 1.;
         context.strokeStyle = "#000000";
         context.fillStyle = "#ffffff";
-        context.rect(margin_x, margin_y, canvas_width + margin_x, canvas_height + margin_y);
+        context.rect(0, 0, canvas_width, canvas_height);
         context.fill();
         context.stroke();
 
@@ -350,12 +359,12 @@ p1.divers.trajet.View = function (mdl, div, n, m, min, max) {
         context.lineWidth = 2;
         for (var i = 0; i < pts_x.length; ++i) {
             context.moveTo(pts_x[i], margin_y);
-            context.lineTo(pts_x[i], height + margin_y);
+            context.lineTo(pts_x[i], height - margin_y);
         }
 
         for (var i = 0; i < pts_y.length; ++i) {
             context.moveTo(margin_x, pts_y[i]);
-            context.lineTo(width + margin_x, pts_y[i]);
+            context.lineTo(width - margin_x, pts_y[i]);
         }
         context.stroke();
     };
